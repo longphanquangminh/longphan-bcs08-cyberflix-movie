@@ -1,0 +1,33 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./page/Home/Home";
+import Login from "./page/Login/Login";
+import DetailMovie from "./page/DetailMovie/DetailMovie";
+import Layout from "./template/layout";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route path='/login' element={<Login />} />
+        <Route
+          path='/movie/:id'
+          element={
+            <Layout>
+              <DetailMovie />
+            </Layout>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
