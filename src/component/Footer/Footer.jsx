@@ -43,7 +43,7 @@ export default function Footer() {
   ];
   return (
     <div className='bg-[#212121] text-white'>
-      <div className='w-[90%] mx-auto'>
+      <div className='container'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-6'>
           <div className='space-y-3'>
             <h1 className='uppercase'>TIX</h1>
@@ -98,7 +98,7 @@ export default function Footer() {
           </div>
           <div className='basis-4/6 space-y-3 text-center md:text-justify'>
             <h1 className='uppercase font-bold'>TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION</h1>
-            <div className='text-sm'>
+            <div className='text-sm space-y-1'>
               <p>Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh, Việt Nam.</p>
               <p>Giấy chứng nhận đăng ký kinh doanh số: 0101659783,</p>
               <p>đăng ký thay đổi lần thứ 30, ngày 22 tháng 01 năm 2020 do Sở kế hoạch và đầu tư TPHCM cấp.</p>

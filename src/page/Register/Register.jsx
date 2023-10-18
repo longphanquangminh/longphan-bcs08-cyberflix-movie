@@ -5,7 +5,7 @@ import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
 import { SET_INFO } from "../../redux/constant/user";
 import { userLocalStorage } from "../../api/localService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const SubmitButton = ({ form }) => {
@@ -177,6 +177,12 @@ export default function Register() {
                 </Space>
               </Form.Item>
             </Form>
+            <p className='text-right text-red-500'>
+              Have account?{" "}
+              <Link to='/login' className='font-bold text-red-500 hover:text-red-400 duration-300'>
+                Login
+              </Link>
+            </p>
           </div>
         </div>
       </div>
