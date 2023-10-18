@@ -1,3 +1,5 @@
+@import "../node_modules/react-modal-video/css/modal-video.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

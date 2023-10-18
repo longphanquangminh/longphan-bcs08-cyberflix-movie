@@ -36,30 +36,64 @@ export default function TabMovie() {
       );
     });
   };
+  const classTabs = "h-full md:h-96";
+  const classTabsShowMovie = "h-[390px] md:h-96";
   let handleHeThongRap = () => {
     return danhSachHeThongRap.map((heThongRap, index) => {
       return {
         key: index,
-        label: <img className='w-16 h-16' src={heThongRap.logo} alt='' />,
+        label: <img className='w-8 h-8 mx-auto' src={heThongRap.logo} alt='' />,
         children: (
-          <Tabs
-            style={{ height: 500 }}
-            tabPosition='left'
-            defaultActiveKey='1'
-            items={heThongRap.lstCumRap.map(cumRap => {
-              return {
-                key: cumRap.tenCumRap,
-                label: (
-                  <div className='text-left w-96 whitespace-normal'>
-                    <p className='text-green-800 font-medium'>{cumRap.tenCumRap}</p>
-                    <p className='hover:text-green-800'>{cumRap.diaChi}</p>
-                  </div>
-                ),
-                children: <div style={{ height: 500, overflowY: "scroll" }}>{renderDsPhim(cumRap.danhSachPhim)}</div>,
-              };
-            })}
-            onChange={onChange}
-          />
+          <>
+            <div className='hidden lg:block'>
+              <Tabs
+                className={classTabs}
+                tabPosition='left'
+                defaultActiveKey='1'
+                items={heThongRap.lstCumRap.map(cumRap => {
+                  return {
+                    key: cumRap.tenCumRap,
+                    label: (
+                      <div className='text-left w-96 whitespace-normal'>
+                        <p className='text-green-800 font-medium'>{cumRap.tenCumRap}</p>
+                        <p className='text-green-800 hover:text-green-800 truncate'>{cumRap.diaChi}</p>
+                      </div>
+                    ),
+                    children: (
+                      <div className={classTabsShowMovie} style={{ overflowY: "scroll" }}>
+                        {renderDsPhim(cumRap.danhSachPhim)}
+                      </div>
+                    ),
+                  };
+                })}
+                onChange={onChange}
+              />
+            </div>
+            <div className='block lg:hidden'>
+              <Tabs
+                className={classTabs}
+                tabPosition='top'
+                defaultActiveKey='1'
+                items={heThongRap.lstCumRap.map(cumRap => {
+                  return {
+                    key: cumRap.tenCumRap,
+                    label: (
+                      <div className='text-left w-96 whitespace-normal'>
+                        <p className='text-green-800 font-medium'>{cumRap.tenCumRap}</p>
+                        <p className='text-green-800 hover:text-green-800 truncate'>{cumRap.diaChi}</p>
+                      </div>
+                    ),
+                    children: (
+                      <div className={classTabsShowMovie} style={{ overflowY: "scroll" }}>
+                        {renderDsPhim(cumRap.danhSachPhim)}
+                      </div>
+                    ),
+                  };
+                })}
+                onChange={onChange}
+              />
+            </div>
+          </>
         ),
       };
     });
@@ -67,7 +101,12 @@ export default function TabMovie() {
 
   return (
     <div className='container p-3 rounded border-2 border-l-black'>
-      <Tabs style={{ height: 500 }} tabPosition='left' defaultActiveKey='1' items={handleHeThongRap()} onChange={onChange} />
+      <div className='hidden lg:block'>
+        <Tabs className={classTabs} tabPosition='left' defaultActiveKey='1' items={handleHeThongRap()} onChange={onChange} />
+      </div>
+      <div className='block lg:hidden'>
+        <Tabs className={classTabs} tabPosition='top' defaultActiveKey='1' items={handleHeThongRap()} onChange={onChange} />
+      </div>
     </div>
   );
 }

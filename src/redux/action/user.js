@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
-import { SET_INFO } from "../constant/user";
+import { CHOOSE_TRAILER, SET_INFO } from "../constant/user";
 
 export let loginAction = values => {
   return dispatch => {
@@ -18,5 +18,15 @@ export let loginAction = values => {
       .catch(err => {
         console.log(err);
       });
+  };
+};
+
+export let chooseTrailer = values => {
+  return dispatch => {
+    let action = {
+      type: CHOOSE_TRAILER,
+      payload: values,
+    };
+    dispatch(action);
   };
 };

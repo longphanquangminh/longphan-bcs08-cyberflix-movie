@@ -1,6 +1,7 @@
 import { Carousel, ConfigProvider, message } from "antd";
 import { useEffect, useState } from "react";
 import { getDataSlider } from "../../../api/api";
+import PlayVideo from "../../../component/PlayVideo";
 // const contentStyle = {
 //   margin: 0,
 //   height: "160px",
@@ -35,25 +36,37 @@ export default function Slider() {
     fetchData();
   }, []);
   // try catch
+  const trailer = [
+    "https://www.youtube.com/watch?v=uqJ9u7GSaYM",
+    "https://www.youtube.com/watch?v=kBY2k3G6LsM",
+    "https://www.youtube.com/watch?v=tlBvBQCZKL8",
+  ];
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Carousel: {
-            dotHeight: 10,
-            dotWidth: 60,
-            dotActiveWidth: 100,
-          },
-          /* here is your component tokens */
-        },
-      }}
-    >
-      <Carousel effect='fade' afterChange={onChange}>
-        {banners.map((item, index) => (
-          <img className='h-40 sm:h-64 lg:h-96 xl:h-200 w-full object-cover' key={index} src={item.hinhAnh} alt='' />
-        ))}
-      </Carousel>
-    </ConfigProvider>
+    <>
+      <div className='z-50'>
+        <ConfigProvider
+          theme={{
+            components: {
+              Carousel: {
+                dotHeight: 10,
+                dotWidth: 60,
+                dotActiveWidth: 60,
+              },
+              /* here is your component tokens */
+            },
+          }}
+        >
+          <Carousel effect='fade' afterChange={onChange} className='group'>
+            {banners.map((item, index) => (
+              <div key={index}>
+                <img className='h-[calc(100vh-60px)] w-full object-cover' src={item.hinhAnh} alt='' />
+                <PlayVideo trailer={trailer[index]} />
+              </div>
+            ))}
+          </Carousel>
+        </ConfigProvider>
+      </div>
+    </>
   );
 }
 

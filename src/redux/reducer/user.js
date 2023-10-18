@@ -1,8 +1,9 @@
 import { userLocalStorage } from "../../api/localService.js";
-import { SET_INFO } from "../constant/user.js";
+import { CHOOSE_TRAILER, SET_INFO } from "../constant/user.js";
 
 const initialState = {
   info: userLocalStorage.get(),
+  chosenTrailer: "",
 };
 
 let userReducer = (state = initialState, { type, payload }) => {
@@ -11,6 +12,8 @@ let userReducer = (state = initialState, { type, payload }) => {
       //   state.info = payload;
       //   return { ...state };
       return { ...state, info: payload };
+    case CHOOSE_TRAILER:
+      return { ...state, chosenTrailer: payload };
     default:
       return state;
   }

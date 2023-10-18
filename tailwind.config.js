@@ -8,6 +8,9 @@ export default {
         200: "800px",
         ["banner-home"]: "800px",
       },
+      backgroundImage: {
+        "movie-background": "url('https://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg')",
+      },
     },
   },
   plugins: [],

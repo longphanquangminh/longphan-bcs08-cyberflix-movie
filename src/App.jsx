@@ -3,6 +3,7 @@ import Home from "./page/Home/Home";
 import Login from "./page/Login/Login";
 import DetailMovie from "./page/DetailMovie/DetailMovie";
 import Layout from "./template/layout";
+import Register from "./page/Register/Register";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           }
         />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route
           path='/movie/:id'
           element={

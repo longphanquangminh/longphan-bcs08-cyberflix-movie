@@ -31,13 +31,13 @@ export default function FormLogin() {
         // đẩy data xuống localStorage
         userLocalStorage.set(res.data.content);
         // useNavigate
-        message.success("Đăng nhập thành công");
+        message.success("Login success!");
         // chuyển hướng về trang home
         navigate("/");
         console.log(res);
       })
       .catch(err => {
-        message.error("Đăng nhập thất bại");
+        message.error("Login fail!");
         console.log(err);
       });
   };
@@ -58,7 +58,7 @@ export default function FormLogin() {
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
+      onFinish={onFinish2}
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
