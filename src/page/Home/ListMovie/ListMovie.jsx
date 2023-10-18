@@ -51,7 +51,7 @@ export default function ListMovie() {
               <p className='line-clamp-2 text-justify'>{item.moTa}</p>
             </div>
             <NavLink className='text-white' to={`/movie/${item.maPhim}`}>
-              <button className='py-3 mt-3 w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300'>Mua vé</button>
+              <button className='py-3 mt-3 w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300'>Book tickets</button>
             </NavLink>
           </Card>
           <PlayVideo isCard trailer={item.trailer} />

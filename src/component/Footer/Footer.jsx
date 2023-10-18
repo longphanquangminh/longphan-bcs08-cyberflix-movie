@@ -42,15 +42,15 @@ export default function Footer() {
     },
   ];
   return (
-    <div className='mt-9 bg-[#212121] text-white'>
-      <div className='container'>
+    <div className='bg-[#212121] text-white'>
+      <div className='w-[90%] mx-auto'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-6'>
           <div className='space-y-3'>
             <h1 className='uppercase'>TIX</h1>
             <ul className='grid grid-cols-1 md:grid-cols-2'>
               <li className='cursor-pointer text-gray-500 hover:text-gray-300 duration-300'>FAQ</li>
               <li className='cursor-pointer text-gray-500 hover:text-gray-300 duration-300'>Terms of use</li>
-              <li className='cursor-pointer text-gray-500 hover:text-gray-300 duration-300'>Brand Guidelines</li>
+              <li className='cursor-pointer text-gray-500 hover:text-gray-300 duration-300'>Guidelines</li>
               <li className='cursor-pointer text-gray-500 hover:text-gray-300 duration-300'>Privacy Policy</li>
             </ul>
           </div>
@@ -92,12 +92,22 @@ export default function Footer() {
           </div>
         </div>
         <div className='w-full h-px bg-white'></div>
-        <div className='py-6 grid lg:flex flex-row'>
-          <div className='basis-1/4'>
-            <img src='https://movie-booking-project.vercel.app/img/logo-connect/zion-logo.jpg' alt='' className='rounded-lg w-24' />
+        <div className='py-6 grid lg:flex flex-row gap-12'>
+          <div className='basis-1/6'>
+            <img src='https://movie-booking-project.vercel.app/img/logo-connect/zion-logo.jpg' alt='' className='mx-auto md:mx-0 rounded-lg w-24' />
           </div>
-          <div className='basis-2/4'>2</div>
-          <div className='basis-1/4'>3</div>
+          <div className='basis-4/6 space-y-3 text-center md:text-justify'>
+            <h1 className='uppercase font-bold'>TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION</h1>
+            <div className='text-sm'>
+              <p>Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh, Việt Nam.</p>
+              <p>Giấy chứng nhận đăng ký kinh doanh số: 0101659783,</p>
+              <p>đăng ký thay đổi lần thứ 30, ngày 22 tháng 01 năm 2020 do Sở kế hoạch và đầu tư TPHCM cấp.</p>
+              <p>Số Điện Thoại (Hotline): 1900 545 436</p>
+            </div>
+          </div>
+          <div className='basis-1/6'>
+            <img src='https://movie-booking-project.vercel.app/img/media/certificate.png' alt='' className='mx-auto md:mx-0 w-24' />
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
-import { Carousel, ConfigProvider, message } from "antd";
+import Carousel from "react-multi-carousel";
+import { message } from "antd";
 import { useEffect, useState } from "react";
 import { getDataSlider } from "../../../api/api";
 import PlayVideo from "../../../component/PlayVideo";
+import "react-multi-carousel/lib/styles.css";
 // const contentStyle = {
 //   margin: 0,
 //   height: "160px",
@@ -11,9 +13,6 @@ import PlayVideo from "../../../component/PlayVideo";
 //   background: "#364d79",
 // };
 export default function Slider() {
-  const onChange = currentSlide => {
-    console.log(currentSlide);
-  };
   const [banners, setBanners] = useState([]);
   let fetchData = async () => {
     try {
@@ -44,27 +43,62 @@ export default function Slider() {
   return (
     <>
       <div className='z-50'>
-        <ConfigProvider
-          theme={{
-            components: {
-              Carousel: {
-                dotHeight: 10,
-                dotWidth: 60,
-                dotActiveWidth: 60,
+        <Carousel
+          className='group'
+          additionalTransfrom={0}
+          arrows
+          autoPlaySpeed={3000}
+          centerMode={false}
+          dotListClass=''
+          draggable
+          focusOnSelect={false}
+          infinite
+          itemClass=''
+          keyBoardControl
+          minimumTouchDrag={80}
+          pauseOnHover
+          renderArrowsWhenDisabled={false}
+          renderButtonGroupOutside={false}
+          renderDotsOutside={false}
+          responsive={{
+            desktop: {
+              breakpoint: {
+                max: 3000,
+                min: 1024,
               },
-              /* here is your component tokens */
+              items: 1,
+            },
+            mobile: {
+              breakpoint: {
+                max: 464,
+                min: 0,
+              },
+              items: 1,
+            },
+            tablet: {
+              breakpoint: {
+                max: 1024,
+                min: 464,
+              },
+              items: 1,
             },
           }}
+          rewind={false}
+          rewindWithAnimation={false}
+          rtl={false}
+          shouldResetAutoplay
+          showDots
+          sliderClass=''
+          slidesToSlide={1}
+          swipeable
         >
-          <Carousel effect='fade' afterChange={onChange} className='group'>
-            {banners.map((item, index) => (
-              <div key={index}>
-                <img className='h-[calc(100vh-60px)] w-full object-cover' src={item.hinhAnh} alt='' />
-                <PlayVideo trailer={trailer[index]} />
-              </div>
-            ))}
-          </Carousel>
-        </ConfigProvider>
+          {banners.map((item, index) => (
+            <div key={index}>
+              <img className='h-[calc(100vh-60px)] w-full object-cover' src={item.hinhAnh} alt='' />
+              <PlayVideo trailer={trailer[index]} />
+            </div>
+          ))}
+        </Carousel>
       </div>
     </>
   );
