@@ -35,6 +35,22 @@ export default function Home() {
       </>
     );
   };
+  const SinglePostNoText = ({ itemData }) => {
+    return (
+      <>
+        {itemData.map((item, index) => (
+          <div key={index} className='grid grid-cols-2'>
+            <a target='blank' href={item.url}>
+              <img src={item.img} alt='' className='rounded-lg cursor-pointer h-24 w-24 object-cover' />
+            </a>
+            <a target='blank' href={item.url}>
+              <p className='text-gray-700 line-clamp-2'>{item.title}</p>
+            </a>
+          </div>
+        ))}
+      </>
+    );
+  };
   const handlePosts = arrData => {
     return (
       <div className='space-y-3'>
@@ -44,7 +60,7 @@ export default function Home() {
         <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
           <SinglePost itemData={arrData.slice(2, 4)} />
           <div className='grid grid-cols-1'>
-            <SinglePost itemData={arrData.slice(4, 8)} />
+            <SinglePostNoText itemData={arrData.slice(4, 8)} />
           </div>
         </div>
       </div>
