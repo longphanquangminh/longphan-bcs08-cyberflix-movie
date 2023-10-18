@@ -25,11 +25,11 @@ export default function Header() {
   const items = [
     {
       key: "1",
-      label: info ? <span>{info.hoTen}</span> : <button onClick={handleLogin}>Login</button>,
+      label: info ? <span>{info.hoTen}</span> : <Link to='/login'>Login</Link>,
     },
     {
       key: "2",
-      label: info ? <button onClick={handleLogout}>Logout</button> : <button onClick={handleRegister}>Register</button>,
+      label: info ? <a onClick={handleLogout}>Logout</a> : <Link to='/register'>Register</Link>,
     },
   ];
   let renderUserNav = () => {
@@ -60,7 +60,7 @@ export default function Header() {
   };
 
   return (
-    <div className='bg-white flex items-center justify-center md:justify-between shadow-lg px-20 py-3 gap-6'>
+    <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6'>
       <p className='text-3xl font-medium text-red-600 animate-pulse text-center'>
         <Link to='/'>CyberFlix</Link>
       </p>

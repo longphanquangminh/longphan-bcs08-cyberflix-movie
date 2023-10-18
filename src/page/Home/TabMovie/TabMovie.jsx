@@ -26,7 +26,7 @@ export default function TabMovie() {
             <p className='font-bold'>{phim.tenPhim}</p>
             <div className='grid grid-cols-2 gap-3'>
               {phim.lstLichChieuTheoPhim.slice(0, 8).map((lichChieu, index) => (
-                <span className='bg-red-500 text-white rounded shadow px-5 py-2' key={index}>
+                <span className='bg-red-500 text-white rounded shadow px-5 py-2 cursor-pointer hover:bg-red-700 duration-300' key={index}>
                   {moment(lichChieu.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm")}
                 </span>
               ))}
@@ -36,8 +36,8 @@ export default function TabMovie() {
       );
     });
   };
-  const classTabs = "h-full md:h-96";
-  const classTabsShowMovie = "h-[390px] md:h-96";
+  const classTabs = "h-full lg:h-96";
+  const classTabsShowMovie = "h-[390px] lg:h-96";
   let handleHeThongRap = () => {
     return danhSachHeThongRap.map((heThongRap, index) => {
       return {

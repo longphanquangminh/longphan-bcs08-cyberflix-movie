@@ -23,10 +23,9 @@ export default function DetailMovie() {
         size={400}
         strokeColor={"red"}
         strokeWidth={20}
-        format={percent => <span className='text-red-600 font-medium block'>{percent / 10} điểm</span>}
+        format={percent => <span className='text-red-600 font-medium block'>{percent / 10} / 10</span>}
         type='circle'
         percent={detail.danhGia * 10}
-        className='animate-spin'
       />
     </div>
   );

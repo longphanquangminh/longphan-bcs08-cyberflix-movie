@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, message, Space } from "antd";
 import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
 import { useDispatch } from "react-redux";
@@ -6,13 +6,41 @@ import { SET_INFO } from "../../redux/constant/user";
 import { useNavigate } from "react-router-dom";
 import { userLocalStorage } from "../../api/localService";
 import { loginAction } from "../../redux/action/user";
+import { useEffect, useState } from "react";
 
 // lotties
 const onFinishFailed = errorInfo => {
   console.log("Failed:", errorInfo);
 };
 
+const SubmitButton = ({ form }) => {
+  const [submittable, setSubmittable] = useState(false);
+
+  // Watch all values
+  const values = Form.useWatch([], form);
+  useEffect(() => {
+    form
+      .validateFields({
+        validateOnly: true,
+      })
+      .then(
+        () => {
+          setSubmittable(true);
+        },
+        () => {
+          setSubmittable(false);
+        },
+      );
+  }, [values, form]);
+  return (
+    <Button type='primary' className='bg-blue-500' htmlType='submit' disabled={!submittable}>
+      Submit
+    </Button>
+  );
+};
+
 export default function FormLogin() {
+  const [form] = Form.useForm();
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const onFinish2 = values => {
@@ -45,23 +73,7 @@ export default function FormLogin() {
     dispatch(loginAction(values));
   };
   return (
-    <Form
-      className='w-1/2'
-      layout='vertical'
-      name='basic'
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 20,
-      }}
-      initialValues={{
-        remember: true,
-      }}
-      onFinish={onFinish2}
-      onFinishFailed={onFinishFailed}
-      autoComplete='off'
-    >
+    <Form form={form} layout='vertical' onFinish={onFinish2} onFinishFailed={onFinishFailed} autoComplete='off'>
       <Form.Item
         label='Username'
         name='taiKhoan'
@@ -88,15 +100,11 @@ export default function FormLogin() {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 20,
-        }}
-      >
-        <Button type='primary' className='bg-orange-600' htmlType='submit'>
-          Submit
-        </Button>
+      <Form.Item className='flex justify-center'>
+        <Space>
+          <SubmitButton form={form} />
+          <Button htmlType='reset'>Reset</Button>
+        </Space>
       </Form.Item>
     </Form>
   );
