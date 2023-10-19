@@ -8,10 +8,9 @@ import Slider from "./Slider/Slider";
 import TabMovie from "./TabMovie/TabMovie";
 import { useDispatch, useSelector } from "react-redux";
 import { CHOOSE_TRAILER } from "../../redux/constant/user";
-import { Card, Carousel, Tabs } from "antd";
+import { Carousel, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Meta from "antd/es/card/Meta";
 
 export default function Home() {
   // let navigate = useNavigate();
