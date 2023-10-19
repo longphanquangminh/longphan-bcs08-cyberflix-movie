@@ -8,9 +8,10 @@ import Slider from "./Slider/Slider";
 import TabMovie from "./TabMovie/TabMovie";
 import { useDispatch, useSelector } from "react-redux";
 import { CHOOSE_TRAILER } from "../../redux/constant/user";
-import { Carousel, Tabs } from "antd";
+import { Card, Carousel, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Meta from "antd/es/card/Meta";
 
 export default function Home() {
   // let navigate = useNavigate();
@@ -37,27 +38,45 @@ export default function Home() {
   };
   const SinglePostNoText = ({ itemData }) => {
     return (
-      <>
+      <div className='p-0 m-0 grid gap-7'>
         {itemData.map((item, index) => (
-          <div key={index} className='grid grid-cols-2'>
-            <a target='blank' href={item.url}>
-              <img src={item.img} alt='' className='rounded-lg cursor-pointer h-24 w-24 object-cover' />
+          <div key={index} className='flex flex-row justify-start md:justify-between gap-3'>
+            <a target='blank' href={item.url} className='basis-auto'>
+              <img src={item.img} alt='' className='rounded-lg cursor-pointer h-20 w-20 object-cover' />
             </a>
-            <a target='blank' href={item.url}>
-              <p className='text-gray-700 line-clamp-2'>{item.title}</p>
-            </a>
+            <p target='blank' href={item.url} className='basis-4/5 text-gray-700 text-justify'>
+              {item.title}
+            </p>
           </div>
+          // <div key={index}>
+          //   {/* <Card
+          //     style={{
+          //       border: 0,
+          //       margin: 0,
+          //       padding: 0,
+          //     }}
+          //   >
+          //     <Meta
+          //       avatar={<img src={item.img} alt='' className='rounded-lg cursor-pointer h-16 w-16 object-cover' />}
+          //       description='This is the description'
+          //       style={{
+          //         margin: 0,
+          //         padding: 0,
+          //       }}
+          //     />
+          //   </Card> */}
+          // </div>
         ))}
-      </>
+      </div>
     );
   };
   const handlePosts = arrData => {
     return (
-      <div className='space-y-3'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
+      <div className='space-y-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <SinglePost itemData={arrData.slice(0, 2)} />
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           <SinglePost itemData={arrData.slice(2, 4)} />
           <div className='grid grid-cols-1'>
             <SinglePostNoText itemData={arrData.slice(4, 8)} />
@@ -131,7 +150,7 @@ export default function Home() {
         </div>
         <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
           <div className='flex flex-1 justify-center items-center text-white container'>
-            <div className='grid grid-cols-1 md:grid-cols-2 p-3 gap-12'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-12'>
               <div className='flex justify-center items-center text-center md:text-justify'>
                 <div className='space-y-12'>
                   <h1 className='font-bold text-3xl'>Ứng dụng tiện lợi dành cho người yêu điện ảnh</h1>
