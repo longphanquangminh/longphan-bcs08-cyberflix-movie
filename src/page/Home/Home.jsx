@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Home() {
+  const [viewMore, setViewMore] = useState(false);
   // let navigate = useNavigate();
   // useEffect(() => {
   //   navigate("/login");
@@ -75,11 +76,22 @@ export default function Home() {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
           <SinglePost itemData={arrData.slice(0, 2)} />
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-          <SinglePost itemData={arrData.slice(2, 4)} />
-          <div className='grid grid-cols-1'>
-            <SinglePostNoText itemData={arrData.slice(4, 8)} />
+        {viewMore && (
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+            <SinglePost itemData={arrData.slice(2, 4)} />
+            <div className='grid grid-cols-1'>
+              <SinglePostNoText itemData={arrData.slice(4, 8)} />
+            </div>
           </div>
+        )}
+        <div className='flex justify-center'>
+          <button
+            className='px-6 py-2 text-white w-36 bg-[#fb4226] hover:bg-red-800 duration-300 rounded-lg'
+            onClick={() => setViewMore(!viewMore)}
+            type='button'
+          >
+            {viewMore ? "Collapse" : "View more"}
+          </button>
         </div>
       </div>
     );
@@ -158,7 +170,7 @@ export default function Home() {
                     <a
                       href='https://apps.apple.com/us/app/123phim-mua-ve-lien-tay-chon/id615186197'
                       target='blank'
-                      className='uppercase bg-red-600 py-5 px-7 rounded-lg hover:bg-red-800 duration-300'
+                      className='uppercase bg-[#fb4226] py-5 px-7 rounded-lg hover:bg-red-800 duration-300'
                     >
                       APP MIỄN PHÍ – TẢI VỀ NGAY!
                     </a>
