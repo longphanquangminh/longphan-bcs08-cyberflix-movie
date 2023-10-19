@@ -164,7 +164,7 @@ export default function Home() {
             <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-12'>
               <div className='flex justify-center items-center text-center md:text-justify'>
                 <div className='space-y-12'>
-                  <h1 className='font-bold text-3xl'>Ứng dụng tiện lợi dành cho người yêu điện ảnh</h1>
+                  <h1 className='font-bold text-3xl'>Ứng dụng tiện lợi dành cho dân yêu điện ảnh</h1>
                   <p>Không chỉ đặt vé, bạn còn có thể bình luận phim, chấm điểm rạp và đổi quà hấp dẫn.</p>
                   <div>
                     <a
@@ -197,7 +197,7 @@ export default function Home() {
                   src='https://media.discordapp.net/attachments/1026660684739653674/1164198632325660732/phoneFrame2.png'
                   className='mx-auto w-48 z-50'
                 />
-                <div className='absolute top-1/2 text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer'>
+                <div className='absolute top-1/2 text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                   <Carousel effect='fade' autoplay dots={false} className='w-[180px] mx-auto'>
                     {Array.from({ length: 15 }, (_, i) => i + 1).map(index => (
                       <img
