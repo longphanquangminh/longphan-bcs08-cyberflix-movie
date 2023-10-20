@@ -153,13 +153,13 @@ export default function Home() {
   const [chosenCinemaArr, setChosenCinemaArr] = useState([]);
 
   // chọn rạp
-  const [searchCinema, setSearchCinema] = useState("");
+  const [searchCinema, setSearchCinema] = useState(null);
 
   // danh sách suất
-  const [searchTime, setSearchTime] = useState("");
+  const [searchTime, setSearchTime] = useState(null);
 
   // chọn suất
-  const [chosenTime, setChosenTime] = useState("");
+  const [chosenTime, setChosenTime] = useState(null);
 
   const [totalSearchFilm, setTotalSearchFilm] = useState([]);
 
@@ -233,6 +233,7 @@ export default function Home() {
         <div className='container grid grid-cols-1 lg:grid-cols-4 gap-3'>
           <Select
             disabled={movieArrFilter.length === 0}
+            value={searchFilm}
             showSearch
             className='w-full'
             placeholder='Choose film'
@@ -242,13 +243,14 @@ export default function Home() {
             options={movieArrFilter}
             onChange={value => {
               setSearchFilm(value);
-              setSearchCinema("");
-              setSearchTime("");
-              setChosenTime("");
+              setSearchCinema(null);
+              setSearchTime(null);
+              setChosenTime(null);
             }}
           />
           <Select
             disabled={!searchFilm}
+            value={searchCinema}
             showSearch
             className='w-full'
             placeholder='Choose cinema'
@@ -258,11 +260,12 @@ export default function Home() {
             options={chosenCinemaArr}
             onChange={e => {
               setSearchCinema(e);
-              setChosenTime("");
+              setChosenTime(null);
             }}
           />
           <Select
             disabled={!searchCinema}
+            value={chosenTime}
             showSearch
             className='w-full'
             placeholder='Choose time'
