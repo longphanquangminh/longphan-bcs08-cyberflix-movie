@@ -161,6 +161,8 @@ export default function Home() {
   // chọn suất
   const [chosenTime, setChosenTime] = useState("");
 
+  const [totalSearchFilm, setTotalSearchFilm] = useState([]);
+
   useEffect(() => {
     if (searchFilm) {
       axios({
@@ -170,6 +172,7 @@ export default function Home() {
       })
         .then(res => {
           console.log(res.data);
+          setTotalSearchFilm(res.data);
           const arrData = [...res.data.heThongRapChieu];
           const arrFilter = [];
           const cumRapList = arrData
@@ -192,33 +195,23 @@ export default function Home() {
     }
   }, [searchFilm]);
   useEffect(() => {
-    if (searchCinema) {
-      axios({
-        url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${searchFilm}`,
-        method: "GET",
-        headers: configHeaders(),
-      })
-        .then(res => {
-          const filteredData = res.data.heThongRapChieu
-            .map(heThongRap => heThongRap.cumRapChieu.filter(cumRap => cumRap.maCumRap === searchCinema))
-            .flat();
-          const arr = [];
-          filteredData.map(item => {
-            item.lichChieuPhim.map(itemChild =>
-              arr.push({
-                value: itemChild.maLichChieu,
-                label: moment(itemChild.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm"),
-              }),
-            );
-          });
-          console.log(filteredData);
-          setSearchTime([...arr]);
-        })
-        .catch(error => {
-          console.error("Error fetching data:", error);
-        });
+    if (searchCinema && searchFilm) {
+      const filteredData = totalSearchFilm.heThongRapChieu
+        .map(heThongRap => heThongRap.cumRapChieu.filter(cumRap => cumRap.maCumRap === searchCinema))
+        .flat();
+      const arr = [];
+      filteredData.map(item => {
+        item.lichChieuPhim.map(itemChild =>
+          arr.push({
+            value: itemChild.maLichChieu,
+            label: moment(itemChild.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm"),
+          }),
+        );
+      });
+      console.log(filteredData);
+      setSearchTime([...arr]);
     }
-  }, [searchCinema, searchFilm]);
+  }, [searchCinema, searchFilm, totalSearchFilm]);
 
   return (
     <>
@@ -255,7 +248,6 @@ export default function Home() {
             }}
           />
           <Select
-            value=''
             disabled={!searchFilm}
             showSearch
             className='w-full'
@@ -286,7 +278,7 @@ export default function Home() {
               chosenTime && "hover:bg-red-800"
             } duration-300 ${chosenTime ? "cursor-pointer" : "cursor-not-allowed"}`}
             onClick={() => {
-              alert("OK");
+              alert(chosenTime);
             }}
           >
             Book tickets
