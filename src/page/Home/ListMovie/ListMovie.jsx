@@ -4,8 +4,12 @@ import C18 from "../../../component/C18";
 import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../../../redux/action/user";
 import PlayVideo from "../../../component/PlayVideo";
+import { placeholderImage } from "../../../constants/defaultValues";
 
 export default function ListMovie({ movieArr }) {
+  const onImageError = e => {
+    e.target.src = placeholderImage;
+  };
   const dispatch = useDispatch();
   const handleChooseTrailer = trailer => {
     const url = new URL(trailer);
@@ -30,7 +34,8 @@ export default function ListMovie({ movieArr }) {
                       className='h-48 object-cover group-hover:brightness-50 duration-300 group2'
                       onClick={() => handleChooseTrailer(item.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
                       alt='example'
-                      src={item.hinhAnh}
+                      src={item.hinhAnh ? item.hinhAnh : placeholderImage}
+                      onError={onImageError}
                     />
                   </>
                 }
@@ -40,13 +45,13 @@ export default function ListMovie({ movieArr }) {
                     <C18 />
                     <span className='ml-2 font-semibold text-xl truncate'>{item.tenPhim}</span>
                   </p>
-                  <p className='line-clamp-2 text-justify'>{item.moTa}</p>
+                  <p className='line-clamp-2 text-justify h-12'>{item.moTa}</p>
                 </div>
                 <NavLink className='text-white' to={`/movie/${item.maPhim}`}>
                   <button className='py-3 mt-3 w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300'>Book tickets</button>
                 </NavLink>
               </Card>
-              <PlayVideo isCard trailer={item.trailer} />
+              <PlayVideo isCard trailer={item.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ"} />
             </div>
           ))}
         </div>
@@ -67,7 +72,8 @@ export default function ListMovie({ movieArr }) {
                       className='h-48 object-cover group-hover:brightness-50 duration-300 group2'
                       onClick={() => handleChooseTrailer(item.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
                       alt='example'
-                      src={item.hinhAnh}
+                      src={item.hinhAnh ? item.hinhAnh : placeholderImage}
+                      onError={onImageError}
                     />
                   </>
                 }
@@ -83,7 +89,7 @@ export default function ListMovie({ movieArr }) {
                   <button className='py-3 mt-3 w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300'>Book tickets</button>
                 </NavLink>
               </Card>
-              <PlayVideo isCard trailer={item.trailer} />
+              <PlayVideo isCard trailer={item.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ"} />
             </div>
           ))}
         </div>

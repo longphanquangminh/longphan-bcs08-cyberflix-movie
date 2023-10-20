@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getMovieByTheater } from "../../../api/api";
 import { Tabs } from "antd";
 import moment from "moment/moment";
+import { placeholderImage } from "../../../constants/defaultValues";
 
 const onChange = key => {
   console.log(key);
@@ -17,16 +18,23 @@ export default function TabMovie() {
       })
       .catch(err => console.log(err));
   }, []);
+  const onImageError = e => {
+    e.target.src = placeholderImage;
+  };
   let renderDsPhim = dsPhim => {
     return dsPhim.map((phim, index) => {
       return (
         <div key={index} className='flex space-x-5 p-3 items-center'>
-          <img alt='' src={phim.hinhAnh} className='w-20 h-32 object-cover' />
+          <img alt='' src={phim.hinhAnh ? phim.hinhAnh : placeholderImage} onError={onImageError} className='w-20 h-32 object-cover' />
           <div>
             <p className='font-bold'>{phim.tenPhim}</p>
             <div className='grid grid-cols-2 gap-3'>
               {phim.lstLichChieuTheoPhim.slice(0, 8).map((lichChieu, index) => (
-                <span className='bg-red-500 text-white rounded shadow px-5 py-2 cursor-pointer hover:bg-red-700 duration-300' key={index} onClick={() => alert(lichChieu.maLichChieu)}>
+                <span
+                  className='bg-red-500 text-white rounded shadow px-5 py-2 cursor-pointer hover:bg-red-700 duration-300'
+                  key={index}
+                  onClick={() => alert(lichChieu.maLichChieu)}
+                >
                   {moment(lichChieu.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm")}
                 </span>
               ))}
