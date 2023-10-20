@@ -25,7 +25,7 @@ export default function ListMovie() {
   };
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 container gap-10'>
-      {movieArr.slice(0, 12).map((item, index) => (
+      {movieArr.slice(0, 16).map((item, index) => (
         <div key={index} className='relative group'>
           <Card
             hoverable
