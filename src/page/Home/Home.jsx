@@ -265,7 +265,7 @@ export default function Home() {
             disabled={!searchCinema}
             showSearch
             className='w-full'
-            placeholder={!searchCinema && "Choose time"}
+            placeholder='Choose time'
             optionFilterProp='children'
             filterOption={(input, option) => (option?.label ?? "").includes(input)}
             filterSort={(optionA, optionB) => (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())}
