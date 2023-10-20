@@ -4,7 +4,7 @@ import C18 from "../../../component/C18";
 import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../../../redux/action/user";
 import PlayVideo from "../../../component/PlayVideo";
-import { placeholderImage } from "../../../constants/defaultValues";
+import { defaultTrailer, placeholderImage } from "../../../constants/defaultValues";
 
 export default function ListMovie({ movieArr }) {
   const onImageError = e => {
@@ -30,7 +30,7 @@ export default function ListMovie({ movieArr }) {
                 <>
                   <img
                     className='h-48 object-cover group-hover:brightness-50 duration-300 group2'
-                    onClick={() => handleChooseTrailer(item.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
+                    onClick={() => handleChooseTrailer(item.trailer.length > 0 || item.trailer !== "" ? item.trailer : defaultTrailer)}
                     alt='example'
                     src={item.hinhAnh ? item.hinhAnh : placeholderImage}
                     onError={onImageError}
@@ -49,7 +49,7 @@ export default function ListMovie({ movieArr }) {
                 <button className='py-3 mt-3 w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300'>Book tickets</button>
               </NavLink>
             </Card>
-            <PlayVideo isCard trailer={item.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ"} />
+            <PlayVideo isCard trailer={item.trailer ?? defaultTrailer} />
           </div>
         ))}
       </div>

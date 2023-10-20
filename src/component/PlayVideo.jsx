@@ -14,7 +14,7 @@ export default function PlayVideo({ isCard, trailer = "https://www.youtube.com/w
       className={`absolute hidden group-hover:block duration-300 ${
         isCard ? `top-1/4` : `top-1/2`
       } text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-50`}
-      onClick={() => handleChooseTrailer(trailer.length > 0 ? trailer : "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
+      onClick={() => handleChooseTrailer(trailer.length > 0 || trailer !== "" ? trailer : "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
     >
       <PlayCircle size={52} />
     </div>
