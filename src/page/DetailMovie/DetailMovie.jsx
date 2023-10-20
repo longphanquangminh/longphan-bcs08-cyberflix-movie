@@ -12,7 +12,7 @@ export default function DetailMovie() {
     getDetailMovie(params.id)
       .then(res => {
         console.log(res);
-        setDetail(res.data.content);
+        setDetail(res.data);
       })
       .catch(err => console.log(err));
   }, [params.id]);

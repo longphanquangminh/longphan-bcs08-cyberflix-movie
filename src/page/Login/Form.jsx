@@ -53,11 +53,11 @@ export default function FormLogin() {
         // đầy res lên redux sau khi login thành công
         let action = {
           type: SET_INFO,
-          payload: res.data.content,
+          payload: res.data,
         };
         dispatch(action);
         // đẩy data xuống localStorage
-        userLocalStorage.set(res.data.content);
+        userLocalStorage.set(res.data);
         // useNavigate
         message.success("Login success!");
         // chuyển hướng về trang home

@@ -2,7 +2,7 @@ import { PlayCircle } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../redux/action/user";
 
-export default function PlayVideo(props) {
+export default function PlayVideo({ isCard, trailer = "https://www.youtube.com/watch?v=kvAfmYNtugQ" }) {
   const dispatch = useDispatch();
   const handleChooseTrailer = trailer => {
     const url = new URL(trailer);
@@ -12,9 +12,9 @@ export default function PlayVideo(props) {
   return (
     <div
       className={`absolute hidden group-hover:block duration-300 ${
-        props.isCard ? `top-1/4` : `top-1/2`
+        isCard ? `top-1/4` : `top-1/2`
       } text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-50`}
-      onClick={() => handleChooseTrailer(props.trailer ?? "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
+      onClick={() => handleChooseTrailer(trailer.length > 0 ? trailer : "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
     >
       <PlayCircle size={52} />
     </div>

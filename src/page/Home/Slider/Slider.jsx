@@ -28,7 +28,7 @@ export default function Slider() {
     // getDataSlider()
     //   .then(res => {
     //     console.log(res);
-    //     setBanners(res.data.content);
+    //     setBanners(res.data);
     //   })
     //   .catch(err => console.log(err));
 

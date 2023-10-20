@@ -11,7 +11,7 @@ export let loginAction = values => {
       .then(res => {
         let action = {
           type: SET_INFO,
-          payload: res.data.content,
+          payload: res.data,
         };
         dispatch(action);
       })

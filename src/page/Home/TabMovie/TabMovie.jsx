@@ -13,7 +13,7 @@ export default function TabMovie() {
     getMovieByTheater()
       .then(res => {
         console.log(res);
-        setDanhSachHeThongRap(res.data.content);
+        setDanhSachHeThongRap(res.data);
       })
       .catch(err => console.log(err));
   }, []);

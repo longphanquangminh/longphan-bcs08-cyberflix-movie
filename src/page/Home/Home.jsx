@@ -8,9 +8,12 @@ import Slider from "./Slider/Slider";
 import TabMovie from "./TabMovie/TabMovie";
 import { useDispatch, useSelector } from "react-redux";
 import { CHOOSE_TRAILER } from "../../redux/constant/user";
-import { Carousel, Tabs } from "antd";
+import { Carousel, Select, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getListMovie } from "../../api/api";
+import { BASE_URL, configHeaders } from "../../api/config";
+import moment from "moment/moment";
 
 export default function Home() {
   const [viewMore, setViewMore] = useState(false);
@@ -126,6 +129,97 @@ export default function Home() {
     return state.userReducer;
   });
   const dispatch = useDispatch();
+  const [movieArr, setMovieArr] = useState([]);
+  const [movieArrFilter, setMovieArrFilter] = useState([]);
+  useEffect(() => {
+    getListMovie()
+      .then(res => {
+        console.log(res);
+        setMovieArr([...res.data]);
+        const arrData = [...res.data];
+        const arrFilter = [];
+        arrData.map(item => {
+          arrFilter.push({
+            value: item.maPhim,
+            label: item.tenPhim,
+          });
+        });
+        setMovieArrFilter([...arrFilter]);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  const [searchFilm, setSearchFilm] = useState(0);
+  const [chosenCinemaArr, setChosenCinemaArr] = useState([]);
+
+  // chọn rạp
+  const [searchCinema, setSearchCinema] = useState("");
+
+  // danh sách suất
+  const [searchTime, setSearchTime] = useState("");
+
+  // chọn suất
+  const [chosenTime, setChosenTime] = useState("");
+
+  useEffect(() => {
+    if (searchFilm) {
+      axios({
+        url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${searchFilm}`,
+        method: "GET",
+        headers: configHeaders(),
+      })
+        .then(res => {
+          console.log(res.data);
+          const arrData = [...res.data.heThongRapChieu];
+          const arrFilter = [];
+          const cumRapList = arrData
+            .map(heThongRap =>
+              heThongRap.cumRapChieu.map(cumRap => ({
+                maCumRap: cumRap.maCumRap,
+                tenCumRap: cumRap.tenCumRap,
+              })),
+            )
+            .flat();
+          cumRapList.map(item => {
+            arrFilter.push({
+              value: item.maCumRap,
+              label: item.tenCumRap,
+            });
+          });
+          setChosenCinemaArr([...arrFilter]);
+        })
+        .catch(err => console.error(err));
+    }
+  }, [searchFilm]);
+  useEffect(() => {
+    if (searchCinema) {
+      axios({
+        url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${searchFilm}`,
+        method: "GET",
+        headers: configHeaders(),
+      })
+        .then(res => {
+          const filteredData = res.data.heThongRapChieu
+            .map(heThongRap => heThongRap.cumRapChieu.filter(cumRap => cumRap.maCumRap === searchCinema))
+            .flat();
+          const arr = [];
+          filteredData.map(item => {
+            item.lichChieuPhim.map(itemChild =>
+              arr.push({
+                value: itemChild.maLichChieu,
+                label: moment(itemChild.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm"),
+              }),
+            );
+          });
+          console.log(filteredData);
+          setSearchTime([...arr]);
+        })
+        .catch(error => {
+          console.error("Error fetching data:", error);
+        });
+    }
+  }, [searchCinema, searchFilm]);
+
   return (
     <>
       <ModalVideo
@@ -143,7 +237,62 @@ export default function Home() {
       />
       <div className='space-y-10'>
         <Slider />
-        <ListMovie></ListMovie>
+        <div className='container grid grid-cols-1 lg:grid-cols-4 gap-3'>
+          <Select
+            disabled={movieArrFilter.length === 0}
+            showSearch
+            className='w-full'
+            placeholder='Choose film'
+            optionFilterProp='children'
+            filterOption={(input, option) => (option?.label ?? "").includes(input)}
+            filterSort={(optionA, optionB) => (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())}
+            options={movieArrFilter}
+            onChange={value => {
+              setSearchFilm(value);
+              setSearchCinema("");
+              setSearchTime("");
+              setChosenTime("");
+            }}
+          />
+          <Select
+            value=''
+            disabled={!searchFilm}
+            showSearch
+            className='w-full'
+            placeholder='Choose cinema'
+            optionFilterProp='children'
+            filterOption={(input, option) => (option?.label ?? "").includes(input)}
+            filterSort={(optionA, optionB) => (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())}
+            options={chosenCinemaArr}
+            onChange={e => {
+              setSearchCinema(e);
+              setChosenTime("");
+            }}
+          />
+          <Select
+            disabled={!searchCinema}
+            showSearch
+            className='w-full'
+            placeholder={!searchCinema && "Choose time"}
+            optionFilterProp='children'
+            filterOption={(input, option) => (option?.label ?? "").includes(input)}
+            filterSort={(optionA, optionB) => (optionA?.label ?? "").toLowerCase().localeCompare((optionB?.label ?? "").toLowerCase())}
+            options={searchTime}
+            onChange={e => setChosenTime(e)}
+          />
+          <button
+            disabled={!chosenTime}
+            className={`w-full mx-auto text-white bg-red-500 ${chosenTime ? "opacity-100" : "opacity-50"} rounded ${
+              chosenTime && "hover:bg-red-800"
+            } duration-300 ${chosenTime ? "cursor-pointer" : "cursor-not-allowed"}`}
+            onClick={() => {
+              alert("OK");
+            }}
+          >
+            Book tickets
+          </button>
+        </div>
+        <ListMovie movieArr={movieArr}></ListMovie>
         <TabMovie />
         <div className='container'>
           <Tabs

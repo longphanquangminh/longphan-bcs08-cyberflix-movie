@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL, configHeaders } from "./config";
+import { BASE_URL, BASE_URL_2, configHeaders } from "./config";
 
 export let getListMovie = () => {
   return axios({
@@ -27,7 +27,7 @@ export let getMovieByTheater = () => {
 
 export let getDataSlider = () => {
   return axios({
-    url: `${BASE_URL}/QuanLyPhim/LayDanhSachBanner`,
+    url: `${BASE_URL_2}/QuanLyPhim/LayDanhSachBanner`,
     method: "GET",
     headers: configHeaders(),
   });

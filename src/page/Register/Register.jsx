@@ -53,11 +53,11 @@ export default function Register() {
         // đầy res lên redux sau khi Register thành công
         let action = {
           type: SET_INFO,
-          payload: res.data.content,
+          payload: res.data,
         };
         dispatch(action);
         // đẩy data xuống localStorage
-        userLocalStorage.set(res.data.content);
+        userLocalStorage.set(res.data);
         // useNavigate
         message.success("Register success!");
         // chuyển hướng về trang home
