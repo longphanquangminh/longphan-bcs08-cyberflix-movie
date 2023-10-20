@@ -149,7 +149,7 @@ export default function Home() {
       .catch(err => console.log(err));
   }, []);
 
-  const [searchFilm, setSearchFilm] = useState(0);
+  const [searchFilm, setSearchFilm] = useState(null);
   const [chosenCinemaArr, setChosenCinemaArr] = useState([]);
 
   // chọn rạp
@@ -233,7 +233,6 @@ export default function Home() {
         <div className='container grid grid-cols-1 lg:grid-cols-4 gap-3'>
           <Select
             disabled={movieArrFilter.length === 0}
-            value={searchFilm}
             showSearch
             className='w-full'
             placeholder='Choose film'
