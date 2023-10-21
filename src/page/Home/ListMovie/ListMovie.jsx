@@ -24,9 +24,6 @@ export default function ListMovie({ movieArr }) {
           <div key={index} className='relative group'>
             <Card
               hoverable
-              //   style={{
-              //     width: 240,
-              //   }}
               cover={
                 <>
                   <img
@@ -46,7 +43,7 @@ export default function ListMovie({ movieArr }) {
                 </p>
                 <p className='line-clamp-2 text-justify h-12'>{item.moTa}</p>
               </div>
-              <NavLink className='text-white' to={`/movie/${item.maPhim}`}>
+              <NavLink className='text-white' to={`/detail/${item.maPhim}`}>
                 <button className='py-3 mt-3 w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300'>Book tickets</button>
               </NavLink>
             </Card>

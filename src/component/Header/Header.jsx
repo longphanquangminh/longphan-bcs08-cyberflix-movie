@@ -60,7 +60,7 @@ export default function Header() {
   };
 
   return (
-    <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6'>
+    <div className='bg-white flex items-center justify-center md:justify-between shadow-lg px-20 py-3 gap-6'>
       <p className='text-3xl font-medium text-red-600 animate-pulse text-center'>
         <Link to='/'>CyberFlix</Link>
       </p>

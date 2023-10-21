@@ -20,7 +20,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route
-          path='/movie/:id'
+          path='/detail/:id'
           element={
             <Layout>
               <DetailMovie />
