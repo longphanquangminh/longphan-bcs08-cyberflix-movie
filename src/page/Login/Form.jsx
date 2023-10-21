@@ -5,12 +5,12 @@ import { useDispatch } from "react-redux";
 import { SET_INFO } from "../../redux/constant/user";
 import { useNavigate } from "react-router-dom";
 import { userLocalStorage } from "../../api/localService";
-import { loginAction } from "../../redux/action/user";
+// import { loginAction } from "../../redux/action/user";
 import { useEffect, useState } from "react";
 
 // lotties
 const onFinishFailed = errorInfo => {
-  console.log("Failed:", errorInfo);
+  console.error("Failed:", errorInfo);
 };
 
 const SubmitButton = ({ form }) => {
@@ -44,7 +44,6 @@ export default function FormLogin() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const onFinish2 = values => {
-    console.log("Success:", values);
     axios
       .post(`${BASE_URL}/QuanLyNguoiDung/DangNhap`, values, {
         headers: configHeaders(),
@@ -62,16 +61,15 @@ export default function FormLogin() {
         message.success("Login success!");
         // chuyển hướng về trang home
         navigate("/");
-        console.log(res);
       })
       .catch(err => {
         message.error("Login fail!");
-        console.log(err);
+        console.error(err);
       });
   };
-  const onFinish = values => {
-    dispatch(loginAction(values));
-  };
+  // const onFinish = values => {
+  //   dispatch(loginAction(values));
+  // };
   return (
     <Form form={form} layout='vertical' onFinish={onFinish2} onFinishFailed={onFinishFailed} autoComplete='off'>
       <Form.Item

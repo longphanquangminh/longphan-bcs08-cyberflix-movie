@@ -4,20 +4,11 @@ import { useEffect, useState } from "react";
 import { getDataSlider } from "../../../api/api";
 import PlayVideo from "../../../component/PlayVideo";
 import "react-multi-carousel/lib/styles.css";
-// const contentStyle = {
-//   margin: 0,
-//   height: "160px",
-//   color: "#fff",
-//   lineHeight: "160px",
-//   textAlign: "center",
-//   background: "#364d79",
-// };
 export default function Slider() {
   const [banners, setBanners] = useState([]);
   let fetchData = async () => {
     try {
       let response = await getDataSlider();
-      //   console.log("😀 - fetchData - response:", response.data.content);
       setBanners(response.data.content);
     } catch {
       message.error("Đã có lỗi xảy ra");
@@ -25,16 +16,8 @@ export default function Slider() {
   };
 
   useEffect(() => {
-    // getDataSlider()
-    //   .then(res => {
-    //     console.log(res);
-    //     setBanners(res.data);
-    //   })
-    //   .catch(err => console.log(err));
-
     fetchData();
   }, []);
-  // try catch
   const trailer = [
     "https://www.youtube.com/watch?v=uqJ9u7GSaYM",
     "https://www.youtube.com/watch?v=kBY2k3G6LsM",

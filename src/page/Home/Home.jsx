@@ -134,7 +134,6 @@ export default function Home() {
   useEffect(() => {
     getListMovie()
       .then(res => {
-        console.log(res);
         setMovieArr([...res.data]);
         const arrData = [...res.data];
         const arrFilter = [];
@@ -146,7 +145,7 @@ export default function Home() {
         });
         setMovieArrFilter([...arrFilter]);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }, []);
 
   const [searchFilm, setSearchFilm] = useState(null);
@@ -171,7 +170,6 @@ export default function Home() {
         headers: configHeaders(),
       })
         .then(res => {
-          console.log(res.data);
           setTotalSearchFilm(res.data);
           const arrData = [...res.data.heThongRapChieu];
           const arrFilter = [];
@@ -208,7 +206,6 @@ export default function Home() {
           }),
         );
       });
-      console.log(filteredData);
       setSearchTime([...arr]);
     }
   }, [searchCinema, searchFilm, totalSearchFilm]);

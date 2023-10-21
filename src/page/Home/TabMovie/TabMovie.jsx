@@ -4,20 +4,16 @@ import { Tabs } from "antd";
 import moment from "moment/moment";
 import { placeholderImage } from "../../../constants/defaultValues";
 import { useNavigate } from "react-router-dom";
-
-const onChange = key => {
-  console.log(key);
-};
+import { imageUrlRegex } from "../../../constants/regex";
 
 export default function TabMovie() {
   const [danhSachHeThongRap, setDanhSachHeThongRap] = useState([]);
   useEffect(() => {
     getMovieByTheater()
       .then(res => {
-        console.log(res);
         setDanhSachHeThongRap(res.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }, []);
   const onImageError = e => {
     e.target.src = placeholderImage;
@@ -26,7 +22,12 @@ export default function TabMovie() {
     return dsPhim.map((phim, index) => {
       return (
         <div key={index} className='flex space-x-5 p-3 items-center'>
-          <img alt='' src={phim.hinhAnh ? phim.hinhAnh : placeholderImage} onError={onImageError} className='w-20 h-32 object-cover' />
+          <img
+            alt=''
+            src={imageUrlRegex.test(phim.hinhAnh) ? phim.hinhAnh : placeholderImage}
+            onError={onImageError}
+            className='w-20 h-32 object-cover'
+          />
           <div>
             <p className='font-bold'>{phim.tenPhim}</p>
             <div className='grid grid-cols-2 gap-3'>
@@ -76,7 +77,6 @@ export default function TabMovie() {
                     ),
                   };
                 })}
-                onChange={onChange}
               />
             </div>
             <div className='block lg:hidden'>
@@ -100,7 +100,6 @@ export default function TabMovie() {
                     ),
                   };
                 })}
-                onChange={onChange}
               />
             </div>
           </>
@@ -112,10 +111,10 @@ export default function TabMovie() {
   return (
     <div className='container p-3 rounded border-2 border-l-black'>
       <div className='hidden lg:block'>
-        <Tabs className={classTabs} tabPosition='left' defaultActiveKey='1' items={handleHeThongRap()} onChange={onChange} />
+        <Tabs className={classTabs} tabPosition='left' defaultActiveKey='1' items={handleHeThongRap()} />
       </div>
       <div className='block lg:hidden'>
-        <Tabs className={classTabs} tabPosition='top' defaultActiveKey='1' items={handleHeThongRap()} onChange={onChange} />
+        <Tabs className={classTabs} tabPosition='top' defaultActiveKey='1' items={handleHeThongRap()} />
       </div>
     </div>
   );

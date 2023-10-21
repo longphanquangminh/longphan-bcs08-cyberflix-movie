@@ -7,14 +7,12 @@ export default function DetailMovie() {
   // useParams => lấy id từ url
   const [detail, setDetail] = useState({});
   let params = useParams();
-  console.log("😀 - DetailMovie - params:", params);
   useEffect(() => {
     getDetailMovie(params.id)
       .then(res => {
-        console.log(res);
         setDetail(res.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   }, [params.id]);
   return (
     <div className='flex justify-between items-center'>

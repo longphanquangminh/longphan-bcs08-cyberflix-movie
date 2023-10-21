@@ -16,7 +16,7 @@ export let loginAction = values => {
         dispatch(action);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   };
 };

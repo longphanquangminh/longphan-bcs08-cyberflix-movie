@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../../../redux/action/user";
 import PlayVideo from "../../../component/PlayVideo";
 import { defaultTrailer, placeholderImage } from "../../../constants/defaultValues";
-import { trailerUrlRegex } from "../../../constants/regex";
+import { trailerUrlRegex, imageUrlRegex } from "../../../constants/regex";
 
 export default function ListMovie({ movieArr }) {
   const onImageError = e => {
@@ -33,7 +33,7 @@ export default function ListMovie({ movieArr }) {
                     className='h-48 object-cover group-hover:brightness-50 duration-300 group2'
                     onClick={() => handleChooseTrailer(trailerUrlRegex.test(item.trailer) ? item.trailer : defaultTrailer)}
                     alt='example'
-                    src={item.hinhAnh ? item.hinhAnh : placeholderImage}
+                    src={imageUrlRegex.test(item.hinhAnh) ? item.hinhAnh : placeholderImage}
                     onError={onImageError}
                   />
                 </>

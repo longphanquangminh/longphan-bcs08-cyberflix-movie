@@ -38,13 +38,12 @@ export default function Register() {
   //   return <div className='bg-movie-background h-screen bg-center bg-cover bg-no-repeat bg-fixed relative'></div>;
   const [form] = Form.useForm();
   const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
     message("Error!");
   };
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const onFinish = values => {
-    console.log("Success:", values);
     axios
       .post(`${BASE_URL}/QuanLyNguoiDung/DangKy`, values, {
         headers: configHeaders(),
@@ -62,11 +61,10 @@ export default function Register() {
         message.success("Register success!");
         // chuyển hướng về trang home
         navigate("/");
-        console.log(res);
       })
       .catch(err => {
         message.error("Register fail!");
-        console.log(err);
+        console.error(err);
       });
   };
   return (
