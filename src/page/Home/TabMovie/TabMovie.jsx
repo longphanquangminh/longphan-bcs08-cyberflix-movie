@@ -3,6 +3,7 @@ import { getMovieByTheater } from "../../../api/api";
 import { Tabs } from "antd";
 import moment from "moment/moment";
 import { placeholderImage } from "../../../constants/defaultValues";
+import { useNavigate } from "react-router-dom";
 
 const onChange = key => {
   console.log(key);
@@ -33,7 +34,7 @@ export default function TabMovie() {
                 <span
                   className='bg-red-500 text-white rounded shadow px-5 py-2 cursor-pointer hover:bg-red-700 duration-300'
                   key={index}
-                  onClick={() => alert(lichChieu.maLichChieu)}
+                  onClick={() => navigate(`/purchase/${lichChieu.maLichChieu}`)}
                 >
                   {moment(lichChieu.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm")}
                 </span>
@@ -46,6 +47,7 @@ export default function TabMovie() {
   };
   const classTabs = "h-full lg:h-96";
   const classTabsShowMovie = "h-[390px] lg:h-96";
+  const navigate = useNavigate();
   let handleHeThongRap = () => {
     return danhSachHeThongRap.map((heThongRap, index) => {
       return {

@@ -1,5 +1,5 @@
 // import { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // import Header from "../../component/Header/Header";
 import ModalVideo from "react-modal-video";
@@ -17,7 +17,7 @@ import moment from "moment/moment";
 
 export default function Home() {
   const [viewMore, setViewMore] = useState(false);
-  // let navigate = useNavigate();
+  const navigate = useNavigate();
   // useEffect(() => {
   //   navigate("/login");
   // }, []);
@@ -279,9 +279,7 @@ export default function Home() {
             className={`w-full mx-auto text-white bg-red-500 ${chosenTime ? "opacity-100" : "opacity-50"} rounded ${
               chosenTime && "hover:bg-red-800"
             } duration-300 ${chosenTime ? "cursor-pointer" : "cursor-not-allowed"}`}
-            onClick={() => {
-              alert(chosenTime);
-            }}
+            onClick={() => navigate(`/purchase/${chosenTime}`)}
           >
             Book tickets
           </button>

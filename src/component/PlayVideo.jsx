@@ -1,6 +1,7 @@
 import { PlayCircle } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../redux/action/user";
+import { trailerUrlRegex } from "../constants/regex";
 
 export default function PlayVideo({ isCard, trailer = "https://www.youtube.com/watch?v=kvAfmYNtugQ" }) {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export default function PlayVideo({ isCard, trailer = "https://www.youtube.com/w
       className={`absolute hidden group-hover:block duration-300 ${
         isCard ? `top-1/4` : `top-1/2`
       } text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer z-50`}
-      onClick={() => handleChooseTrailer(trailer.length > 0 || trailer !== "" ? trailer : "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
+      onClick={() => handleChooseTrailer(trailerUrlRegex.test(trailer) ? trailer : "https://www.youtube.com/watch?v=kvAfmYNtugQ")}
     >
       <PlayCircle size={52} />
     </div>
