@@ -32,13 +32,13 @@ export default function TabMovie() {
             <p className='font-bold'>{phim.tenPhim}</p>
             <div className='grid grid-cols-2 gap-3'>
               {phim.lstLichChieuTheoPhim.slice(0, 8).map((lichChieu, index) => (
-                <span
+                <button
                   className='bg-red-500 text-white rounded shadow px-5 py-2 cursor-pointer hover:bg-red-700 duration-300'
                   key={index}
                   onClick={() => navigate(`/purchase/${lichChieu.maLichChieu}`)}
                 >
                   {moment(lichChieu.ngayChieuGioChieu).format("DD-MM-YYYY ~ HH:mm")}
-                </span>
+                </button>
               ))}
             </div>
           </div>

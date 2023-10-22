@@ -4,6 +4,9 @@ export default {
   mode: "jit",
   theme: {
     extend: {
+      gridTemplateColumns: {
+        16: "repeat(16, minmax(0, 1fr))",
+      },
       height: {
         200: "800px",
         ["banner-home"]: "800px",

@@ -17,6 +17,22 @@ export let getDetailMovie = id => {
   });
 };
 
+export let getDetailMovieShow = id => {
+  return axios({
+    url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
+    method: "GET",
+    headers: configHeaders(),
+  });
+};
+
+export let getSeatListByFilm = id => {
+  return axios({
+    url: `${BASE_URL}/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`,
+    method: "GET",
+    headers: configHeaders(),
+  });
+};
+
 export let getMovieByTheater = () => {
   return axios({
     url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01`,

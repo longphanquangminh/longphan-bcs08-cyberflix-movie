@@ -45,9 +45,13 @@ export default function Register() {
   let dispatch = useDispatch();
   const onFinish = values => {
     axios
-      .post(`${BASE_URL}/QuanLyNguoiDung/DangKy`, values, {
-        headers: configHeaders(),
-      })
+      .post(
+        `${BASE_URL}/QuanLyNguoiDung/DangKy`,
+        { ...values, maNhom: "GP01", maLoaiNguoiDung: "KhachHang" },
+        {
+          headers: configHeaders(),
+        },
+      )
       .then(res => {
         // đầy res lên redux sau khi Register thành công
         let action = {
@@ -63,8 +67,7 @@ export default function Register() {
         navigate("/");
       })
       .catch(err => {
-        message.error("Register fail!");
-        console.error(err);
+        message.error(err.response.data);
       });
   };
   return (
