@@ -86,9 +86,10 @@ export default function Account() {
         message.success("Update success!");
         console.log(res);
         console.log("values", { ...values, maNhom: "GP09", maLoaiNguoiDung: values.loaiNguoiDung === "Khách hàng" ? "KhachHang" : "QuanTri" });
-        const { thongTinDatVe, ...dataToStore } = res.data; // trick để làm thongTinDatVe ko dính Redux...
-        userLocalStorage.set({ ...dataToStore, accessToken: info.accessToken });
-        dispatch({ type: SET_INFO, payload: { ...dataToStore, accessToken: info.accessToken } });
+        // eslint-disable-next-line
+        const { thongTinDatVe, loaiNguoiDung, ...dataToStore } = res.data;
+        userLocalStorage.set({ ...dataToStore, accessToken: info.accessToken, maLoaiNguoiDung: info.maLoaiNguoiDung });
+        dispatch({ type: SET_INFO, payload: { ...dataToStore, accessToken: info.accessToken, maLoaiNguoiDung: info.maLoaiNguoiDung } });
       })
       .catch(err => {
         console.error(err);
