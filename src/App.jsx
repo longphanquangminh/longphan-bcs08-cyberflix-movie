@@ -5,6 +5,7 @@ import DetailMovie from "./page/DetailMovie/DetailMovie";
 import Layout from "./template/Layout";
 import Register from "./page/Register/Register";
 import Purchase from "./page/Purchase/Purchase";
+import Account from "./page/Account/Account";
 
 function App() {
   return (
@@ -21,6 +22,14 @@ function App() {
           />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route
+            path='/account'
+            element={
+              <Layout>
+                <Account />
+              </Layout>
+            }
+          />
           <Route
             path='/detail/:id'
             element={

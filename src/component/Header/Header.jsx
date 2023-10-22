@@ -22,10 +22,13 @@ export default function Header() {
     // window.location.href = "/login";
     navigate("/register");
   };
+  const handleAccount = () => {
+    navigate("/account");
+  };
   const items = [
     {
       key: "1",
-      label: info ? <span>{info.hoTen}</span> : <Link to='/login'>Login</Link>,
+      label: info ? <Link to='/account'>{info.hoTen}</Link> : <Link to='/login'>Login</Link>,
     },
     {
       key: "2",
@@ -37,7 +40,9 @@ export default function Header() {
     if (info) {
       return (
         <div className='flex justify-center items-center gap-x-3'>
-          <span>{info.hoTen}</span>
+          <span className='cursor-pointer text-black hover:text-gray-500 duration-300' onClick={handleAccount}>
+            {info.hoTen}
+          </span>
           <button className={classBtn} onClick={handleLogout}>
             Logout
           </button>
