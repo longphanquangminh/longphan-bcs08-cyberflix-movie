@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSeatListByFilm } from "../../api/api";
+import { getSeatListByFilm, postTickets } from "../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "antd";
@@ -45,15 +45,21 @@ export default function Purchase() {
       onOk() {
         setTimeout(() => navigate("/login"), 100);
       },
-      onCancel() {
-        console.log("Cancel");
-      },
     });
   };
   const showNoSeatMessage = () => {
     error({
       title: "You've not chosen seats",
       content: "Please chosen seats!",
+      okButtonProps: {
+        className: "bg-blue-500",
+      },
+    });
+  };
+  const showError = () => {
+    error({
+      title: "Error",
+      content: "Error! Please try again!",
       okButtonProps: {
         className: "bg-blue-500",
       },
@@ -75,13 +81,19 @@ export default function Purchase() {
     });
   };
   const buyTickets = () => {
-    if (info?.accessToken === "" || info === undefined) {
+    if (info === null) {
       showConfirmLogin();
     } else {
       if (chosenSeats.length === 0) {
         showNoSeatMessage();
       } else {
-        showSuccess();
+        postTickets(id, chosenSeats, info)
+          .then(() => {
+            showSuccess();
+          })
+          .catch(() => {
+            showError();
+          });
       }
     }
   };

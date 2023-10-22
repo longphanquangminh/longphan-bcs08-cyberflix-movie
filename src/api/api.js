@@ -17,6 +17,19 @@ export let getDetailMovie = id => {
   });
 };
 
+export let postTickets = (id, seats, info) => {
+  return axios({
+    url: `${BASE_URL}/QuanLyDatVe/DatVe`,
+    method: "POST",
+    headers: { ...configHeaders(), Authorization: `Bearer ${info.accessToken}` },
+    data: {
+      maLichChieu: id,
+      danhSachVe: seats,
+      taiKhoanNguoiDung: info.taiKhoan,
+    },
+  });
+};
+
 export let getDetailMovieShow = id => {
   return axios({
     url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
