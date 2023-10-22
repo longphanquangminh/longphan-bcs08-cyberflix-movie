@@ -148,7 +148,7 @@ export default function Purchase() {
           </div>
           <div className='flex justify-between items-center'>
             <div>Address:</div>
-            <div>{filmSeats.thongTinPhim.diaChi}</div>
+            <div className='truncate ml-1'>{filmSeats.thongTinPhim.diaChi}</div>
           </div>
           <div className='flex justify-between items-center'>
             <div>Room name:</div>
