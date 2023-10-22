@@ -3,7 +3,6 @@ import Header from "../../component/Header/Header";
 import { Button, Form, Input, Select, Space, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
 import { userLocalStorage } from "../../api/localService";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { layUserInfo, putUserInfo } from "../../api/api";
@@ -33,7 +32,7 @@ const SubmitButton = () => {
     //   Submit
     // </Button>
     <Button type='primary' className='bg-blue-500' htmlType='submit'>
-      Submit
+      Update
     </Button>
   );
 };
@@ -98,10 +97,12 @@ export default function Account() {
   return (
     <>
       <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
-        <Header />
-        <div className='flex flex-1 justify-center items-center'>
+        <div className='fixed min-w-full z-50'>
+          <Header />
+        </div>
+        <div className='flex flex-1 justify-center items-center mt-16 mb-2'>
           <div className='p-3 m-2 bg-white rounded-lg w-2/3 md:w-1/3'>
-            <h1 className='mb-3 font-bold text-2xl text-center'>Register</h1>
+            <h1 className='mb-3 font-bold text-2xl text-center'>User Info</h1>
             <Form form={form} layout='vertical' onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete='off'>
               <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
                 <Form.Item
@@ -162,19 +163,21 @@ export default function Account() {
                 >
                   <Input />
                 </Form.Item>
-                <Form.Item
-                  name='matKhau'
-                  label='Password'
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your password!",
-                    },
-                  ]}
-                  hasFeedback
-                >
-                  <Input.Password />
-                </Form.Item>
+              </div>
+              <Form.Item
+                name='matKhau'
+                label='Password'
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+                hasFeedback
+              >
+                <Input.Password />
+              </Form.Item>
+              {info.maLoaiNguoiDung !== "KhachHang" && (
                 <Form.Item
                   name='loaiNguoiDung'
                   label='Account type'
@@ -185,24 +188,18 @@ export default function Account() {
                     },
                   ]}
                 >
-                  <Select disabled placeholder='Select account type' onChange={onAccountTypeChange}>
+                  <Select disabled={info.maLoaiNguoiDung === "KhachHang"} placeholder='Select account type' onChange={onAccountTypeChange}>
                     <Option value='Khách hàng'>Customer</Option>
                     <Option value='Quản trị'>Administrator</Option>
                   </Select>
                 </Form.Item>
-              </div>
+              )}
               <Form.Item className='flex justify-center'>
                 <Space>
                   <SubmitButton form={form} />
                 </Space>
               </Form.Item>
             </Form>
-            <p className='text-right text-red-500'>
-              Have account?{" "}
-              <Link to='/login' className='font-bold text-red-500 hover:text-red-400 duration-300'>
-                Login
-              </Link>
-            </p>
           </div>
         </div>
       </div>
