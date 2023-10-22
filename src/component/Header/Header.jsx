@@ -48,9 +48,10 @@ export default function Header() {
     if (info) {
       return (
         <div className='flex justify-center items-center gap-x-3'>
-          <span className='cursor-pointer text-black hover:text-gray-500 duration-300' onClick={handleAccount}>
-            {info.hoTen}
-          </span>
+          <div className='cursor-pointer flex justify-center items-center gap-x-1 group' onClick={handleAccount}>
+            <img src='https://demo1.cybersoft.edu.vn/static/media/avatarTix.546c691f.jpg' className='w-7 h-7  rounded-lg' alt='' />
+            <span className='text-black group-hover:text-gray-500 duration-300'>{info.hoTen}</span>
+          </div>
           <button className={classBtn} onClick={handleLogout}>
             Logout
           </button>
