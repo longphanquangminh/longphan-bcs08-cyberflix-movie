@@ -40,7 +40,9 @@ export default function DetailMovie() {
             <div className='text-white space-y-3 text-center md:text-left'>
               <p>{moment(detail.ngayKhoiChieu).format("DD-MM-YYYY")}</p>
               <p className='font-bold text-xl'>{detail.tenPhim}</p>
-              <p>{detail.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].thoiLuong ?? 120} minutes</p>
+              {/* <p>{detail.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].thoiLuong ?? 120} minutes</p> */}
+              {/* <p>{detail?.heThongRapChieu[0]?.cumRapChieu[0]?.lichChieuPhim[0]?.thoiLuong ?? 120} minutes</p> */}
+              <p>120 minutes</p>
               {/* <div className='w-full md:w-1/2'>
                 <button className='py-3 mt-3 w-1/2 md:w-full mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300' onClick={() => {}}>
                   Buy tickets

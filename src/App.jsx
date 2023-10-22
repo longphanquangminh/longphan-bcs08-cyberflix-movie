@@ -22,14 +22,7 @@ function App() {
           />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route
-            path='/account'
-            element={
-              <Layout>
-                <Account />
-              </Layout>
-            }
-          />
+          <Route path='/account' element={<Account />} />
           <Route
             path='/detail/:id'
             element={

@@ -3,10 +3,7 @@ import Header from "../../component/Header/Header";
 import { Button, Form, Input, Space, message } from "antd";
 import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
-import { SET_INFO } from "../../redux/constant/user";
-import { userLocalStorage } from "../../api/localService";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 const SubmitButton = ({ form }) => {
   const [submittable, setSubmittable] = useState(false);
@@ -39,10 +36,9 @@ export default function Register() {
   const [form] = Form.useForm();
   const onFinishFailed = errorInfo => {
     console.error("Failed:", errorInfo);
-    message("Error!");
+    message.error("Error!");
   };
   let navigate = useNavigate();
-  let dispatch = useDispatch();
   const onFinish = values => {
     axios
       .post(
@@ -52,18 +48,8 @@ export default function Register() {
           headers: configHeaders(),
         },
       )
-      .then(res => {
-        // đầy res lên redux sau khi Register thành công
-        let action = {
-          type: SET_INFO,
-          payload: res.data,
-        };
-        dispatch(action);
-        // đẩy data xuống localStorage
-        userLocalStorage.set(res.data);
-        // useNavigate
-        message.success("Register success!");
-        // chuyển hướng về trang home
+      .then(() => {
+        message.success("Register success! Please login");
         navigate("/");
       })
       .catch(err => {

@@ -1,18 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLocalStorage } from "../../api/localService";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Dropdown } from "antd";
+import { Button, Dropdown, message } from "antd";
+import { SET_INFO } from "../../redux/constant/user";
 
 export default function Header() {
   let navigate = useNavigate();
   let { info } = useSelector(state => {
     return state.userReducer;
   });
+  const dispatch = useDispatch();
   let handleLogout = () => {
     userLocalStorage.remove();
-    window.location.reload();
+    navigate("/");
+    let action = {
+      type: SET_INFO,
+      payload: null,
+    };
+    dispatch(action);
+    message.success("Logout successfully!");
+    // window.location.reload();
     // window.location.href = "/";
-    // navigate("/");
   };
   let handleLogin = () => {
     // window.location.href = "/login";

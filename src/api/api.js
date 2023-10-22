@@ -30,6 +30,17 @@ export let postTickets = (id, seats, info) => {
   });
 };
 
+export let layUserInfo = userName => {
+  return axios({
+    url: `${BASE_URL}/QuanLyNguoiDung/ThongTinTaiKhoan`,
+    method: "POST",
+    headers: { ...configHeaders() },
+    data: {
+      taiKhoan: userName,
+    },
+  });
+};
+
 export let getDetailMovieShow = id => {
   return axios({
     url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
@@ -59,5 +70,14 @@ export let getDataSlider = () => {
     url: `${BASE_URL_2}/QuanLyPhim/LayDanhSachBanner`,
     method: "GET",
     headers: configHeaders(),
+  });
+};
+
+export const putUserInfo = (values, accessToken) => {
+  return axios({
+    url: `${BASE_URL}/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+    method: "PUT",
+    headers: { ...configHeaders(), Authorization: `Bearer ${accessToken}` },
+    data: values,
   });
 };

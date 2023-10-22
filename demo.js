@@ -93,6 +93,4 @@ const a = {
   danhGia: 10,
 };
 
-a.heThongRapChieu.map(item => {
-  console.log(item.tenHeThongRap);
-});
+console.log(a.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].thoiLuong);
