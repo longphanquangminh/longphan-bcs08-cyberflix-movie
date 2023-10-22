@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./page/Home/Home";
 import Login from "./page/Login/Login";
 import DetailMovie from "./page/DetailMovie/DetailMovie";
-import Layout from "./template/layout";
+import Layout from "./template/Layout";
 import Register from "./page/Register/Register";
 import Purchase from "./page/Purchase/Purchase";
 
