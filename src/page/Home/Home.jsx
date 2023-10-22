@@ -21,7 +21,7 @@ export default function Home() {
   // useEffect(() => {
   //   navigate("/login");
   // }, []);
-  const kindOfPosts = ["Điện ảnh 24h", "Review", "Khuyến mãi"];
+  const kindOfPosts = ["Showbiz 24h", "Review", "Promotion"];
   const SinglePost = ({ itemData }) => {
     return (
       <>
