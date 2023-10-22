@@ -11,14 +11,14 @@ export default function Header() {
   });
   const dispatch = useDispatch();
   let handleLogout = () => {
-    userLocalStorage.remove();
+    message.success("Logout successfully!");
     navigate("/");
+    userLocalStorage.remove();
     let action = {
       type: SET_INFO,
       payload: null,
     };
     dispatch(action);
-    message.success("Logout successfully!");
     // window.location.reload();
     // window.location.href = "/";
   };

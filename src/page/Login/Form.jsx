@@ -49,6 +49,7 @@ export default function FormLogin() {
         headers: configHeaders(),
       })
       .then(res => {
+        message.success("Login success!");
         // đầy res lên redux sau khi login thành công
         let action = {
           type: SET_INFO,
@@ -58,7 +59,6 @@ export default function FormLogin() {
         // đẩy data xuống localStorage
         userLocalStorage.set(res.data);
         // useNavigate
-        message.success("Login success!");
         // chuyển hướng về trang home
         navigate("/");
       })

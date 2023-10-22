@@ -69,7 +69,6 @@ export default function DetailMovie() {
               defaultActiveKey='1'
               items={detail?.heThongRapChieu?.map((item, index) => {
                 const id = String(index + 1);
-                console.log(item);
                 return {
                   label: <img className='w-16 h-16' src={item.logo} alt='' />,
                   key: id,

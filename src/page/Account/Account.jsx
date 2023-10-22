@@ -45,15 +45,15 @@ export default function Account() {
   useEffect(() => {
     layUserInfo(info.taiKhoan)
       .then(res => {
-        console.log(res);
         form.setFieldsValue({
           ...res.data,
           loaiNguoiDung: res.data.loaiNguoiDung === null ? "Khách hàng" : res.data.loaiNguoiDung,
         });
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [info]);
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -84,8 +84,6 @@ export default function Account() {
     putUserInfo({ ...values, maNhom: "GP01", maLoaiNguoiDung: values.loaiNguoiDung === "Khách hàng" ? "KhachHang" : "QuanTri" }, info.accessToken)
       .then(res => {
         message.success("Update success!");
-        console.log(res);
-        console.log("values", { ...values, maNhom: "GP09", maLoaiNguoiDung: values.loaiNguoiDung === "Khách hàng" ? "KhachHang" : "QuanTri" });
         // eslint-disable-next-line
         const { thongTinDatVe, loaiNguoiDung, ...dataToStore } = res.data;
         userLocalStorage.set({ ...dataToStore, accessToken: info.accessToken, maLoaiNguoiDung: info.maLoaiNguoiDung });

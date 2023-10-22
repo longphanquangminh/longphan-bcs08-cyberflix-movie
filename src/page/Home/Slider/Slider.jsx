@@ -11,7 +11,7 @@ export default function Slider() {
       let response = await getDataSlider();
       setBanners(response.data.content);
     } catch {
-      message.error("Đã có lỗi xảy ra");
+      message.error("Error!");
     }
   };
 

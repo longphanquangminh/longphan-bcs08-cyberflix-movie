@@ -35,8 +35,8 @@ export default function Register() {
   //   return <div className='bg-movie-background h-screen bg-center bg-cover bg-no-repeat bg-fixed relative'></div>;
   const [form] = Form.useForm();
   const onFinishFailed = errorInfo => {
-    console.error("Failed:", errorInfo);
     message.error("Error!");
+    console.error("Failed:", errorInfo);
   };
   let navigate = useNavigate();
   const onFinish = values => {
