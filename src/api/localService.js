@@ -13,3 +13,19 @@ export const userLocalStorage = {
     localStorage.removeItem("USER");
   },
 };
+
+export const adminLocalStorage = {
+  //   get: () => {
+  //     // return localStorage.getItem("ADMIN") ? JSON.parse(localStorage.getItem("ADMIN")) : null;
+  //     const dataJson = localStorage.getItem("ADMIN");
+  //     return JSON.parse(dataJson);
+  //   },
+  get: () => (localStorage.getItem("ADMIN") ? JSON.parse(localStorage.getItem("ADMIN")) : null),
+  set: userDataContentInfo => {
+    const dataJson = JSON.stringify(userDataContentInfo);
+    localStorage.setItem("ADMIN", dataJson);
+  },
+  remove: () => {
+    localStorage.removeItem("ADMIN");
+  },
+};

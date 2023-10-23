@@ -6,6 +6,11 @@ import Layout from "./template/Layout";
 import Register from "./page/Register/Register";
 import Purchase from "./page/Purchase/Purchase";
 import Account from "./page/Account/Account";
+import Auth from "./page/Admin/Auth";
+import PrivateRoute from "./template/PrivateRoute";
+import Dashboard from "./page/Admin/Dashboard";
+import PageNotFound from "./page/PageNotFound/PageNotFound";
+import AdminLayout from "./template/AdminLayout";
 
 function App() {
   return (
@@ -21,6 +26,16 @@ function App() {
             }
           />
           <Route path='/login' element={<Login />} />
+          <Route path='/admin' element={<Auth />} />
+          <Route path='/admin/auth' element={<Auth />} />
+          <Route
+            path='/admin/dashboard'
+            element={
+              <PrivateRoute>
+                <AdminLayout />
+              </PrivateRoute>
+            }
+          />
           <Route path='/register' element={<Register />} />
           <Route path='/account' element={<Account />} />
           <Route
@@ -39,6 +54,7 @@ function App() {
               </Layout>
             }
           />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </>

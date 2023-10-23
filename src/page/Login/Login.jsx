@@ -17,6 +17,11 @@ export default function Login() {
                 Register
               </Link>
             </p>
+            <p className='text-right text-red-500'>
+              <Link to='/admin/auth' className='font-bold text-red-500 hover:text-red-400 duration-300'>
+                Login as admin
+              </Link>
+            </p>
           </div>
         </div>
       </div>
