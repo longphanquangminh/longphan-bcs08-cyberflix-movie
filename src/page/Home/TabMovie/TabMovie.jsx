@@ -114,7 +114,7 @@ export default function TabMovie() {
         <Tabs className={classTabs} tabPosition='left' defaultActiveKey='1' items={handleHeThongRap()} />
       </div>
       <div className='block lg:hidden'>
-        <Tabs className={classTabs} tabPosition='top' defaultActiveKey='1' items={handleHeThongRap()} />
+        <Tabs className={classTabs} centered defaultActiveKey='1' items={handleHeThongRap()} />
       </div>
     </div>
   );

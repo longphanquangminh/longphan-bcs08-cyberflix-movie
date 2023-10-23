@@ -30,11 +30,22 @@ export const postTickets = (id, seats, info) => {
   });
 };
 
-export const layUserInfo = userName => {
+export const getUserInfo = userName => {
   return axios({
     url: `${BASE_URL}/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${MA_NHOM}&tuKhoa=${userName}`,
     method: "GET",
     headers: { ...configHeaders() },
+  });
+};
+
+export let layUserTickets = userName => {
+  return axios({
+    url: `${BASE_URL}/QuanLyNguoiDung/ThongTinTaiKhoan`,
+    method: "POST",
+    headers: { ...configHeaders() },
+    data: {
+      taiKhoan: userName,
+    },
   });
 };
 
