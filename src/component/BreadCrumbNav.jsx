@@ -2,47 +2,16 @@ import { Breadcrumb } from "antd";
 import { NavLink } from "react-router-dom";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
 
-// const IconDashBoard = () => {
-//   return (
-//     <span>
-//       {/* <i className='fa fa-home' aria-hidden='true'></i>Trang chủ */}
-//       <i className='fa fa-home' aria-hidden='true'></i>Homepage
-//     </span>
-//   );
-// };
-
-// const routes = [
-//     {
-//       path: "/",
-//       breadcrumb: IconDashBoard,
-//     },
-//   {
-//     path: "/admin/user",
-//     breadcrumb: "User management",
-//   },
-//   {
-//     path: "/movie",
-//     breadcrumb: "Movie management",
-//   },
-// ];
-
 const routes = [
   {
     path: "/admin/user",
     breadcrumb: "User management",
   },
   {
-    path: "/movie",
+    path: "/admin/movie",
     breadcrumb: "Movie management",
   },
 ];
-
-// const routes = [
-//   {
-//     path: "/admin/user",
-//     breadcrumb: "User management",
-//   },
-// ];
 
 export default function BreadCrumbNav() {
   const breadcrumbs = useBreadcrumbs(routes);

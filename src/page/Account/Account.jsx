@@ -41,8 +41,16 @@ const SubmitButton = () => {
 
 export default function Account() {
   //   return <div className='bg-movie-background h-screen bg-center bg-cover bg-no-repeat bg-fixed relative'></div>;
-  const { info } = useSelector(state => {
-    return state.userReducer;
+  // const { info } = useSelector(state => {
+  //   return state.userReducer;
+  // });
+  const info = useSelector(state => {
+    const userInfo = state.userReducer.info;
+    const adminInfo = state.adminReducer.info;
+    console.log(userInfo !== null && userInfo !== undefined ? userInfo : adminInfo);
+
+    // If info is null or undefined in userReducer, use adminReducer
+    return userInfo !== null && userInfo !== undefined ? userInfo : adminInfo;
   });
   useEffect(() => {
     getUserInfo(info.taiKhoan)

@@ -5,7 +5,7 @@ import { Layout, Menu, theme, message } from "antd";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import BreadCrumbNav from "../component/BreadCrumbNav";
 import { adminLocalStorage } from "../api/localService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_INFO_ADMIN } from "../redux/constant/admin";
 
 const { Header, Content, Sider } = Layout;
@@ -58,11 +58,21 @@ const AdminLayout = () => {
     };
     dispatch(action);
   };
+  const { info } = useSelector(state => {
+    return state.adminReducer;
+  });
+  const handleAccount = () => {
+    navigate("/account");
+  };
   return (
     <Layout>
       <Header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingLeft: 200 }}>
         <span className='text-white font-medium text-2xl'>CyberFlix Admin</span>
-        <div>
+        <div className='flex justify-center items-center gap-x-3'>
+          <div className='cursor-pointer flex justify-center items-center gap-x-1 group' onClick={handleAccount}>
+            <img src='https://demo1.cybersoft.edu.vn/static/media/avatarTix.546c691f.jpg' className='w-7 h-7  rounded-lg' alt='' />
+            <span className='text-white group-hover:text-gray-500 duration-300'>{info.hoTen}</span>
+          </div>
           <button onClick={handleAdminLogout} className='text-black bg-white rounded px-5 h-10 leading-10 shadow shadow-white'>
             Log out
           </button>
