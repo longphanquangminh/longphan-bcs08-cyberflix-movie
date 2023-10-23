@@ -100,7 +100,7 @@ export default function Purchase() {
       }
     }
   };
-  if (loading) return <div className='container h-96'>Loading</div>;
+  if (loading) return <div className='container h-48 text-center pt-12'>Loading...</div>;
   if (!filmSeats) return <div className='container h-96'>No data!</div>;
   return (
     <div className='container'>
