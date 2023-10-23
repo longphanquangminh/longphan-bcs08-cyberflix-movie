@@ -38,7 +38,7 @@ export const getUserInfo = userName => {
   });
 };
 
-export let layUserTickets = userName => {
+export const layUserTickets = userName => {
   return axios({
     url: `${BASE_URL}/QuanLyNguoiDung/ThongTinTaiKhoan`,
     method: "POST",
@@ -90,7 +90,7 @@ export const putUserInfo = (values, accessToken) => {
   });
 };
 
-export let userServ = {
+export const userServ = {
   getList: () => {
     return https.get(`/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${MA_NHOM}`);
   },

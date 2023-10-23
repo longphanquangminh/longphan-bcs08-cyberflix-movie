@@ -58,7 +58,7 @@ export default function Auth() {
         };
         dispatch(action);
         adminLocalStorage.set(res.data);
-        navigate("/admin/dashboard");
+        navigate("/admin/user");
       })
       .catch(err => {
         message.error(err.response.data);

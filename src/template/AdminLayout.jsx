@@ -1,7 +1,8 @@
 import React from "react";
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from "@ant-design/icons";
+// import { LaptopOutlined, NotificationOutlined, UserOutlined } from "@ant-design/icons";
+import { LaptopOutlined } from "@ant-design/icons";
 import { Layout, Menu, theme, message } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import BreadCrumbNav from "../component/BreadCrumbNav";
 import { adminLocalStorage } from "../api/localService";
 import { useDispatch } from "react-redux";
@@ -13,20 +14,29 @@ const { Header, Content, Sider } = Layout;
 //   key,
 //   label: `nav ${key}`,
 // }));
+// const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
 
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
+const items2 = [LaptopOutlined].map((icon, index) => {
   const key = String(index + 1);
-
+  const menu = [
+    {
+      label: "User",
+      url: "/admin/user",
+    },
+    {
+      label: "Movie",
+      url: "/admin/movie",
+    },
+  ];
   return {
     key: `sub${key}`,
     icon: React.createElement(icon),
-    label: `subnav ${key}`,
+    label: `Menu`,
 
-    children: new Array(4).fill(null).map((_, j) => {
-      const subKey = index * 4 + j + 1;
+    children: menu.map((item, indexChild) => {
       return {
-        key: subKey,
-        label: `option${subKey}`,
+        key: String(indexChild + 1),
+        label: <Link to={item.url}>{item.label}</Link>,
       };
     }),
   };

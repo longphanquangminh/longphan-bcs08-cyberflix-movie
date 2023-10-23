@@ -11,7 +11,7 @@ export default function TableUser() {
         setListUser(res.data);
       })
       .catch(err => {
-        message.error(err.response.data.content);
+        message.error(err.response.data);
       });
   };
   useEffect(() => {
@@ -25,21 +25,20 @@ export default function TableUser() {
         fetchListUser();
       })
       .catch(err => {
-        message.error(err.response.data.content);
+        message.error(err.response.data);
       });
   };
   const columnsHeader = [
     {
-      title: "STT",
+      title: "No.",
       dataIndex: "stt",
       key: "stt",
-      render: (item, record) => {
-        console.log(record);
+      render: (_, record) => {
         return <>{listUser.indexOf(record) + 1}</>;
       },
     },
     {
-      title: "Tài khoản",
+      title: "Username",
       dataIndex: "taiKhoan",
       key: "taiKhoan",
     },
@@ -50,31 +49,31 @@ export default function TableUser() {
       render: email => <a>{email}</a>,
     },
     {
-      title: "Họ tên",
+      title: "Full name",
       dataIndex: "hoTen",
       key: "hoTen",
     },
     {
-      title: "Mã loại người dùng",
+      title: "Account type",
       dataIndex: "maLoaiNguoiDung",
       key: "maLoaiNguoiDung",
       render: tag => (
         <>
           {
             <Tag color={tag === "QuanTri" ? "volcano" : "geekblue"} key={tag}>
-              {tag === "QuanTri" ? "QUẢN TRỊ VIP" : "KHÁCH HÀNG VIP"}
+              {tag === "QuanTri" ? "Admin" : "Customer"}
             </Tag>
           }
         </>
       ),
     },
     {
-      title: "Số ĐT",
+      title: "Phone",
       key: "soDT",
       dataIndex: "soDT",
     },
     {
-      title: "Hành động",
+      title: "Action",
       key: "action",
       render: item => (
         <Space size='middle'>

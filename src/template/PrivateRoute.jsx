@@ -5,7 +5,7 @@ import { adminLocalStorage } from "../api/localService";
 // };
 
 export default function PrivateRoute({ children }) {
-  let admin = adminLocalStorage.get();
+  const admin = adminLocalStorage.get();
   if (admin?.maLoaiNguoiDung === "QuanTri") {
     return children;
   }
