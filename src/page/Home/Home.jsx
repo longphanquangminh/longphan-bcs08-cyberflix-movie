@@ -210,7 +210,7 @@ export default function Home() {
     }
   }, [searchCinema, searchFilm, totalSearchFilm]);
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls to the top of the page
+    window.scrollTo(0, 0);
   }, []);
   return (
     <>

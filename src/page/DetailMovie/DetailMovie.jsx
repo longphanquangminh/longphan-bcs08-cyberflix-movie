@@ -8,7 +8,7 @@ import moment from "moment/moment";
 
 export default function DetailMovie() {
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls to the top of the page
+    window.scrollTo(0, 0);
   }, []);
   // useParams => lấy id từ url
   const [detail, setDetail] = useState({});

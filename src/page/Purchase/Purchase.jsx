@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "antd";
 export default function Purchase() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { id } = useParams();
   const { info } = useSelector(state => {
     return state.userReducer;
