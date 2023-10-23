@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL, BASE_URL_2, configHeaders, MA_NHOM } from "./config";
+import { BASE_URL, BASE_URL_2, configHeaders, https, MA_NHOM } from "./config";
 
 export const getListMovie = () => {
   return axios({
@@ -88,4 +88,11 @@ export const putUserInfo = (values, accessToken) => {
     headers: { ...configHeaders(), Authorization: `Bearer ${accessToken}` },
     data: values,
   });
+};
+
+export let userServ = {
+  getList: () => {
+    return https.get(`/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${MA_NHOM}`);
+  },
+  deleteUser: taiKhoan => https.delete(`/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`),
 };

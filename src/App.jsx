@@ -11,6 +11,7 @@ import PrivateRoute from "./template/PrivateRoute";
 import Dashboard from "./page/Admin/Dashboard";
 import PageNotFound from "./page/PageNotFound/PageNotFound";
 import AdminLayout from "./template/AdminLayout";
+import UserPage from "./page/UserPage/UserPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path='/admin/user' element={<UserPage />} />
           <Route path='/register' element={<Register />} />
           <Route path='/account' element={<Account />} />
           <Route
