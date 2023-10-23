@@ -49,7 +49,6 @@ export default function BreadCrumbNav() {
   return (
     <Breadcrumb className='p-5'>
       {breadcrumbs.map(({ breadcrumb, match }, index) => {
-        console.log("😀 - {breadcrumbs.map - match:", match);
         return (
           <Breadcrumb.Item key={index}>
             <NavLink to={match.pathname}>{breadcrumb}</NavLink>

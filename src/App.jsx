@@ -12,10 +12,12 @@ import PageNotFound from "./page/PageNotFound/PageNotFound";
 import AdminLayout from "./template/AdminLayout";
 import UserPage from "./page/UserPage/UserPage";
 import MoviePage from "./page/UserPage/MoviePage";
+import Spinner from "./component/Spinner";
 
 function App() {
   return (
-    <>
+    <div>
+      <Spinner />
       <BrowserRouter>
         <Routes>
           <Route
@@ -61,7 +63,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

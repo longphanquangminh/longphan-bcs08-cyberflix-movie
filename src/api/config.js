@@ -1,6 +1,7 @@
 import axios from "axios";
 import { adminLocalStorage } from "./localService";
 import { store } from "../redux/store";
+import { SET_LOADING_OFF, SET_LOADING_ON } from "../redux/constant/spinner";
 
 export const TOKEN_CYBER =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCBTw6FuZyAwOCIsIkhldEhhblN0cmluZyI6IjA3LzAzLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcwOTc2OTYwMDAwMCIsIm5iZiI6MTY4Njc2MjAwMCwiZXhwIjoxNzA5OTE3MjAwfQ.KMixzquIcyG1HcsZ_iekv3cHfqWMebGVfzp349mNosg";
@@ -25,40 +26,24 @@ export const https = axios.create({
   },
 });
 
-// axios interceptor: can thiệp vào request và response từ api
-
-// xây dựng chức năng login: config 1 lần, sau đó áp dụng cho mọi api
-// 1. spinnerSlice ~ giữ trạng thái bật tắt loading
-// 2. dispatch => dispatch ngoài component
-
-// Add a request interceptor
 https.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
-    // store.dispatch(setLoadingOn());
-    console.log("api đi");
+    store.dispatch({ type: SET_LOADING_ON });
     return config;
   },
   function (error) {
-    // Do something with request error
-    // store.dispatch(setLoadingOff());
+    store.dispatch({ type: SET_LOADING_OFF });
     return Promise.reject(error);
   },
 );
 
-// Add a response interceptor
 https.interceptors.response.use(
   function (response) {
-    // store.dispatch(setLoadingOff());
-    console.log("api về");
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
+    store.dispatch({ type: SET_LOADING_OFF });
     return response;
   },
   function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    // store.dispatch(setLoadingOff());
+    store.dispatch({ type: SET_LOADING_OFF });
     return Promise.reject(error);
   },
 );

@@ -96,8 +96,7 @@ export default function Account() {
   const dispatch = useDispatch();
   const onFinish = values => {
     putUserInfo({ ...values, maNhom: MA_NHOM }, info.accessToken)
-      .then(res => {
-        console.log(res);
+      .then(() => {
         message.success("Update success!");
         // userLocalStorage.set({ ...res.data, maLoaiNguoiDung: values.maLoaiNguoiDung, accessToken: info.accessToken });
         // dispatch({ type: SET_INFO, payload: { ...res.data, maLoaiNguoiDung: values.maLoaiNguoiDung, accessToken: info.accessToken } });
