@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "antd";
 export default function Purchase() {
   const { id } = useParams();
-  let { info } = useSelector(state => {
+  const { info } = useSelector(state => {
     return state.userReducer;
   });
   const [filmSeats, setFilmSeats] = useState(null);

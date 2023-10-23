@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../component/Header/Header";
 import { Button, Form, Input, Space, message } from "antd";
 import axios from "axios";
-import { BASE_URL, configHeaders } from "../../api/config";
+import { BASE_URL, MA_NHOM, configHeaders } from "../../api/config";
 import { Link, useNavigate } from "react-router-dom";
 
 const SubmitButton = ({ form }) => {
@@ -38,12 +38,12 @@ export default function Register() {
     message.error("Error!");
     console.error("Failed:", errorInfo);
   };
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const onFinish = values => {
     axios
       .post(
         `${BASE_URL}/QuanLyNguoiDung/DangKy`,
-        { ...values, maNhom: "GP01", maLoaiNguoiDung: "KhachHang" },
+        { ...values, maNhom: MA_NHOM, maLoaiNguoiDung: "KhachHang" },
         {
           headers: configHeaders(),
         },
@@ -108,7 +108,7 @@ export default function Register() {
               </Form.Item>
               <Form.Item
                 name='soDt'
-                label='Phone Number'
+                label='Phone number'
                 rules={[
                   {
                     pattern: new RegExp(/^0(?!0)\d{9}$/g),

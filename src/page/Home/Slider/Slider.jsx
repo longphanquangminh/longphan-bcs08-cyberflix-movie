@@ -6,9 +6,9 @@ import PlayVideo from "../../../component/PlayVideo";
 import "react-multi-carousel/lib/styles.css";
 export default function Slider() {
   const [banners, setBanners] = useState([]);
-  let fetchData = async () => {
+  const fetchData = async () => {
     try {
-      let response = await getDataSlider();
+      const response = await getDataSlider();
       setBanners(response.data.content);
     } catch {
       message.error("Error!");

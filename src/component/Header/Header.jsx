@@ -5,16 +5,16 @@ import { Button, Dropdown, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
 
 export default function Header() {
-  let navigate = useNavigate();
-  let { info } = useSelector(state => {
+  const navigate = useNavigate();
+  const { info } = useSelector(state => {
     return state.userReducer;
   });
   const dispatch = useDispatch();
-  let handleLogout = () => {
+  const handleLogout = () => {
     message.success("Logout successfully!");
     navigate("/");
     userLocalStorage.remove();
-    let action = {
+    const action = {
       type: SET_INFO,
       payload: null,
     };
@@ -22,11 +22,11 @@ export default function Header() {
     // window.location.reload();
     // window.location.href = "/";
   };
-  let handleLogin = () => {
+  const handleLogin = () => {
     // window.location.href = "/login";
     navigate("/login");
   };
-  let handleRegister = () => {
+  const handleRegister = () => {
     // window.location.href = "/login";
     navigate("/register");
   };
@@ -43,8 +43,8 @@ export default function Header() {
       label: info ? <a onClick={handleLogout}>Logout</a> : <Link to='/register'>Register</Link>,
     },
   ];
-  let renderUserNav = () => {
-    let classBtn = "border-2 border-black rounded-lg w-20 text-center hidden md:block";
+  const renderUserNav = () => {
+    const classBtn = "border-2 border-black rounded-lg w-20 text-center hidden md:block";
     if (info) {
       return (
         <div className='flex justify-center items-center gap-x-3'>

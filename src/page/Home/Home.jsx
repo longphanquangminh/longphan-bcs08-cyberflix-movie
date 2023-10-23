@@ -125,7 +125,7 @@ export default function Home() {
       .then(res => setKhuyenMaiPosts(res.data))
       .catch(err => console.error(err));
   }, []);
-  let { chosenTrailer } = useSelector(state => {
+  const { chosenTrailer } = useSelector(state => {
     return state.userReducer;
   });
   const dispatch = useDispatch();
@@ -220,7 +220,7 @@ export default function Home() {
         isOpen={chosenTrailer !== ""}
         videoId={chosenTrailer}
         onClose={() => {
-          let action = {
+          const action = {
             type: CHOOSE_TRAILER,
             payload: "",
           };

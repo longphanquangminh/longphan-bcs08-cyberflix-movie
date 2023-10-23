@@ -9,3 +9,4 @@ export const configHeaders = () => {
 
 export const BASE_URL = "https://movie0706.cybersoft.edu.vn/api";
 export const BASE_URL_2 = "https://movienew.cybersoft.edu.vn/api";
+export const MA_NHOM = "GP09";

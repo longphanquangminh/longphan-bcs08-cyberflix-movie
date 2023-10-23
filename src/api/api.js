@@ -1,15 +1,15 @@
 import axios from "axios";
-import { BASE_URL, BASE_URL_2, configHeaders } from "./config";
+import { BASE_URL, BASE_URL_2, configHeaders, MA_NHOM } from "./config";
 
-export let getListMovie = () => {
+export const getListMovie = () => {
   return axios({
-    url: `${BASE_URL}/QuanLyPhim/LayDanhSachPhim?maNhom=GP01`,
+    url: `${BASE_URL}/QuanLyPhim/LayDanhSachPhim?maNhom=${MA_NHOM}`,
     method: "GET",
     headers: configHeaders(),
   });
 };
 
-export let getDetailMovie = id => {
+export const getDetailMovie = id => {
   return axios({
     url: `${BASE_URL}/QuanLyPhim/LayThongTinPhim?MaPhim=${id}`,
     method: "GET",
@@ -17,7 +17,7 @@ export let getDetailMovie = id => {
   });
 };
 
-export let postTickets = (id, seats, info) => {
+export const postTickets = (id, seats, info) => {
   return axios({
     url: `${BASE_URL}/QuanLyDatVe/DatVe`,
     method: "POST",
@@ -30,18 +30,15 @@ export let postTickets = (id, seats, info) => {
   });
 };
 
-export let layUserInfo = userName => {
+export const layUserInfo = userName => {
   return axios({
-    url: `${BASE_URL}/QuanLyNguoiDung/ThongTinTaiKhoan`,
-    method: "POST",
+    url: `${BASE_URL}/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${MA_NHOM}&tuKhoa=${userName}`,
+    method: "GET",
     headers: { ...configHeaders() },
-    data: {
-      taiKhoan: userName,
-    },
   });
 };
 
-export let getDetailMovieShow = id => {
+export const getDetailMovieShow = id => {
   return axios({
     url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
     method: "GET",
@@ -49,7 +46,7 @@ export let getDetailMovieShow = id => {
   });
 };
 
-export let getSeatListByFilm = id => {
+export const getSeatListByFilm = id => {
   return axios({
     url: `${BASE_URL}/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`,
     method: "GET",
@@ -57,15 +54,15 @@ export let getSeatListByFilm = id => {
   });
 };
 
-export let getMovieByTheater = () => {
+export const getMovieByTheater = () => {
   return axios({
-    url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01`,
+    url: `${BASE_URL}/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${MA_NHOM}`,
     method: "GET",
     headers: configHeaders(),
   });
 };
 
-export let getDataSlider = () => {
+export const getDataSlider = () => {
   return axios({
     url: `${BASE_URL_2}/QuanLyPhim/LayDanhSachBanner`,
     method: "GET",

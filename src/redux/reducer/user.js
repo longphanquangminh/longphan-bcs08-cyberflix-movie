@@ -6,7 +6,7 @@ const initialState = {
   chosenTrailer: "",
 };
 
-let userReducer = (state = initialState, { type, payload }) => {
+const userReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_INFO:
       //   state.info = payload;

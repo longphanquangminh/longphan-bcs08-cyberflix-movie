@@ -41,8 +41,8 @@ const SubmitButton = ({ form }) => {
 
 export default function FormLogin() {
   const [form] = Form.useForm();
-  let dispatch = useDispatch();
-  let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onFinish2 = values => {
     axios
       .post(`${BASE_URL}/QuanLyNguoiDung/DangNhap`, values, {
@@ -51,7 +51,7 @@ export default function FormLogin() {
       .then(res => {
         message.success("Login success!");
         // đầy res lên redux sau khi login thành công
-        let action = {
+        const action = {
           type: SET_INFO,
           payload: res.data,
         };

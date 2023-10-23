@@ -18,7 +18,7 @@ export default function TabMovie() {
   const onImageError = e => {
     e.target.src = placeholderImage;
   };
-  let renderDsPhim = dsPhim => {
+  const renderDsPhim = dsPhim => {
     return dsPhim.map((phim, index) => {
       return (
         <div key={index} className='flex space-x-5 p-3 items-center'>
@@ -49,7 +49,7 @@ export default function TabMovie() {
   const classTabs = "h-full lg:h-96";
   const classTabsShowMovie = "h-[390px] lg:h-96";
   const navigate = useNavigate();
-  let handleHeThongRap = () => {
+  const handleHeThongRap = () => {
     return danhSachHeThongRap.map((heThongRap, index) => {
       return {
         key: index,

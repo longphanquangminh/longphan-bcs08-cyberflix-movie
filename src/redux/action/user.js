@@ -2,14 +2,14 @@ import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
 import { CHOOSE_TRAILER, SET_INFO } from "../constant/user";
 
-export let loginAction = values => {
+export const loginAction = values => {
   return dispatch => {
     axios
       .post(`${BASE_URL}/QuanLyNguoiDung/DangNhap`, values, {
         headers: configHeaders(),
       })
       .then(res => {
-        let action = {
+        const action = {
           type: SET_INFO,
           payload: res.data,
         };
@@ -21,9 +21,9 @@ export let loginAction = values => {
   };
 };
 
-export let chooseTrailer = values => {
+export const chooseTrailer = values => {
   return dispatch => {
-    let action = {
+    const action = {
       type: CHOOSE_TRAILER,
       payload: values,
     };

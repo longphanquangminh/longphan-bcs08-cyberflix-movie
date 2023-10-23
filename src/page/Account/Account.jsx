@@ -6,6 +6,7 @@ import { userLocalStorage } from "../../api/localService";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { layUserInfo, putUserInfo } from "../../api/api";
+import { MA_NHOM } from "../../api/config";
 
 const SubmitButton = () => {
   // const SubmitButton = ({ form }) => {
@@ -45,9 +46,9 @@ export default function Account() {
   useEffect(() => {
     layUserInfo(info.taiKhoan)
       .then(res => {
+        console.log(res);
         form.setFieldsValue({
-          ...res.data,
-          loaiNguoiDung: res.data.loaiNguoiDung === null ? "Khách hàng" : res.data.loaiNguoiDung,
+          ...res.data[0],
         });
         setLoading(false);
       })
@@ -60,19 +61,19 @@ export default function Account() {
   const [form] = Form.useForm();
   const onAccountTypeChange = value => {
     switch (value) {
-      case "Khách hàng":
+      case "KhachHang":
         form.setFieldsValue({
-          loaiNguoiDung: "Khách hàng",
+          maLoaiNguoiDung: "KhachHang",
         });
         break;
-      case "Quản trị":
+      case "QuanTri":
         form.setFieldsValue({
-          loaiNguoiDung: "Quản trị",
+          maLoaiNguoiDung: "QuanTri",
         });
         break;
       default:
         form.setFieldsValue({
-          loaiNguoiDung: "Khách hàng",
+          maLoaiNguoiDung: "KhachHang",
         });
     }
   };
@@ -80,15 +81,13 @@ export default function Account() {
     console.error("Failed:", errorInfo);
     message.error("Error!");
   };
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   const onFinish = values => {
-    putUserInfo({ ...values, maNhom: "GP01", maLoaiNguoiDung: values.loaiNguoiDung === "Khách hàng" ? "KhachHang" : "QuanTri" }, info.accessToken)
+    putUserInfo({ ...values, maNhom: MA_NHOM }, info.accessToken)
       .then(res => {
         message.success("Update success!");
-        // eslint-disable-next-line
-        const { thongTinDatVe, loaiNguoiDung, ...dataToStore } = res.data;
-        userLocalStorage.set({ ...dataToStore, accessToken: info.accessToken, maLoaiNguoiDung: info.maLoaiNguoiDung });
-        dispatch({ type: SET_INFO, payload: { ...dataToStore, accessToken: info.accessToken, maLoaiNguoiDung: info.maLoaiNguoiDung } });
+        userLocalStorage.set({ ...res.data, accessToken: info.accessToken });
+        dispatch({ type: SET_INFO, payload: { ...res.data, accessToken: info.accessToken } });
       })
       .catch(err => {
         console.error(err);
@@ -106,7 +105,10 @@ export default function Account() {
             <p className='text-white text-center'>Loading...</p>
           ) : (
             <div className='p-3 m-2 bg-white rounded-lg w-2/3 md:w-1/3'>
-              <h1 className='mb-3 font-bold text-2xl text-center'>User Info</h1>
+              <div className='mb-3 border-b-2 pb-3'>
+                <h1 className='font-bold text-xl'>User Info</h1>
+                <p>Info can be changed</p>
+              </div>
               <Form form={form} layout='vertical' onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete='off'>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
                   <Form.Item
@@ -152,8 +154,8 @@ export default function Account() {
                     <Input />
                   </Form.Item>
                   <Form.Item
-                    name='soDT'
-                    label='Phone Number'
+                    name='soDt'
+                    label='Phone number'
                     rules={[
                       {
                         pattern: new RegExp(/^0(?!0)\d{9}$/g),
@@ -181,23 +183,22 @@ export default function Account() {
                 >
                   <Input.Password />
                 </Form.Item>
-                {info.maLoaiNguoiDung !== "KhachHang" && (
-                  <Form.Item
-                    name='loaiNguoiDung'
-                    label='Account type'
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please choose account type",
-                      },
-                    ]}
-                  >
-                    <Select disabled={info.maLoaiNguoiDung === "KhachHang"} placeholder='Select account type' onChange={onAccountTypeChange}>
-                      <Option value='Khách hàng'>Customer</Option>
-                      <Option value='Quản trị'>Administrator</Option>
-                    </Select>
-                  </Form.Item>
-                )}
+                <Form.Item
+                  className={`${info.maLoaiNguoiDung === "KhachHang" && "hidden"}`}
+                  name='maLoaiNguoiDung'
+                  label='Account type'
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please choose account type",
+                    },
+                  ]}
+                >
+                  <Select disabled={info.maLoaiNguoiDung === "KhachHang"} placeholder='Select account type' onChange={onAccountTypeChange}>
+                    <Option value='KhachHang'>Customer</Option>
+                    <Option value='QuanTri'>Administrator</Option>
+                  </Select>
+                </Form.Item>
                 <Form.Item className='flex justify-center'>
                   <Space>
                     <SubmitButton form={form} />
