@@ -39,7 +39,7 @@ const SubmitButton = () => {
   );
 };
 
-export default function Account() {
+export default function AdminAccount() {
   //   return <div className='bg-movie-background h-screen bg-center bg-cover bg-no-repeat bg-fixed relative'></div>;
   // const { info } = useSelector(state => {
   //   return state.userReducer;
@@ -120,10 +120,7 @@ export default function Account() {
   return (
     <>
       <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
-        <div className='fixed min-w-full z-50'>
-          <Header />
-        </div>
-        <div className='flex flex-1 justify-center items-center mt-24 mb-7'>
+        <div className='flex flex-1 justify-center items-center'>
           {loading || loadingTicket ? (
             <p className='text-white text-center'>Loading...</p>
           ) : (

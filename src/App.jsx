@@ -13,6 +13,7 @@ import AdminLayout from "./template/AdminLayout";
 import UserPage from "./page/UserPage/UserPage";
 import MoviePage from "./page/UserPage/MoviePage";
 import Spinner from "./component/Spinner";
+import AdminAccount from "./page/Account/AdminAccount";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             }
           />
           <Route path='/login' element={<Login />} />
+          <Route path='/admin/account' element={<AdminAccount />} />
           <Route
             path='/admin'
             element={

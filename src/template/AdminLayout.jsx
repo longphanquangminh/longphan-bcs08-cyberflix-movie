@@ -62,7 +62,7 @@ const AdminLayout = () => {
     return state.adminReducer;
   });
   const handleAccount = () => {
-    navigate("/account");
+    navigate("/admin/account");
   };
   return (
     <Layout>
