@@ -1,8 +1,21 @@
 import { userServ } from "../../api/api";
-import { Button, Space, Table, Tag, message } from "antd";
+import { Button, Modal, Space, Table, Tag, message } from "antd";
 
 export default function TableUser(props) {
   const { listUser, fetchListUser } = props;
+  const { confirm } = Modal;
+  const showConfirmDelete = taiKhoan => {
+    confirm({
+      title: `Delete account ${taiKhoan}`,
+      content: `Do you want to delete account ${taiKhoan}`,
+      okButtonProps: {
+        className: "bg-blue-500",
+      },
+      onOk() {
+        deleteUser(taiKhoan);
+      },
+    });
+  };
   const deleteUser = taiKhoan => {
     userServ
       .deleteUser(taiKhoan)
@@ -65,7 +78,7 @@ export default function TableUser(props) {
         <Space size='middle'>
           <Button>Edit</Button>
           {/* {item.maLoaiNguoiDung === "KhachHang" && <Button onClick={() => deleteUser(item.taiKhoan)}>Delete</Button>} */}
-          {<Button onClick={() => deleteUser(item.taiKhoan)}>Delete</Button>}
+          {<Button onClick={() => showConfirmDelete(item.taiKhoan)}>Delete</Button>}
         </Space>
       ),
     },
