@@ -20,12 +20,12 @@ const items2 = [LaptopOutlined].map((icon, index) => {
   const key = String(index + 1);
   const menu = [
     {
-      label: "User",
+      label: "List User",
       url: "/admin/user",
     },
     {
-      label: "Movie",
-      url: "/admin/movie",
+      label: "Add user",
+      url: "/admin/add-user",
     },
   ];
   return {

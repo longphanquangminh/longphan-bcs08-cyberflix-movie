@@ -14,6 +14,7 @@ import UserPage from "./page/UserPage/UserPage";
 import MoviePage from "./page/UserPage/MoviePage";
 import Spinner from "./component/Spinner";
 import AdminAccount from "./page/Account/AdminAccount";
+import AddUserPage from "./page/UserPage/AddUserPage";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           >
             <Route path='/admin' element={<Navigate to='/admin/user' />} />
             <Route path='/admin/user' element={<UserPage />} />
+            <Route path='/admin/add-user' element={<AddUserPage />} />
             <Route path='/admin/movie' element={<MoviePage />} />
           </Route>
           <Route path='/admin/auth' element={<Auth />} />
