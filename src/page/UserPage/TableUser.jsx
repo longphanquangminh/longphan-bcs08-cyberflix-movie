@@ -7,7 +7,7 @@ export default function TableUser(props) {
   const showConfirmDelete = taiKhoan => {
     confirm({
       title: `Delete account ${taiKhoan}`,
-      content: `Do you want to delete account ${taiKhoan}`,
+      content: `Do you want to delete account ${taiKhoan}?`,
       okButtonProps: {
         className: "bg-blue-500",
       },
