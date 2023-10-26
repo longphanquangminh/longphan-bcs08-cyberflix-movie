@@ -112,7 +112,7 @@ export default function UserPage() {
                   message: "Please input full name!",
                 },
                 {
-                  pattern: new RegExp(/^[A-Za-z\s'-]+$/g),
+                  pattern: new RegExp(/^[\p{L}\s'-]+$/u),
                   message: "Invalid full name format!",
                 },
               ]}
