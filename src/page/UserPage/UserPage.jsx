@@ -49,11 +49,18 @@ export default function UserPage() {
           submitTimeout={2000}
           onFinish={async values => {
             await waitTime(2000);
-            https.post(`${BASE_URL}/QuanLyNguoiDung/ThemNguoiDung`, {
-              ...values,
-              maNhom: MA_NHOM,
-            });
-            message.success("Add account successfully!");
+            https
+              .post(`${BASE_URL}/QuanLyNguoiDung/ThemNguoiDung`, {
+                ...values,
+                maNhom: MA_NHOM,
+              })
+              .then(res => {
+                console.log(res);
+                message.success("Add account successfully!");
+              })
+              .catch(err => {
+                message.error(err.response.data);
+              });
             return true;
           }}
         >
@@ -103,6 +110,10 @@ export default function UserPage() {
                 {
                   required: true,
                   message: "Please input full name!",
+                },
+                {
+                  pattern: new RegExp(/^[A-Za-z\s'-]+$/g),
+                  message: "Invalid full name format!",
                 },
               ]}
             />
