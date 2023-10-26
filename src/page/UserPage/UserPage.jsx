@@ -50,11 +50,9 @@ export default function UserPage() {
           }}
           title='Add account'
           trigger={
-            <div className='flex justify-end items-center'>
-              <button className='mb-3 px-6 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-500 duration-300' onClick={() => {}}>
-                Add user
-              </button>
-            </div>
+            <button className='mb-3 px-6 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-500 duration-300' onClick={() => {}}>
+              Add user
+            </button>
           }
           form={form}
           autoFocusFirstInput
@@ -96,6 +94,10 @@ export default function UserPage() {
                 {
                   min: 5,
                   message: "At least 5 characters",
+                },
+                {
+                  pattern: new RegExp(/^[a-zA-Z0-9_]{3,20}$/),
+                  message: "Invalid user name format!",
                 },
               ]}
             />
