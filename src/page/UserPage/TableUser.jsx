@@ -1,22 +1,8 @@
-import { useEffect, useState } from "react";
 import { userServ } from "../../api/api";
 import { Button, Space, Table, Tag, message } from "antd";
 
-export default function TableUser() {
-  const [listUser, setListUser] = useState([]);
-  const fetchListUser = () => {
-    userServ
-      .getList()
-      .then(res => {
-        setListUser(res.data);
-      })
-      .catch(err => {
-        message.error(err.response.data);
-      });
-  };
-  useEffect(() => {
-    fetchListUser();
-  }, []);
+export default function TableUser(props) {
+  const { listUser, fetchListUser } = props;
   const deleteUser = taiKhoan => {
     userServ
       .deleteUser(taiKhoan)
@@ -69,8 +55,8 @@ export default function TableUser() {
     },
     {
       title: "Phone",
-      key: "soDT",
-      dataIndex: "soDT",
+      key: "soDt",
+      dataIndex: "soDt",
     },
     {
       title: "Action",

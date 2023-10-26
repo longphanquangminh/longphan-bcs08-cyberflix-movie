@@ -2,6 +2,8 @@ import TableUser from "./TableUser";
 import { ModalForm, ProForm, ProFormSelect, ProFormText } from "@ant-design/pro-components";
 import { ConfigProvider, Form, message } from "antd";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
+import { useState, useEffect } from "react";
+import { userServ } from "../../api/api";
 
 const waitTime = (time = 100) => {
   return new Promise(resolve => {
@@ -13,6 +15,20 @@ const waitTime = (time = 100) => {
 
 export default function UserPage() {
   const [form] = Form.useForm();
+  const [listUser, setListUser] = useState([]);
+  const fetchListUser = () => {
+    userServ
+      .getList()
+      .then(res => {
+        setListUser(res.data);
+      })
+      .catch(err => {
+        message.error(err.response.data);
+      });
+  };
+  useEffect(() => {
+    fetchListUser();
+  }, []);
   return (
     <>
       <ConfigProvider button={{ className: "bg-blue-500" }}>
@@ -54,9 +70,9 @@ export default function UserPage() {
                 ...values,
                 maNhom: MA_NHOM,
               })
-              .then(res => {
-                console.log(res);
+              .then(() => {
                 message.success("Add account successfully!");
+                fetchListUser();
               })
               .catch(err => {
                 message.error(err.response.data);
@@ -177,8 +193,7 @@ export default function UserPage() {
           </ProForm.Group>
         </ModalForm>
       </ConfigProvider>
-
-      <TableUser />
+      <TableUser listUser={listUser} fetchListUser={fetchListUser} />
     </>
   );
 }
