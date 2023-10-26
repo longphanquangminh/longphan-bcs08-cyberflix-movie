@@ -1,3 +1,4 @@
+import "./TableUser.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
