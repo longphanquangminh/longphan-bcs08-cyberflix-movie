@@ -220,7 +220,14 @@ export default function TableUser(props) {
   ];
   return (
     <div>
-      <Table dataSource={listUser} columns={columnsHeader} />
+      <Table
+        scroll={{
+          y: 390,
+          x: 1200,
+        }}
+        dataSource={listUser}
+        columns={columnsHeader}
+      />
     </div>
   );
 }
