@@ -1,5 +1,3 @@
-// import { useEffect, useState } from "react";
-// import Header from "../../component/Header/Header";
 import { Button, Form, Input, Select, Space, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
 import { userLocalStorage } from "../../api/localService";
@@ -8,31 +6,10 @@ import { useEffect, useState } from "react";
 import { getUserInfo, putUserInfo, layUserTickets } from "../../api/api";
 import { MA_NHOM } from "../../api/config";
 import moment from "moment/moment";
+import { useNavigate } from "react-router-dom";
 
 const SubmitButton = () => {
-  // const SubmitButton = ({ form }) => {
-  //   const [submittable, setSubmittable] = useState(false);
-
-  //   // Watch all values
-  //   const values = Form.useWatch([], form);
-  //   useEffect(() => {
-  //     form
-  //       .validateFields({
-  //         validateOnly: true,
-  //       })
-  //       .then(
-  //         () => {
-  //           setSubmittable(true);
-  //         },
-  //         () => {
-  //           setSubmittable(false);
-  //         },
-  //       );
-  //   }, [values, form]);
   return (
-    // <Button type='primary' className='bg-blue-500' htmlType='submit' disabled={!submittable}>
-    //   Submit
-    // </Button>
     <Button type='primary' className='bg-blue-500' htmlType='submit'>
       Update
     </Button>
@@ -40,34 +17,33 @@ const SubmitButton = () => {
 };
 
 export default function AdminAccount() {
-  //   return <div className='bg-movie-background h-screen bg-center bg-cover bg-no-repeat bg-fixed relative'></div>;
-  // const { info } = useSelector(state => {
-  //   return state.userReducer;
-  // });
   const info = useSelector(state => state.adminReducer.info);
-  useEffect(() => {
-    getUserInfo(info.taiKhoan)
-      .then(res => {
-        form.setFieldsValue({
-          ...res.data[0],
-        });
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [info]);
   const [ticketHistory, setTicketHistory] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    layUserTickets(info.taiKhoan)
-      .then(res => {
-        setTicketHistory([...res.data.thongTinDatVe]);
-        setLoadingTicket(false);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    if (!info?.accessToken) {
+      message.error("Please login first, admin!");
+      navigate("/admin/auth");
+    } else {
+      getUserInfo(info.taiKhoan)
+        .then(res => {
+          form.setFieldsValue({
+            ...res.data[0],
+          });
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+      layUserTickets(info.taiKhoan)
+        .then(res => {
+          setTicketHistory([...res.data.thongTinDatVe]);
+          setLoadingTicket(false);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [info]);
   const { Option } = Select;
@@ -99,8 +75,6 @@ export default function AdminAccount() {
     putUserInfo({ ...values, maNhom: MA_NHOM }, info.accessToken)
       .then(() => {
         message.success("Update success!");
-        // userLocalStorage.set({ ...res.data, maLoaiNguoiDung: values.maLoaiNguoiDung, accessToken: info.accessToken });
-        // dispatch({ type: SET_INFO, payload: { ...res.data, maLoaiNguoiDung: values.maLoaiNguoiDung, accessToken: info.accessToken } });
         userLocalStorage.set({ ...values, accessToken: info.accessToken });
         dispatch({ type: SET_INFO, payload: { ...values, accessToken: info.accessToken } });
       })
