@@ -9,6 +9,10 @@
   margin: auto;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
   ::-webkit-scrollbar {
     width: 6px;

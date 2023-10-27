@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { userLocalStorage } from "../../api/localService";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Dropdown, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
 
@@ -33,6 +33,7 @@ export default function Header() {
   const handleAccount = () => {
     navigate("/account");
   };
+  const location = useLocation();
   const items = [
     {
       key: "1",
@@ -41,6 +42,38 @@ export default function Header() {
     {
       key: "2",
       label: info ? <a onClick={handleLogout}>Logout</a> : <Link to='/register'>Register</Link>,
+    },
+    {
+      key: "3",
+      label: (
+        <a className='text-black hover:text-gray-700 durataion-300' href='#showtimes'>
+          Showtimes
+        </a>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <a className='text-black hover:text-gray-700 durataion-300' href='#cinemas'>
+          Cinemas
+        </a>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <a className='text-black hover:text-gray-700 durataion-300' href='#news'>
+          News
+        </a>
+      ),
+    },
+    {
+      key: "6",
+      label: (
+        <a className='text-black hover:text-gray-700 durataion-300' href='#app'>
+          App
+        </a>
+      ),
     },
   ];
   const renderUserNav = () => {
@@ -74,10 +107,26 @@ export default function Header() {
   };
 
   return (
-    <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6'>
+    <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6 fixed z-50 w-full'>
       <p className='text-3xl font-medium text-red-600 animate-pulse text-center'>
         <Link to='/'>CyberFlix</Link>
       </p>
+      {location.pathname === "/" && (
+        <div className='text-xl font-medium gap-3 lg:gap-12 text-center hidden md:flex justify-center items-center'>
+          <a className='text-black hover:text-gray-700 durataion-300' href='#showtimes'>
+            Showtimes
+          </a>
+          <a className='text-black hover:text-gray-700 durataion-300' href='#cinemas'>
+            Cinemas
+          </a>
+          <a className='text-black hover:text-gray-700 durataion-300' href='#news'>
+            News
+          </a>
+          <a className='text-black hover:text-gray-700 durataion-300' href='#app'>
+            App
+          </a>
+        </div>
+      )}
       <div className='space-x-5'>
         <div className='hidden md:block'>{renderUserNav()}</div>
         <div className='block md:hidden'>

@@ -229,7 +229,7 @@ export default function Home() {
       />
       <div className='space-y-10'>
         <Slider />
-        <div className='container grid grid-cols-1 lg:grid-cols-4 gap-3'>
+        <div id='showtimes' className='container grid grid-cols-1 lg:grid-cols-4 gap-3'>
           <Select
             disabled={movieArrFilter.length === 0}
             showSearch
@@ -284,8 +284,10 @@ export default function Home() {
           </button>
         </div>
         <ListMovie movieArr={movieArr}></ListMovie>
-        <TabMovie />
-        <div className='container'>
+        <div id='cinemas'>
+          <TabMovie />
+        </div>
+        <div className='container' id='news'>
           <Tabs
             defaultActiveKey='1'
             centered
@@ -299,7 +301,7 @@ export default function Home() {
             })}
           />
         </div>
-        <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
+        <div id='app' className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
           <div className='flex flex-1 justify-center items-center text-white container'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-12'>
               <div className='flex justify-center items-center text-center md:text-justify'>

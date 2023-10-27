@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "../../component/Header/Header";
 import { Button, Form, Input, Space, message } from "antd";
 import axios from "axios";
 import { BASE_URL, MA_NHOM, configHeaders } from "../../api/config";
@@ -59,7 +58,7 @@ export default function Register() {
   return (
     <>
       <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
-        <Header />
+        {/* <Header /> */}
         <div className='flex flex-1 justify-center items-center'>
           <div className='p-3 m-2 bg-white rounded-lg w-2/3 md:w-1/3'>
             <h1 className='mb-3 font-bold text-2xl text-center'>Register</h1>
@@ -168,6 +167,11 @@ export default function Register() {
               Have account?{" "}
               <Link to='/login' className='font-bold text-red-500 hover:text-red-400 duration-300'>
                 Login
+              </Link>
+            </p>
+            <p className='text-right text-red-500'>
+              <Link to='/' className='font-bold text-red-500 hover:text-red-400 duration-300'>
+                Back to homepage
               </Link>
             </p>
           </div>

@@ -77,7 +77,8 @@ export default function Slider() {
         >
           {banners.map((item, index) => (
             <div key={index}>
-              <img className='h-[calc(100vh-60px)] w-full object-cover' src={item.hinhAnh} alt='' />
+              {/* <img className='h-[calc(100vh-60px)] w-full object-cover' src={item.hinhAnh} alt='' /> */}
+              <img className='h-screen w-full object-cover' src={item.hinhAnh} alt='' />
               <PlayVideo trailer={trailer[index]} />
             </div>
           ))}
