@@ -31,7 +31,7 @@ export default function DetailMovie() {
           <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-12'>
             <div>
               <img
-                className='mx-auto w-96 h-96 object-cover'
+                className='mx-auto w-96 h-96 object-cover rounded-lg'
                 alt=''
                 src={imageUrlRegex.test(detail.hinhAnh) ? detail.hinhAnh : placeholderImage}
                 onError={onImageError}
