@@ -1,4 +1,4 @@
-import "./TableUser.css";
+import "./ButtonPrimary.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -279,10 +279,10 @@ export default function TableUser(props) {
                   //     min: 5,
                   //     message: "At least 5 characters",
                   //   },
-                  //   {
-                  //     pattern: new RegExp(/^[a-zA-Z0-9_]{3,20}$/),
-                  //     message: "Invalid user name format!",
-                  //   },
+                  // {
+                  //   pattern: new RegExp(/^[a-zA-Z0-9_]{3,20}$/),
+                  //   message: "Invalid user name format!",
+                  // },
                   // ]}
                 />
                 <ProFormText

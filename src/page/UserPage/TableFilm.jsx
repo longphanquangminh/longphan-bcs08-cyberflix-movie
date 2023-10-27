@@ -1,10 +1,10 @@
-import "./TableUser.css";
+import "./ButtonPrimary.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
-import { adminServ, userServ } from "../../api/api";
+import { adminServ } from "../../api/api";
 import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form } from "antd";
-import { ModalForm, ProForm, ProFormSelect, ProFormText } from "@ant-design/pro-components";
+import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
 import { imageUrlRegex, trailerUrlRegex } from "../../constants/regex";
@@ -46,7 +46,7 @@ export default function TableFilm(props) {
         message.error(err.response.data ?? err.message);
       });
   };
-  const handleDelete = taiKhoan => deleteFilm(taiKhoan);
+  const handleDelete = maPhim => deleteFilm(maPhim);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -178,12 +178,12 @@ export default function TableFilm(props) {
       ...getColumnSearchProps("tenPhim"),
       render: text => <p className='truncate'>{text}</p>,
     },
-    {
-      title: "Film alias",
-      dataIndex: "biDanh",
-      key: "biDanh",
-      ...getColumnSearchProps("biDanh"),
-    },
+    // {
+    //   title: "Film alias",
+    //   dataIndex: "biDanh",
+    //   key: "biDanh",
+    //   ...getColumnSearchProps("biDanh"),
+    // },
     {
       title: "Trailer",
       dataIndex: "trailer",
@@ -254,9 +254,9 @@ export default function TableFilm(props) {
                 },
                 submitButtonProps: {},
               }}
-              title='Edit account'
+              title='Edit film'
               trigger={
-                <Button type='primary' onClick={() => form.setFieldsValue({ ...item })}>
+                <Button type='primary' onClick={() => form.setFieldsValue({ ...item, danhGia: item.danhGia / 2 })}>
                   Edit
                 </Button>
               }
@@ -270,12 +270,12 @@ export default function TableFilm(props) {
               onFinish={async values => {
                 await waitTime(2000);
                 https
-                  .put(`${BASE_URL}/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, {
+                  .post(`${BASE_URL}/QuanLyPhim/CapNhatPhim`, {
                     ...values,
                     maNhom: MA_NHOM,
                   })
                   .then(() => {
-                    message.success(`Edit account ${values.taiKhoan} successfully!`);
+                    message.success(`Edit film ${values.tenPhim} successfully!`);
                     fetchListUser();
                   })
                   .catch(err => {
@@ -287,117 +287,127 @@ export default function TableFilm(props) {
               <ProForm.Group>
                 <ProFormText
                   width='md'
-                  name='taiKhoan'
-                  label='Username'
-                  tooltip='What do you want others to call this user?'
-                  placeholder=''
-                  disabled={true}
-                  // rules={[
-                  //   {
-                  //     required: true,
-                  //     message: "Please input nickname!",
-                  //     whitespace: true,
-                  //   },
-                  //   {
-                  //     min: 5,
-                  //     message: "At least 5 characters",
-                  //   },
-                  //   {
-                  //     pattern: new RegExp(/^[a-zA-Z0-9_]{3,20}$/),
-                  //     message: "Invalid user name format!",
-                  //   },
-                  // ]}
-                />
-                <ProFormText
-                  width='md'
-                  name='email'
-                  label='Email'
-                  placeholder='example@gmail.com'
+                  name='tenPhim'
+                  label='Film name'
+                  placeholder='John Wick 2'
                   rules={[
                     {
-                      type: "email",
-                      message: "The input is not valid E-mail!",
-                    },
-                    {
                       required: true,
-                      message: "Please input E-mail!",
+                      message: "Please input film name!",
+                      whitespace: true,
                     },
                   ]}
                 />
-              </ProForm.Group>
-              <ProForm.Group>
+                {/* <ProFormText
+              width='md'
+              name='biDanh'
+              label='Film alias'
+              placeholder='john-wick-2'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input film alias!",
+                },
+              ]}
+            /> */}
                 <ProFormText
                   width='md'
-                  name='hoTen'
-                  label='Full name'
-                  placeholder='John Doe'
+                  name='trailer'
+                  label='Youtube trailer'
+                  placeholder='https://youtube.com/abc'
                   rules={[
                     {
                       required: true,
-                      message: "Please input full name!",
+                      message: "Please input film trailer!",
                     },
                     {
-                      pattern: new RegExp(/^[\p{L}\s'-]+$/u),
-                      message: "Invalid full name format!",
+                      pattern: new RegExp(trailerUrlRegex),
+                      message: "Invalid Youtube video url format!",
                     },
                   ]}
                 />
                 <ProFormText
                   width='md'
-                  name='soDt'
-                  label='Phone number'
-                  placeholder='0903123123'
+                  name='hinhAnh'
+                  label='Film poster'
+                  placeholder='https://domain.com/abc.png'
                   rules={[
                     {
-                      pattern: new RegExp(/^0(?!0)\d{9}$/g),
-                      message: "Wrong phone number format!",
+                      required: true,
+                      message: "Please input film poster!",
                     },
                     {
-                      required: true,
-                      message: "Please input phone number!",
+                      pattern: new RegExp(imageUrlRegex),
+                      message: "Invalid image url format!",
                     },
                   ]}
                 />
-              </ProForm.Group>
-              <ProForm.Group>
-                <ProFormText.Password
+                <ProFormText
                   width='md'
-                  name='matKhau'
-                  type='password'
-                  label='Password'
-                  placeholder='Enter password...'
+                  name='moTa'
+                  label='Film description'
+                  placeholder='This is a good film...'
                   rules={[
                     {
                       required: true,
-                      message: "Please input password!",
-                    },
-                    {
-                      min: 6,
-                      message: "At least 6 characters",
+                      message: "Please input film description!",
+                      whitespace: true,
                     },
                   ]}
                 />
-                <ProFormSelect
-                  request={async () => [
-                    {
-                      value: "QuanTri",
-                      label: "Admin",
-                    },
-                    {
-                      value: "KhachHang",
-                      label: "Customer",
-                    },
-                  ]}
+                {/* <ProFormText
+              width='md'
+              name='ngayKhoiChieu'
+              label='Started date'
+              placeholder='01/01/2025'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input started date!",
+                },
+              ]}
+            /> */}
+                <ProFormDatePicker
                   width='md'
-                  name='maLoaiNguoiDung'
-                  label='Account type'
-                  placeholder='Select account type'
+                  name='ngayKhoiChieu'
+                  fieldProps={{
+                    format: "DD-MM-YYYY",
+                  }}
+                  label='Started date'
+                  placeholder='Choose date'
                   rules={[
                     {
                       required: true,
-                      message: "Please choose account type",
+                      message: "Please input started date!",
                     },
                   ]}
+                  onChange={value => {
+                    console.log(value);
+                  }}
+                />
+                {/* <ProFormText
+              width='md'
+              name='danhGia'
+              label='Rating'
+              placeholder='10'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input rating!",
+                },
+              ]}
+            /> */}
+                <ProFormRate
+                  width='md'
+                  name='danhGia'
+                  label='Rating'
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input rating!",
+                    },
+                  ]}
+                  placeholder='10'
                 />
               </ProForm.Group>
             </ModalForm>

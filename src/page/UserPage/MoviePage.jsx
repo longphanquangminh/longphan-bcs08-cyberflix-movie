@@ -1,9 +1,11 @@
-import { ModalForm, ProForm, ProFormSelect, ProFormText } from "@ant-design/pro-components";
+import enEN from "antd/locale/en_US";
+import { ModalForm, ProForm, ProFormDatePicker, ProFormRate, ProFormText } from "@ant-design/pro-components";
 import { ConfigProvider, Form, message } from "antd";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { useState, useEffect } from "react";
 import { getListMovie } from "../../api/api";
 import TableFilm from "./TableFilm";
+import { imageUrlRegex, trailerUrlRegex } from "../../constants/regex";
 
 const waitTime = (time = 100) => {
   return new Promise(resolve => {
@@ -30,7 +32,7 @@ export default function MoviePage() {
   }, []);
   return (
     <>
-      <ConfigProvider button={{ className: "bg-blue-500" }}>
+      <ConfigProvider locale={enEN} button={{ className: "bg-blue-500" }}>
         <ModalForm
           submitter={{
             // Configure the button text
@@ -63,12 +65,13 @@ export default function MoviePage() {
           onFinish={async values => {
             await waitTime(2000);
             https
-              .post(`${BASE_URL}/QuanLyNguoiDung/ThemNguoiDung`, {
+              .post(`${BASE_URL}/QuanLyPhim/ThemPhim`, {
                 ...values,
                 maNhom: MA_NHOM,
+                danhGia: values.danhGia * 2,
               })
               .then(() => {
-                message.success("Add account successfully!");
+                message.success("Add film successfully!");
                 fetchListUser();
               })
               .catch(err => {
@@ -91,96 +94,116 @@ export default function MoviePage() {
                 },
               ]}
             />
-            <ProFormText
+            {/* <ProFormText
               width='md'
-              name='email'
-              label='Email'
-              placeholder='example@gmail.com'
+              name='biDanh'
+              label='Film alias'
+              placeholder='john-wick-2'
               rules={[
                 {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
-                {
                   required: true,
-                  message: "Please input E-mail!",
+                  message: "Please input film alias!",
                 },
               ]}
-            />
-          </ProForm.Group>
-          <ProForm.Group>
+            /> */}
             <ProFormText
               width='md'
-              name='hoTen'
-              label='Full name'
-              placeholder='John Doe'
+              name='trailer'
+              label='Youtube trailer'
+              placeholder='https://youtube.com/abc'
               rules={[
                 {
                   required: true,
-                  message: "Please input full name!",
+                  message: "Please input film trailer!",
                 },
                 {
-                  pattern: new RegExp(/^[\p{L}\s'-]+$/u),
-                  message: "Invalid full name format!",
+                  pattern: new RegExp(trailerUrlRegex),
+                  message: "Invalid Youtube video url format!",
                 },
               ]}
             />
             <ProFormText
               width='md'
-              name='soDt'
-              label='Phone number'
-              placeholder='0903123123'
+              name='hinhAnh'
+              label='Film poster'
+              placeholder='https://domain.com/abc.png'
               rules={[
                 {
-                  pattern: new RegExp(/^0(?!0)\d{9}$/g),
-                  message: "Wrong phone number format!",
+                  required: true,
+                  message: "Please input film poster!",
                 },
                 {
-                  required: true,
-                  message: "Please input phone number!",
+                  pattern: new RegExp(imageUrlRegex),
+                  message: "Invalid image url format!",
                 },
               ]}
             />
-          </ProForm.Group>
-          <ProForm.Group>
-            <ProFormText.Password
+            <ProFormText
               width='md'
-              name='matKhau'
-              type='password'
-              label='Password'
-              placeholder='Enter password...'
+              name='moTa'
+              label='Film description'
+              placeholder='This is a good film...'
               rules={[
                 {
                   required: true,
-                  message: "Please input password!",
-                },
-                {
-                  min: 6,
-                  message: "At least 6 characters",
+                  message: "Please input film description!",
+                  whitespace: true,
                 },
               ]}
             />
-            <ProFormSelect
-              request={async () => [
-                {
-                  value: "QuanTri",
-                  label: "Admin",
-                },
-                {
-                  value: "KhachHang",
-                  label: "Customer",
-                },
-              ]}
+            {/* <ProFormText
               width='md'
-              name='maLoaiNguoiDung'
-              label='Account type'
-              placeholder='Select account type'
+              name='ngayKhoiChieu'
+              label='Started date'
+              placeholder='01/01/2025'
               rules={[
                 {
                   required: true,
-                  message: "Please choose account type",
+                  message: "Please input started date!",
                 },
               ]}
+            /> */}
+            <ProFormDatePicker
+              width='md'
+              name='ngayKhoiChieu'
+              fieldProps={{
+                format: "DD-MM-YYYY",
+              }}
+              label='Started date'
+              placeholder='Choose date'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input started date!",
+                },
+              ]}
+              onChange={value => {
+                console.log(value);
+              }}
+            />
+            {/* <ProFormText
+              width='md'
+              name='danhGia'
+              label='Rating'
+              placeholder='10'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input rating!",
+                },
+              ]}
+            /> */}
+            <ProFormRate
+              width='md'
+              name='danhGia'
+              label='Rating'
+              rules={[
+                {
+                  required: true,
+                  message: "Please input rating!",
+                },
+              ]}
+              placeholder='10'
             />
           </ProForm.Group>
         </ModalForm>
