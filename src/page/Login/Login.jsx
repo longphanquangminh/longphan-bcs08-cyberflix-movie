@@ -1,7 +1,24 @@
 import Form from "./Form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { message } from "antd";
 
 export default function Login() {
+  const { info } = useSelector(state => {
+    return state.userReducer;
+  });
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (info?.accessToken) {
+      message.warning("You've already logged in!");
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  if (info?.accessToken) {
+    return null; // Return null or another loading component
+  }
   return (
     <>
       <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>

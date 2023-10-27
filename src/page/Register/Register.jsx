@@ -3,6 +3,7 @@ import { Button, Form, Input, Space, message } from "antd";
 import axios from "axios";
 import { BASE_URL, MA_NHOM, configHeaders } from "../../api/config";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SubmitButton = ({ form }) => {
   const [submittable, setSubmittable] = useState(false);
@@ -55,6 +56,19 @@ export default function Register() {
         message.error(err.response.data);
       });
   };
+  const { info } = useSelector(state => {
+    return state.userReducer;
+  });
+  useEffect(() => {
+    if (info?.accessToken) {
+      message.warning("You've already logged in!");
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  if (info?.accessToken) {
+    return null; // Return null or another loading component
+  }
   return (
     <>
       <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>

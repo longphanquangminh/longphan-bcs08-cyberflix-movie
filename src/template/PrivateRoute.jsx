@@ -1,12 +1,14 @@
-import { adminLocalStorage } from "../api/localService";
+import { useSelector } from "react-redux";
 
 // PrivateRoute.propTypes = {
 //   children: PropTypes.node.isRequired,
 // };
 
 export default function PrivateRoute({ children }) {
-  const admin = adminLocalStorage.get();
-  if (admin?.maLoaiNguoiDung === "QuanTri") {
+  const { info } = useSelector(state => {
+    return state.adminReducer;
+  });
+  if (info?.maLoaiNguoiDung === "QuanTri") {
     return children;
   }
   window.location.href = "/admin/auth";

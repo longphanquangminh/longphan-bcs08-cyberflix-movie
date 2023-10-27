@@ -227,9 +227,9 @@ export default function Home() {
           dispatch(action);
         }}
       />
-      <div className='space-y-10'>
+      <div className=''>
         <Slider />
-        <div id='showtimes' className='container grid grid-cols-1 lg:grid-cols-4 gap-3'>
+        <div className='container grid grid-cols-1 lg:grid-cols-4 gap-3 pt-[80px]'>
           <Select
             disabled={movieArrFilter.length === 0}
             showSearch
@@ -283,11 +283,12 @@ export default function Home() {
             Book tickets
           </button>
         </div>
+        <div id='showtimes' className='pt-[80px]'></div>
         <ListMovie movieArr={movieArr}></ListMovie>
-        <div id='cinemas'>
-          <TabMovie />
-        </div>
-        <div className='container' id='news'>
+        <div id='cinemas' className='pt-[80px]'></div>
+        <TabMovie />
+        <div id='news' className='pt-[80px]'></div>
+        <div className='container'>
           <Tabs
             defaultActiveKey='1'
             centered
@@ -301,7 +302,8 @@ export default function Home() {
             })}
           />
         </div>
-        <div id='app' className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
+        <div id='app' className='pt-[48px]'></div>
+        <div className='flex flex-col min-h-[calc(100vh-48px)] bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
           <div className='flex flex-1 justify-center items-center text-white container'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-12'>
               <div className='flex justify-center items-center text-center md:text-justify'>
