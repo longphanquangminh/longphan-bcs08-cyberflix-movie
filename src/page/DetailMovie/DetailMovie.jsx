@@ -25,13 +25,13 @@ export default function DetailMovie() {
   }, [id]);
   const navigate = useNavigate();
   return (
-    <div className='bg-[#0a2029]'>
+    <div className='bg-[#0a2029] pt-[50px]'>
       <div className='flex justify-center items-center container'>
         <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-12 my-12'>
           <div className='grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-12'>
             <div>
               <img
-                className='mx-auto w-full'
+                className='mx-auto w-96 h-96 object-cover'
                 alt=''
                 src={imageUrlRegex.test(detail.hinhAnh) ? detail.hinhAnh : placeholderImage}
                 onError={onImageError}

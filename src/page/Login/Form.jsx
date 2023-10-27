@@ -59,7 +59,8 @@ export default function FormLogin() {
         // đẩy data xuống localStorage
         userLocalStorage.set(res.data);
         // useNavigate
-        navigate(-1);
+        // navigate(-1);
+        navigate("/");
       })
       .catch(err => {
         message.error("Login fail!");
