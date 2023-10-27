@@ -13,6 +13,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.react-multi-carousel-dot--active button {
+  background-color: white;
+}
+
 @layer utilities {
   ::-webkit-scrollbar {
     width: 6px;
