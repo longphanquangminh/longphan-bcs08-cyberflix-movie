@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Form, Input, Space, message } from "antd";
 import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { SET_INFO_ADMIN } from "../../redux/constant/admin";
 import { useDispatch } from "react-redux";
 import { adminLocalStorage } from "../../api/localService";
@@ -104,6 +104,18 @@ export default function Auth() {
                 </Space>
               </Form.Item>
             </Form>
+            <div className='space-y-3'>
+              <p className='text-center text-red-500'>
+                <Link to='/login' className='font-bold text-red-500 hover:text-red-400 duration-300'>
+                  Login as customer
+                </Link>
+              </p>
+              <p className='text-center text-red-500'>
+                <Link to='/' className='font-bold text-red-500 hover:text-red-400 duration-300'>
+                  Back to homepage
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
