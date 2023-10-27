@@ -40,7 +40,6 @@ export default function TableUser(props) {
         fetchListUser();
       })
       .catch(err => {
-        console.log(err);
         message.error(err.response.data ?? err.message);
       });
   };
@@ -242,7 +241,7 @@ export default function TableUser(props) {
               autoFocusFirstInput
               modalProps={{
                 destroyOnClose: true,
-                onCancel: () => console.log("run"),
+                onCancel: () => {},
               }}
               submitTimeout={2000}
               onFinish={async values => {

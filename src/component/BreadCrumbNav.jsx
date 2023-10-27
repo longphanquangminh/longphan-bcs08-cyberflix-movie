@@ -15,7 +15,6 @@ const routes = [
 
 export default function BreadCrumbNav() {
   const breadcrumbs = useBreadcrumbs(routes);
-  console.log(breadcrumbs);
   return (
     <Breadcrumb className='p-5'>
       {breadcrumbs.slice(2).map(({ breadcrumb, match }, index) => {

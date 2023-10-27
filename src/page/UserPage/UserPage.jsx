@@ -58,7 +58,7 @@ export default function UserPage() {
           autoFocusFirstInput
           modalProps={{
             destroyOnClose: true,
-            onCancel: () => console.log("run"),
+            onCancel: () => {},
           }}
           submitTimeout={2000}
           onFinish={async values => {
