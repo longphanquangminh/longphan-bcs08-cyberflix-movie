@@ -234,7 +234,7 @@ export default function Account() {
                 <div className='mb-3 border-b-2 pb-3'>
                   <h1 className='font-bold text-xl'>Tickets history</h1>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-12 h-96 overflow-y-auto'>
                   {ticketHistory.length > 0 ? (
                     ticketHistory.map((item, index) => (
                       <div key={index}>
