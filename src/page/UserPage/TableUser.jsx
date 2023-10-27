@@ -36,7 +36,7 @@ export default function TableUser(props) {
     userServ
       .deleteUser(taiKhoan)
       .then(() => {
-        message.success("Xóa thành công!");
+        message.success("Delete successfully!");
         fetchListUser();
       })
       .catch(err => {

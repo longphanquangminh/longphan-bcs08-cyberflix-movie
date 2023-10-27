@@ -2,7 +2,7 @@ import "./TableUser.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
-import { userServ } from "../../api/api";
+import { adminServ, userServ } from "../../api/api";
 import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form } from "antd";
 import { ModalForm, ProForm, ProFormSelect, ProFormText } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
@@ -35,18 +35,18 @@ export default function TableFilm(props) {
   };
   const [form] = Form.useForm();
   const { listUser, fetchListUser } = props;
-  const deleteUser = taiKhoan => {
-    userServ
-      .deleteUser(taiKhoan)
+  const deleteFilm = maPhim => {
+    adminServ
+      .deleteFilm(maPhim)
       .then(() => {
-        message.success("Xóa thành công!");
+        message.success("Delete successfully!");
         fetchListUser();
       })
       .catch(err => {
         message.error(err.response.data ?? err.message);
       });
   };
-  const handleDelete = taiKhoan => deleteUser(taiKhoan);
+  const handleDelete = taiKhoan => deleteFilm(taiKhoan);
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -403,11 +403,11 @@ export default function TableFilm(props) {
             </ModalForm>
           </ConfigProvider>
           <Popconfirm
-            title={`Sure to delete account ${item.taiKhoan}?`}
+            title={`Sure to delete film ${item.tenPhim}?`}
             okButtonProps={{
               className: "bg-blue-500",
             }}
-            onConfirm={() => handleDelete(item.taiKhoan)}
+            onConfirm={() => handleDelete(item.maPhim)}
           >
             <a>Delete</a>
           </Popconfirm>

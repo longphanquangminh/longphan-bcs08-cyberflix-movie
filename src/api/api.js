@@ -96,3 +96,7 @@ export const userServ = {
   },
   deleteUser: taiKhoan => https.delete(`/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`),
 };
+
+export const adminServ = {
+  deleteFilm: MaPhim => https.delete(`/QuanLyPhim/XoaPhim?MaPhim=${MaPhim}`),
+};
