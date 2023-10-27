@@ -1,3 +1,4 @@
+import enEN from "antd/locale/en_US";
 import "./ButtonPrimary.css";
 import { SearchOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
@@ -7,7 +8,7 @@ import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form 
 import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
-import { imageUrlRegex, trailerUrlRegex } from "../../constants/regex";
+import { imageUrlRegex, priceRegex, trailerUrlRegex } from "../../constants/regex";
 import moment from "moment";
 import PlayVideo from "../../component/PlayVideo";
 import { useDispatch, useSelector } from "react-redux";
@@ -165,12 +166,12 @@ export default function TableFilm(props) {
     //     return <>{listMovie.indexOf(record) + 1}</>;
     //   },
     // },
-    {
-      title: "Film code",
-      dataIndex: "maPhim",
-      key: "maPhim",
-      ...getColumnSearchProps("maPhim"),
-    },
+    // {
+    //   title: "Film code",
+    //   dataIndex: "maPhim",
+    //   key: "maPhim",
+    //   ...getColumnSearchProps("maPhim"),
+    // },
     {
       title: "Film name",
       dataIndex: "tenPhim",
@@ -237,7 +238,7 @@ export default function TableFilm(props) {
       key: "action",
       render: item => (
         <Space size='middle'>
-          <ConfigProvider button={{ className: "bg-blue-500" }}>
+          <ConfigProvider button={{ className: "bg-blue-500" }} locale={enEN}>
             <ModalForm
               submitter={{
                 // Configure the button text
@@ -254,7 +255,7 @@ export default function TableFilm(props) {
                 },
                 submitButtonProps: {},
               }}
-              title='Edit film'
+              title={`Edit film ${item.tenPhim} (#${item.maPhim})`}
               trigger={
                 <Button
                   type='primary'
@@ -428,6 +429,96 @@ export default function TableFilm(props) {
           >
             <a>Delete</a>
           </Popconfirm>
+          <ConfigProvider button={{ className: "bg-blue-500" }} locale={enEN}>
+            <ModalForm
+              submitter={{
+                // Configure the button text
+                searchConfig: {
+                  resetText: "Reset",
+                  submitText: "Submit",
+                },
+                // Configure the properties of the button
+                resetButtonProps: {
+                  style: {
+                    // Hide the reset button
+                    display: "none",
+                  },
+                },
+                submitButtonProps: {},
+              }}
+              title={`Edit film ${item.tenPhim} (#${item.maPhim})`}
+              trigger={
+                <a
+                  onClick={() => {
+                    form.setFieldsValue({ ...item });
+                  }}
+                >
+                  Time
+                </a>
+              }
+              form={form}
+              autoFocusFirstInput
+              modalProps={{
+                destroyOnClose: true,
+                onCancel: () => {},
+              }}
+              submitTimeout={2000}
+              onFinish={async values => {
+                await waitTime(2000);
+                https
+                  .post(`${BASE_URL}/QuanLyDatVe/TaoLichChieu`, {
+                    ...values,
+                    maNhom: MA_NHOM,
+                    maPhim: item.maPhim,
+                    maRap: 511,
+                  })
+                  .then(() => {
+                    message.success(`Create showtime for film ${item.tenPhim} successfully!`);
+                  })
+                  .catch(err => {
+                    message.error(err.response.data);
+                  });
+                return true;
+              }}
+            >
+              <ProForm.Group>
+                <ProFormDatePicker
+                  width='md'
+                  name='ngayChieuGioChieu'
+                  fieldProps={{
+                    format: "DD/MM/YYYY hh:mm:ss",
+                  }}
+                  label='Showtime'
+                  placeholder='Choose showtime'
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input showtime!",
+                    },
+                  ]}
+                  onChange={value => {
+                    console.log(value);
+                  }}
+                />
+                <ProFormText
+                  width='md'
+                  name='giaVe'
+                  label='Price'
+                  placeholder='200.000'
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input price!",
+                    },
+                    {
+                      pattern: new RegExp(priceRegex),
+                      message: "Price must be from 75.000 to 200.000 VNĐ",
+                    },
+                  ]}
+                />
+              </ProForm.Group>
+            </ModalForm>
+          </ConfigProvider>
         </Space>
       ),
     },
