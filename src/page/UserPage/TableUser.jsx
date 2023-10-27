@@ -267,7 +267,7 @@ export default function TableUser(props) {
                   name='taiKhoan'
                   label='Username'
                   tooltip='What do you want others to call this user?'
-                  placeholder='defaultAccount123'
+                  placeholder=''
                   disabled={true}
                   // rules={[
                   //   {
