@@ -40,7 +40,8 @@ export default function TableUser(props) {
         fetchListUser();
       })
       .catch(err => {
-        message.error(err.response.data);
+        console.log(err);
+        message.error(err.response.data ?? err.message);
       });
   };
   const handleDelete = taiKhoan => deleteUser(taiKhoan);
