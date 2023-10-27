@@ -100,10 +100,10 @@ export default function Purchase() {
       }
     }
   };
-  if (loading) return <div className='container h-60 text-center pt-[140px]'>Loading...</div>;
-  if (!filmSeats) return <div className='container h-60 text-center pt-[140px]'>No data!</div>;
+  if (loading) return <div className='container min-h-screen text-center pt-[140px]'>Loading...</div>;
+  if (!filmSeats) return <div className='container min-h-screen text-center pt-[140px]'>No data!</div>;
   return (
-    <div className='container pt-[48px]'>
+    <div className='container min-h-screen pt-[48px]'>
       {/* <p className='text-center mt-12'>Please use computer for best view!</p> */}
       <div className='grid grid-cols-1 lg:flex flex-row py-12 gap-6'>
         <div className='basis-2/3'>
