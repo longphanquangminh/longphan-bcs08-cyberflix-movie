@@ -34,13 +34,13 @@ export default function TableFilm(props) {
     dispatch(chooseTrailer(videoId));
   };
   const [form] = Form.useForm();
-  const { listUser, fetchListUser } = props;
+  const { listMovie, fetchListMovie } = props;
   const deleteFilm = maPhim => {
     adminServ
       .deleteFilm(maPhim)
       .then(() => {
         message.success("Delete successfully!");
-        fetchListUser();
+        fetchListMovie();
       })
       .catch(err => {
         message.error(err.response.data ?? err.message);
@@ -162,7 +162,7 @@ export default function TableFilm(props) {
     //   dataIndex: "stt",
     //   key: "stt",
     //   render: (_, record) => {
-    //     return <>{listUser.indexOf(record) + 1}</>;
+    //     return <>{listMovie.indexOf(record) + 1}</>;
     //   },
     // },
     {
@@ -256,7 +256,12 @@ export default function TableFilm(props) {
               }}
               title='Edit film'
               trigger={
-                <Button type='primary' onClick={() => form.setFieldsValue({ ...item, danhGia: item.danhGia / 2 })}>
+                <Button
+                  type='primary'
+                  onClick={() => {
+                    form.setFieldsValue({ ...item, danhGia: item.danhGia / 2, ngayKhoiChieu: moment(item.ngayKhoiChieu) });
+                  }}
+                >
                   Edit
                 </Button>
               }
@@ -273,10 +278,12 @@ export default function TableFilm(props) {
                   .post(`${BASE_URL}/QuanLyPhim/CapNhatPhim`, {
                     ...values,
                     maNhom: MA_NHOM,
+                    maPhim: item.maPhim,
+                    danhGia: values.danhGia * 2,
                   })
                   .then(() => {
                     message.success(`Edit film ${values.tenPhim} successfully!`);
-                    fetchListUser();
+                    fetchListMovie();
                   })
                   .catch(err => {
                     message.error(err.response.data);
@@ -445,7 +452,7 @@ export default function TableFilm(props) {
           y: 390,
           x: 1200,
         }}
-        dataSource={listUser}
+        dataSource={listMovie}
         columns={columnsHeader}
       />
     </>

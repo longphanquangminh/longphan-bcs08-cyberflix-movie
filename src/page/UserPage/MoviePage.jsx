@@ -17,18 +17,18 @@ const waitTime = (time = 100) => {
 
 export default function MoviePage() {
   const [form] = Form.useForm();
-  const [listUser, setListUser] = useState([]);
-  const fetchListUser = () => {
+  const [listMovie, setListMovie] = useState([]);
+  const fetchListMovie = () => {
     getListMovie()
       .then(res => {
-        setListUser(res.data);
+        setListMovie(res.data);
       })
       .catch(err => {
         message.error(err.response.data);
       });
   };
   useEffect(() => {
-    fetchListUser();
+    fetchListMovie();
   }, []);
   return (
     <>
@@ -72,7 +72,7 @@ export default function MoviePage() {
               })
               .then(() => {
                 message.success("Add film successfully!");
-                fetchListUser();
+                fetchListMovie();
               })
               .catch(err => {
                 message.error(err.response.data);
@@ -208,7 +208,7 @@ export default function MoviePage() {
           </ProForm.Group>
         </ModalForm>
       </ConfigProvider>
-      <TableFilm listUser={listUser} fetchListUser={fetchListUser} />
+      <TableFilm listMovie={listMovie} fetchListMovie={fetchListMovie} />
     </>
   );
 }
