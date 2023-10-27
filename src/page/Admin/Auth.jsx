@@ -4,7 +4,7 @@ import axios from "axios";
 import { BASE_URL, configHeaders } from "../../api/config";
 import { useNavigate, Link } from "react-router-dom";
 import { SET_INFO_ADMIN } from "../../redux/constant/admin";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { adminLocalStorage } from "../../api/localService";
 
 const SubmitButton = ({ form }) => {
@@ -64,6 +64,16 @@ export default function Auth() {
         message.error(err.response.data);
       });
   };
+  const { info } = useSelector(state => {
+    return state.adminReducer;
+  });
+  useEffect(() => {
+    if (info?.maLoaiNguoiDung === "QuanTri") {
+      message.warning("You've already logged in!");
+      navigate("/admin/user");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div className='flex flex-col min-h-screen bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
