@@ -44,14 +44,7 @@ export default function AdminAccount() {
   // const { info } = useSelector(state => {
   //   return state.userReducer;
   // });
-  const info = useSelector(state => {
-    const userInfo = state.userReducer.info;
-    const adminInfo = state.adminReducer.info;
-    console.log(userInfo !== null && userInfo !== undefined ? userInfo : adminInfo);
-
-    // If info is null or undefined in userReducer, use adminReducer
-    return userInfo !== null && userInfo !== undefined ? userInfo : adminInfo;
-  });
+  const info = useSelector(state => state.adminReducer.info);
   useEffect(() => {
     getUserInfo(info.taiKhoan)
       .then(res => {

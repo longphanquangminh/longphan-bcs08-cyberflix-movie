@@ -30,7 +30,6 @@ function App() {
             }
           />
           <Route path='/login' element={<Login />} />
-          <Route path='/admin/account' element={<AdminAccount />} />
           <Route
             path='/admin'
             element={
@@ -40,6 +39,7 @@ function App() {
             }
           >
             <Route path='/admin' element={<Navigate to='/admin/user' />} />
+            <Route path='/admin/account' element={<AdminAccount />} />
             <Route path='/admin/user' element={<UserPage />} />
             <Route path='/admin/movie' element={<MoviePage />} />
           </Route>
