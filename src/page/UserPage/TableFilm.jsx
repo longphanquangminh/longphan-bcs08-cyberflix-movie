@@ -191,13 +191,9 @@ export default function TableFilm(props) {
       ...getColumnSearchProps("trailer"),
       render: text => (
         <>
-          <div className='relative group' onClick={() => handleChooseTrailer(trailerUrlRegex.test(text) ? text : defaultTrailer)}>
+          <div className='relative group'>
             <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
-            <PlayVideo
-              trailer={text ?? defaultTrailer}
-              onClick={() => handleChooseTrailer(trailerUrlRegex.test(text) ? text : defaultTrailer)}
-              className='mx-auto'
-            />
+            <PlayVideo trailer={text ?? defaultTrailer} onClick={() => handleChooseTrailer(trailerUrlRegex.test(text) ? text : defaultTrailer)} />
           </div>
         </>
       ),
@@ -406,8 +402,6 @@ export default function TableFilm(props) {
               </ProForm.Group>
             </ModalForm>
           </ConfigProvider>
-          {/* {item.maLoaiNguoiDung === "KhachHang" && <Button onClick={() => deleteUser(item.taiKhoan)}>Delete</Button>} */}
-          {/* {<Button onClick={() => showConfirmDelete(item.taiKhoan)}>Delete</Button>} */}
           <Popconfirm
             title={`Sure to delete account ${item.taiKhoan}?`}
             okButtonProps={{
