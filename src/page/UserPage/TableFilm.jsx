@@ -528,7 +528,7 @@ export default function TableFilm(props) {
                 },
                 submitButtonProps: {},
               }}
-              title={`Create showtime for film ${item.tenPhim} (#${item.maPhim})`}
+              title={`Create showtime for film "${item.tenPhim}" (#${item.maPhim})`}
               trigger={
                 <FieldTimeOutlined
                   onClick={() => {
@@ -566,12 +566,37 @@ export default function TableFilm(props) {
                 return true;
               }}
             >
-              <img
-                className='w-28 h-28 object-cover mx-auto rounded-lg my-6'
-                alt={item.hinhAnh}
-                src={imageUrlRegex.test(item.hinhAnh) ? item.hinhAnh : placeholderImage}
-                onError={onImageError}
-              />
+              <div className='flex justify-around items-center'>
+                <div>
+                  <p className='mb-3'>Poster preview:</p>
+                  <img
+                    className='w-20 h-20 mx-auto object-cover rounded-lg'
+                    alt={item.hinhAnh}
+                    src={imageUrlRegex.test(item.hinhAnh) ? item.hinhAnh : placeholderImage}
+                    onError={onImageError}
+                  />
+                </div>
+                <div>
+                  <p className='mb-3'>Trailer preview:</p>
+                  <>
+                    {trailerUrlRegex.test(item.trailer) ? (
+                      <div className='relative group'>
+                        <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
+                        <PlayVideo
+                          trailer={item.trailer ?? defaultTrailer}
+                          onClick={() => handleChooseTrailer(trailerUrlRegex.test(item.trailer) ? item.trailer : defaultTrailer)}
+                        />
+                      </div>
+                    ) : (
+                      <img
+                        alt={item.trailer}
+                        src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMwCOc2tSRnVaWoY24XHxx0ADxtdSN4nEHpdIsNRtuZn_P8SF6FJQmAjwJBY3rV-6dxeY&usqp=CAU'
+                        className='w-20 h-20 object-cover mx-auto rounded-lg'
+                      />
+                    )}
+                  </>
+                </div>
+              </div>
               <ProForm.Group>
                 <ProFormDatePicker
                   width='md'
