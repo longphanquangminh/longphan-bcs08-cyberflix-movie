@@ -1,5 +1,5 @@
 import { Button, Form, Input, Select, Space, message } from "antd";
-import { adminLocalStorage } from "../../api/localService";
+import { adminLocalStorage, userLocalStorage } from "../../api/localService";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getUserInfo, putUserInfo, layUserTickets } from "../../api/api";
@@ -8,6 +8,7 @@ import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
 import { countryFormat } from "../../constants/defaultValues";
 import { SET_INFO_ADMIN } from "../../redux/constant/admin";
+import { SET_INFO } from "../../redux/constant/user";
 
 const SubmitButton = () => {
   return (
@@ -19,6 +20,7 @@ const SubmitButton = () => {
 
 export default function AdminAccount() {
   const info = useSelector(state => state.adminReducer.info);
+  const infoUser = useSelector(state => state.userReducer.info);
   const [ticketHistory, setTicketHistory] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -78,6 +80,10 @@ export default function AdminAccount() {
         message.success("Update success!");
         adminLocalStorage.set({ ...values, accessToken: info.accessToken });
         dispatch({ type: SET_INFO_ADMIN, payload: { ...values, accessToken: info.accessToken } });
+        if (infoUser.taiKhoan === info.taiKhoan) {
+          userLocalStorage.set({ ...values, accessToken: infoUser.accessToken });
+          dispatch({ type: SET_INFO, payload: { ...values, accessToken: infoUser.accessToken } });
+        }
       })
       .catch(err => {
         console.error(err);

@@ -1,7 +1,7 @@
 import Header from "../../component/Header/Header";
 import { Button, Form, Input, Select, Space, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
-import { userLocalStorage } from "../../api/localService";
+import { adminLocalStorage, userLocalStorage } from "../../api/localService";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getUserInfo, putUserInfo, layUserTickets } from "../../api/api";
@@ -9,6 +9,7 @@ import { MA_NHOM } from "../../api/config";
 import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
 import { countryFormat } from "../../constants/defaultValues";
+import { SET_INFO_ADMIN } from "../../redux/constant/admin";
 
 const SubmitButton = () => {
   return (
@@ -21,6 +22,7 @@ const SubmitButton = () => {
 export default function Account() {
   const navigate = useNavigate();
   const info = useSelector(state => state.userReducer.info);
+  const infoAdmin = useSelector(state => state.adminReducer.info);
   const [ticketHistory, setTicketHistory] = useState([]);
   useEffect(() => {
     if (!info?.accessToken) {
@@ -79,6 +81,10 @@ export default function Account() {
         message.success("Update success!");
         userLocalStorage.set({ ...values, accessToken: info.accessToken });
         dispatch({ type: SET_INFO, payload: { ...values, accessToken: info.accessToken } });
+        if (infoAdmin.taiKhoan === info.taiKhoan) {
+          adminLocalStorage.set({ ...values, accessToken: infoAdmin.accessToken });
+          dispatch({ type: SET_INFO_ADMIN, payload: { ...values, accessToken: infoAdmin.accessToken } });
+        }
       })
       .catch(err => {
         console.error(err);
