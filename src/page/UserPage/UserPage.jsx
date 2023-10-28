@@ -69,7 +69,7 @@ export default function UserPage() {
                 maNhom: MA_NHOM,
               })
               .then(() => {
-                message.success("Add account successfully!");
+                message.success(`Add account ${values.taiKhoan} successfully!`);
                 fetchListUser();
               })
               .catch(err => {

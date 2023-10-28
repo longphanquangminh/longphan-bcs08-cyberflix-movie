@@ -565,6 +565,12 @@ export default function TableFilm(props) {
                 return true;
               }}
             >
+              <img
+                className='w-28 h-28 object-cover mx-auto rounded-lg my-12'
+                alt={item.hinhAnh}
+                src={imageUrlRegex.test(item.hinhAnh) ? item.hinhAnh : placeholderImage}
+                onError={onImageError}
+              />
               <ProForm.Group>
                 <ProFormDatePicker
                   width='md'
