@@ -33,9 +33,9 @@ const items2 = [LaptopOutlined].map((icon, index) => {
     icon: React.createElement(icon),
     label: `Menu`,
 
-    children: menu.map((item, indexChild) => {
+    children: menu.map(item => {
       return {
-        key: String(indexChild + 1),
+        key: item.url,
         label: <Link to={item.url}>{item.label}</Link>,
       };
     }),
@@ -87,7 +87,7 @@ const AdminLayout = () => {
             <Menu
               theme='dark'
               mode='inline'
-              defaultSelectedKeys={["1"]}
+              defaultSelectedKeys={[window.location.pathname]}
               defaultOpenKeys={["sub1"]}
               style={{ height: "100%", borderRight: 0 }}
               items={items2}
