@@ -75,8 +75,8 @@ const AdminLayout = () => {
           <span className='text-white font-medium text-2xl'>CyberFlix Admin</span>
           <div className='flex justify-center items-center gap-x-3'>
             <div className='cursor-pointer flex justify-center items-center gap-x-1 group' onClick={handleAccount}>
-              <img src={defaultAvatar.toUpperCase()} className='w-7 h-7  rounded-lg' alt='' />
-              <span className='text-white group-hover:text-gray-500 duration-300'>{info.hoTen}</span>
+              <img src={defaultAvatar} className='w-7 h-7  rounded-lg' alt='' />
+              <span className='text-white group-hover:text-gray-500 duration-300'>{info.hoTen.toUpperCase()}</span>
             </div>
             <button onClick={handleAdminLogout} className='text-black bg-white rounded px-5 h-10 leading-10 shadow shadow-white'>
               Logout
