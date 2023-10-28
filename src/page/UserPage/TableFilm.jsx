@@ -5,8 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { adminServ } from "../../api/api";
 import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form, Select } from "antd";
-import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate, ProFormSelect } from "@ant-design/pro-components";
-import { BASE_URL, MA_NHOM, https } from "../../api/config";
+import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate } from "@ant-design/pro-components";
+// import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate, ProFormSelect } from "@ant-design/pro-components";
+import { BASE_URL, MA_NHOM, https, httpsNoLoading } from "../../api/config";
 import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
 import { imageUrlRegex, priceRegex, trailerUrlRegex } from "../../constants/regex";
 import moment from "moment";
@@ -45,7 +46,7 @@ export default function TableFilm(props) {
   }, []);
   useEffect(() => {
     if (chonHeThongRap !== null) {
-      https
+      httpsNoLoading
         .get(`${BASE_URL}/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${chonHeThongRap}`)
         .then(res => {
           const newArray = res.data.flatMap(item =>
@@ -501,7 +502,7 @@ export default function TableFilm(props) {
               submitTimeout={2000}
               onFinish={async values => {
                 await waitTime(2000);
-                https
+                httpsNoLoading
                   .post(`${BASE_URL}/QuanLyDatVe/TaoLichChieu`, {
                     ...values,
                     maNhom: MA_NHOM,
@@ -549,7 +550,7 @@ export default function TableFilm(props) {
                     },
                   ]}
                 />
-                <ProFormSelect
+                {/* <ProFormSelect
                   request={async () => heThongRap}
                   onChange={value => setChonHeThongRap(value)}
                   name='heThongRap'
@@ -561,8 +562,20 @@ export default function TableFilm(props) {
                       message: "Please choose cinema system",
                     },
                   ]}
-                />
+                /> */}
               </ProForm.Group>
+              <Form.Item
+                name='heThongRap'
+                label='Cinema system'
+                rules={[
+                  {
+                    required: true,
+                    message: "Please choose theater of the cinema",
+                  },
+                ]}
+              >
+                <Select options={heThongRap} onChange={value => setChonHeThongRap(value)} placeholder='Select cinema system' />
+              </Form.Item>
               <Form.Item
                 name='cumRap'
                 label='Theater of the cinema'

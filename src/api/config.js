@@ -26,6 +26,14 @@ export const https = axios.create({
   },
 });
 
+export const httpsNoLoading = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+    TokenCybersoft: TOKEN_CYBER,
+  },
+});
+
 https.interceptors.request.use(
   function (config) {
     store.dispatch({ type: SET_LOADING_ON });
