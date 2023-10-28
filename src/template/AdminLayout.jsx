@@ -65,7 +65,7 @@ const AdminLayout = () => {
     navigate("/admin/account");
   };
   return (
-    <>
+    <div className=''>
       <div className='bg-white w-screen h-screen z-50 fixed md:hidden flex justify-center items-center'>
         <div className='text-black text-3xl font-bold text-center'>Admin, please use computer (fullscreen) for best view!</div>
       </div>
@@ -108,7 +108,7 @@ const AdminLayout = () => {
           </Layout>
         </Layout>
       </Layout>
-    </>
+    </div>
   );
 };
 

@@ -1,11 +1,11 @@
 import enEN from "antd/locale/en_US";
 import "./ButtonPrimary.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { adminServ } from "../../api/api";
 import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form } from "antd";
-import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate } from "@ant-design/pro-components";
+import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate, ProFormSelect } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
 import { imageUrlRegex, priceRegex, trailerUrlRegex } from "../../constants/regex";
@@ -25,6 +25,65 @@ const waitTime = (time = 100) => {
 };
 
 export default function TableFilm(props) {
+  const [heThongRap, setHeThongRap] = useState([]);
+  const [cumRap, setCumRap] = useState([]);
+  const [chonHeThongRap, setChonHeThongRap] = useState("");
+  const [chonRap, setChonRap] = useState(null);
+  useEffect(() => {
+    https
+      .get(`${BASE_URL}/QuanLyRap/LayThongTinHeThongRap`)
+      .then(res => {
+        const newArray = res.data.map(item => ({
+          value: item.maHeThongRap,
+          label: item.tenHeThongRap.toUpperCase(),
+        }));
+        setHeThongRap([...newArray]);
+      })
+      .catch(err => {
+        message.error(err.response.data);
+      });
+  }, []);
+  useEffect(() => {
+    if (chonHeThongRap.length > 0) {
+      https
+        .get(`${BASE_URL}/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${chonHeThongRap}`)
+        .then(res => {
+          // const newArray = res.data.map(item =>
+          //   item.danhSachRap.map(itemChild => ({
+          //     value: itemChild.maRap,
+          //     label: itemChild.tenRap.toUpperCase(),
+          //   })),
+          // );
+
+          // const newArray = res.data.map(item => ({
+          //   value: item.maCumRap,
+          //   label: item.tenCumRap.toUpperCase(),
+          // }));
+
+          const newArray = res.data.flatMap(item =>
+            item.danhSachRap.map(rapItem => ({
+              value: rapItem.maRap,
+              label: item.tenCumRap + ": " + rapItem.tenRap,
+            })),
+          );
+
+          // const newArray = [];
+          // newArray.push(
+          //   ...res.data.map(item =>
+          //     item.danhSachRap.map(itemChild => ({
+          //       value: itemChild.maRap,
+          //       label: itemChild.tenRap.toUpperCase(),
+          //     })),
+          //   ),
+          // );
+          setCumRap([...newArray]);
+          console.log(newArray);
+        })
+        .catch(err => {
+          message.error(err.response.data);
+        });
+    }
+  }, [chonHeThongRap]);
   const onImageError = e => {
     e.target.src = placeholderImage;
   };
@@ -389,9 +448,6 @@ export default function TableFilm(props) {
                       message: "Please input started date!",
                     },
                   ]}
-                  onChange={value => {
-                    console.log(value);
-                  }}
                 />
                 {/* <ProFormText
               width='md'
@@ -470,7 +526,7 @@ export default function TableFilm(props) {
                     ...values,
                     maNhom: MA_NHOM,
                     maPhim: item.maPhim,
-                    maRap: 511,
+                    maRap: chonRap,
                   })
                   .then(() => {
                     message.success(`Create showtime for film ${item.tenPhim} successfully!`);
@@ -496,9 +552,6 @@ export default function TableFilm(props) {
                       message: "Please input showtime!",
                     },
                   ]}
-                  onChange={value => {
-                    console.log(value);
-                  }}
                 />
                 <ProFormText
                   width='md'
@@ -513,6 +566,34 @@ export default function TableFilm(props) {
                     {
                       pattern: new RegExp(priceRegex),
                       message: "Price must be from 75.000 to 200.000 VNĐ",
+                    },
+                  ]}
+                />
+                <ProFormSelect
+                  request={async () => heThongRap}
+                  onChange={value => setChonHeThongRap(value)}
+                  width='md'
+                  name='heThongRap'
+                  label='Cinema system'
+                  placeholder='Select cinema system'
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please choose cinema system",
+                    },
+                  ]}
+                />
+                <ProFormSelect
+                  request={async () => cumRap}
+                  onChange={value => setChonRap(value)}
+                  width='md'
+                  name='cumRap'
+                  label='Theater of the cinema'
+                  placeholder='Select theater of the cinema'
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please choose theater of the cinema",
                     },
                   ]}
                 />
