@@ -555,9 +555,10 @@ export default function TableFilm(props) {
                     maNhom: MA_NHOM,
                     maPhim: item.maPhim,
                     maRap: chonRap,
+                    giaVe: values.giaVe.replace(/[^\d]/g, ""),
                   })
                   .then(() => {
-                    message.success(`Create showtime for film ${item.tenPhim} successfully!`);
+                    message.success(`Create showtime for film ${item.tenPhim.toUpperCase()} successfully!`);
                   })
                   .catch(err => {
                     message.error(err.response.data);
