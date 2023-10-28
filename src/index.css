@@ -9,6 +9,10 @@
   margin: auto;
 }
 
+.ant-btn-primary {
+  background-color: blue;
+}
+
 html {
   scroll-behavior: smooth;
 }

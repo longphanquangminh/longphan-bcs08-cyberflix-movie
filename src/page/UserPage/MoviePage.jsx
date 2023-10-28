@@ -5,7 +5,11 @@ import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { useState, useEffect } from "react";
 import { getListMovie } from "../../api/api";
 import TableFilm from "./TableFilm";
-import { imageUrlRegex, trailerUrlRegex } from "../../constants/regex";
+import { imageUrlRegex, trailerUrlRegex, trailerYoutube } from "../../constants/regex";
+import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
+import PlayVideo from "../../component/PlayVideo";
+import { useDispatch } from "react-redux";
+import { chooseTrailer } from "../../redux/action/user";
 
 const waitTime = (time = 100) => {
   return new Promise(resolve => {
@@ -16,6 +20,23 @@ const waitTime = (time = 100) => {
 };
 
 export default function MoviePage() {
+  const onImageError = e => {
+    e.target.src = placeholderImage;
+  };
+  const [hinhAnh, setHinhAnh] = useState(null);
+  const [trailerUrl, setTrailerUrl] = useState(null);
+  const dispatch = useDispatch();
+  const handleChooseTrailer = trailer => {
+    let videoId = "";
+    if (trailerYoutube.test(trailer) || trailer.includes("embed")) {
+      const parts = trailer.split("/");
+      videoId = parts[parts.length - 1];
+    } else {
+      const url = new URL(trailer);
+      videoId = url.searchParams.get("v");
+    }
+    dispatch(chooseTrailer(videoId));
+  };
   const [form] = Form.useForm();
   const [listMovie, setListMovie] = useState([]);
   const fetchListMovie = () => {
@@ -71,12 +92,14 @@ export default function MoviePage() {
                 danhGia: values.danhGia * 2,
               })
               .then(() => {
-                message.success("Add film successfully!");
+                message.success(`Add film ${values.tenPhim} successfully!`);
                 fetchListMovie();
               })
               .catch(err => {
                 message.error(err.response.data);
               });
+            setHinhAnh(null);
+            setTrailerUrl(null);
             return true;
           }}
         >
@@ -110,6 +133,7 @@ export default function MoviePage() {
               width='md'
               name='trailer'
               label='Youtube trailer'
+              onChange={e => setTrailerUrl(e.target.value)}
               placeholder='https://youtube.com/abc'
               rules={[
                 {
@@ -125,6 +149,7 @@ export default function MoviePage() {
             <ProFormText
               width='md'
               name='hinhAnh'
+              onChange={e => setHinhAnh(e.target.value)}
               label='Film poster'
               placeholder='https://domain.com/abc.png'
               rules={[
@@ -206,6 +231,37 @@ export default function MoviePage() {
               placeholder='10'
             />
           </ProForm.Group>
+          <div className='flex justify-around items-center'>
+            <div>
+              <p className='mb-3'>Poster preview:</p>
+              <img
+                className='w-20 h-20 mx-auto object-cover rounded-lg'
+                alt={hinhAnh}
+                src={imageUrlRegex.test(hinhAnh) ? hinhAnh : placeholderImage}
+                onError={onImageError}
+              />
+            </div>
+            <div>
+              <p className='mb-3'>Trailer preview:</p>
+              <>
+                {trailerUrlRegex.test(trailerUrl) ? (
+                  <div className='relative group'>
+                    <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
+                    <PlayVideo
+                      trailer={trailerUrl ?? defaultTrailer}
+                      onClick={() => handleChooseTrailer(trailerUrlRegex.test(trailerUrl) ? trailerUrl : defaultTrailer)}
+                    />
+                  </div>
+                ) : (
+                  <img
+                    alt={trailerUrl}
+                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMwCOc2tSRnVaWoY24XHxx0ADxtdSN4nEHpdIsNRtuZn_P8SF6FJQmAjwJBY3rV-6dxeY&usqp=CAU'
+                    className='w-20 h-20 object-cover mx-auto rounded-lg'
+                  />
+                )}
+              </>
+            </div>
+          </div>
         </ModalForm>
       </ConfigProvider>
       <TableFilm listMovie={listMovie} fetchListMovie={fetchListMovie} />

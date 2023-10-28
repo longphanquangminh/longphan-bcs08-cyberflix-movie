@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../../../redux/action/user";
 import PlayVideo from "../../../component/PlayVideo";
 import { defaultTrailer, placeholderImage } from "../../../constants/defaultValues";
-import { trailerUrlRegex, imageUrlRegex } from "../../../constants/regex";
+import { trailerUrlRegex, imageUrlRegex, trailerYoutube } from "../../../constants/regex";
 
 export default function ListMovie({ movieArr }) {
   const onImageError = e => {
@@ -13,8 +13,14 @@ export default function ListMovie({ movieArr }) {
   };
   const dispatch = useDispatch();
   const handleChooseTrailer = trailer => {
-    const url = new URL(trailer);
-    const videoId = url.searchParams.get("v");
+    let videoId = "";
+    if (trailerYoutube.test(trailer) || trailer.includes("embed")) {
+      const parts = trailer.split("/");
+      videoId = parts[parts.length - 1];
+    } else {
+      const url = new URL(trailer);
+      videoId = url.searchParams.get("v");
+    }
     dispatch(chooseTrailer(videoId));
   };
   return (

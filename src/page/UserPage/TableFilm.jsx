@@ -1,5 +1,4 @@
 import enEN from "antd/locale/en_US";
-import "./ButtonPrimary.css";
 import { DeleteOutlined, FieldTimeOutlined, FormOutlined, SearchOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -9,7 +8,7 @@ import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate } from 
 // import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate, ProFormSelect } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https, httpsNoLoading } from "../../api/config";
 import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
-import { imageUrlRegex, priceRegex, trailerUrlRegex } from "../../constants/regex";
+import { imageUrlRegex, priceRegex, trailerUrlRegex, trailerYoutube } from "../../constants/regex";
 import moment from "moment";
 import PlayVideo from "../../component/PlayVideo";
 import { useDispatch, useSelector } from "react-redux";
@@ -69,8 +68,14 @@ export default function TableFilm(props) {
   };
   const dispatch = useDispatch();
   const handleChooseTrailer = trailer => {
-    const url = new URL(trailer);
-    const videoId = url.searchParams.get("v");
+    let videoId = "";
+    if (trailerYoutube.test(trailer) || trailer.includes("embed")) {
+      const parts = trailer.split("/");
+      videoId = parts[parts.length - 1];
+    } else {
+      const url = new URL(trailer);
+      videoId = url.searchParams.get("v");
+    }
     dispatch(chooseTrailer(videoId));
   };
   const [form] = Form.useForm();

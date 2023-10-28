@@ -1,4 +1,3 @@
-import "./ButtonPrimary.css";
 import { FormOutlined, SearchOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
@@ -164,13 +163,18 @@ export default function TableUser(props) {
       dataIndex: "taiKhoan",
       key: "taiKhoan",
       ...getColumnSearchProps("taiKhoan"),
+      render: taiKhoan => <p className='truncate'>{taiKhoan}</p>,
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
       ...getColumnSearchProps("email"),
-      render: email => <a>{email}</a>,
+      render: email => (
+        <p className='truncate'>
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      ),
     },
     {
       title: "Full name",
@@ -208,6 +212,11 @@ export default function TableUser(props) {
       key: "soDt",
       dataIndex: "soDt",
       ...getColumnSearchProps("soDt"),
+      render: soDt => (
+        <p className='truncate'>
+          <a href={`tel:${soDt}`}>{soDt}</a>
+        </p>
+      ),
     },
     {
       title: "Action",
@@ -231,7 +240,7 @@ export default function TableUser(props) {
                 },
                 submitButtonProps: {},
               }}
-              title='Edit account'
+              title={`Edit account ${item.taiKhoan}`}
               trigger={
                 <FormOutlined
                   className='text-xl text-yellow-500 hover:text-yellow-300 duration-300'
@@ -251,9 +260,10 @@ export default function TableUser(props) {
                   .put(`${BASE_URL}/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, {
                     ...values,
                     maNhom: MA_NHOM,
+                    taiKhoan: item.taiKhoan,
                   })
                   .then(() => {
-                    message.success(`Edit account ${values.taiKhoan} successfully!`);
+                    message.success(`Edit account ${item.taiKhoan} successfully!`);
                     fetchListUser();
                   })
                   .catch(err => {
@@ -263,7 +273,7 @@ export default function TableUser(props) {
               }}
             >
               <ProForm.Group>
-                <ProFormText
+                {/* <ProFormText
                   width='md'
                   name='taiKhoan'
                   label='Username'
@@ -285,7 +295,7 @@ export default function TableUser(props) {
                   //   message: "Invalid user name format!",
                   // },
                   // ]}
-                />
+                /> */}
                 <ProFormText
                   width='md'
                   name='email'
