@@ -1,6 +1,6 @@
 import enEN from "antd/locale/en_US";
 import "./ButtonPrimary.css";
-import { SearchOutlined } from "@ant-design/icons";
+import { DeleteOutlined, FieldTimeOutlined, FormOutlined, SearchOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { adminServ } from "../../api/api";
@@ -231,10 +231,18 @@ export default function TableFilm(props) {
       ...getColumnSearchProps("trailer"),
       render: text => (
         <>
-          <div className='relative group'>
-            <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
-            <PlayVideo trailer={text ?? defaultTrailer} onClick={() => handleChooseTrailer(trailerUrlRegex.test(text) ? text : defaultTrailer)} />
-          </div>
+          {trailerUrlRegex.test(text) ? (
+            <div className='relative group'>
+              <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
+              <PlayVideo trailer={text ?? defaultTrailer} onClick={() => handleChooseTrailer(trailerUrlRegex.test(text) ? text : defaultTrailer)} />
+            </div>
+          ) : (
+            <img
+              alt={text}
+              src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMwCOc2tSRnVaWoY24XHxx0ADxtdSN4nEHpdIsNRtuZn_P8SF6FJQmAjwJBY3rV-6dxeY&usqp=CAU'
+              className='w-20 h-20 object-cover mx-auto rounded-lg'
+            />
+          )}
         </>
       ),
     },
@@ -296,16 +304,14 @@ export default function TableFilm(props) {
               }}
               title={`Edit film ${item.tenPhim} (#${item.maPhim})`}
               trigger={
-                <Button
-                  type='primary'
+                <FormOutlined
+                  className='text-xl text-yellow-500 hover:text-yellow-300 duration-300'
                   onClick={() => {
                     form.setFieldsValue({ ...item, danhGia: item.danhGia / 2, ngayKhoiChieu: moment(item.ngayKhoiChieu) });
                     setHinhAnh(item.hinhAnh);
                     setTrailerUrl(item.trailer);
                   }}
-                >
-                  Edit
-                </Button>
+                />
               }
               form={form}
               autoFocusFirstInput
@@ -364,7 +370,7 @@ export default function TableFilm(props) {
                   name='trailer'
                   label='Youtube trailer'
                   placeholder='https://youtube.com/abc'
-                  onChange={value => setTrailerUrl(value)}
+                  onChange={e => setTrailerUrl(e.target.value)}
                   rules={[
                     {
                       required: true,
@@ -470,13 +476,23 @@ export default function TableFilm(props) {
                 </div>
                 <div>
                   <p className='mb-3'>Trailer preview:</p>
-                  <div className='relative group'>
-                    <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
-                    <PlayVideo
-                      trailer={trailerUrl ?? defaultTrailer}
-                      onClick={() => handleChooseTrailer(trailerUrlRegex.test(trailerUrl) ? trailerUrl : defaultTrailer)}
-                    />
-                  </div>
+                  <>
+                    {trailerUrlRegex.test(trailerUrl) ? (
+                      <div className='relative group'>
+                        <div className='bg-black h-20 w-20 mx-auto rounded-lg'></div>
+                        <PlayVideo
+                          trailer={trailerUrl ?? defaultTrailer}
+                          onClick={() => handleChooseTrailer(trailerUrlRegex.test(trailerUrl) ? trailerUrl : defaultTrailer)}
+                        />
+                      </div>
+                    ) : (
+                      <img
+                        alt={trailerUrl}
+                        src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMwCOc2tSRnVaWoY24XHxx0ADxtdSN4nEHpdIsNRtuZn_P8SF6FJQmAjwJBY3rV-6dxeY&usqp=CAU'
+                        className='w-20 h-20 object-cover mx-auto rounded-lg'
+                      />
+                    )}
+                  </>
                 </div>
               </div>
             </ModalForm>
@@ -488,7 +504,7 @@ export default function TableFilm(props) {
             }}
             onConfirm={() => handleDelete(item.maPhim)}
           >
-            <a>Delete</a>
+            <DeleteOutlined className='text-xl text-red-500 hover:text-red-300 duration-300' />
           </Popconfirm>
           <ConfigProvider button={{ className: "bg-blue-500" }} locale={enEN}>
             <ModalForm
@@ -509,13 +525,12 @@ export default function TableFilm(props) {
               }}
               title={`Create showtime for film ${item.tenPhim} (#${item.maPhim})`}
               trigger={
-                <a
+                <FieldTimeOutlined
                   onClick={() => {
                     form.setFieldsValue({ ...item });
                   }}
-                >
-                  Time
-                </a>
+                  className='text-xl text-blue-500 hover:text-blue-300 duration-300'
+                />
               }
               form={form}
               autoFocusFirstInput

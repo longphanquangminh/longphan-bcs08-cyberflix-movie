@@ -4,11 +4,11 @@ import { chooseTrailer } from "../redux/action/user";
 import { trailerUrlRegex, trailerYoutube } from "../constants/regex";
 import { defaultTrailer } from "../constants/defaultValues";
 
-export default function PlayVideo({ isCard, trailer = defaultTrailer }) {
+export default function PlayVideo({ isCard, trailer = defaultTrailer, className }) {
   const dispatch = useDispatch();
   const handleChooseTrailer = trailer => {
     let videoId = "";
-    if (trailerYoutube.test(trailer)) {
+    if (trailerYoutube.test(trailer) || trailer.includes("embed")) {
       const parts = trailer.split("/");
       videoId = parts[parts.length - 1];
     } else {
@@ -21,7 +21,7 @@ export default function PlayVideo({ isCard, trailer = defaultTrailer }) {
     <div
       className={`absolute hidden group-hover:block duration-300 ${
         isCard ? `top-1/4` : `top-1/2`
-      } text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer mx-auto z-40`}
+      } text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer mx-auto z-40 ${className}`}
       onClick={() => handleChooseTrailer(trailerUrlRegex.test(trailer) ? trailer : defaultTrailer)}
     >
       <PlayCircle size={52} />

@@ -1,5 +1,5 @@
 import "./ButtonPrimary.css";
-import { SearchOutlined } from "@ant-design/icons";
+import { FormOutlined, SearchOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { userServ } from "../../api/api";
@@ -233,9 +233,10 @@ export default function TableUser(props) {
               }}
               title='Edit account'
               trigger={
-                <Button type='primary' onClick={() => form.setFieldsValue({ ...item })}>
-                  Edit
-                </Button>
+                <FormOutlined
+                  className='text-xl text-yellow-500 hover:text-yellow-300 duration-300'
+                  onClick={() => form.setFieldsValue({ ...item })}
+                />
               }
               form={form}
               autoFocusFirstInput
@@ -388,7 +389,7 @@ export default function TableUser(props) {
             }}
             onConfirm={() => handleDelete(item.taiKhoan)}
           >
-            <a>Delete</a>
+            <DeleteOutlined className='text-xl text-red-500 hover:text-red-300 duration-300' />
           </Popconfirm>
         </Space>
       ),
