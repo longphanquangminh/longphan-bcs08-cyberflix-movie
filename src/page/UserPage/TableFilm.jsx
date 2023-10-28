@@ -300,6 +300,7 @@ export default function TableFilm(props) {
                   type='primary'
                   onClick={() => {
                     form.setFieldsValue({ ...item, danhGia: item.danhGia / 2, ngayKhoiChieu: moment(item.ngayKhoiChieu) });
+                    setHinhAnh(item.hinhAnh);
                   }}
                 >
                   Edit
