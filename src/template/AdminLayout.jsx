@@ -68,7 +68,7 @@ const AdminLayout = () => {
   return (
     <div className=''>
       <div className='bg-white w-screen h-screen z-50 fixed md:hidden flex justify-center items-center'>
-        <div className='text-black text-3xl font-bold text-center'>Admin, please use computer (fullscreen) for best view!</div>
+        <div className='text-black text-3xl font-bold text-center'>Admin, please use computer fullscreen for best view!</div>
       </div>
       <Layout>
         <Header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingLeft: 200 }}>
