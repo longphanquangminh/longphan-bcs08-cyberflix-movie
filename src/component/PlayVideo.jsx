@@ -1,14 +1,20 @@
 import { PlayCircle } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { chooseTrailer } from "../redux/action/user";
-import { trailerUrlRegex } from "../constants/regex";
+import { trailerUrlRegex, trailerYoutube } from "../constants/regex";
 import { defaultTrailer } from "../constants/defaultValues";
 
 export default function PlayVideo({ isCard, trailer = defaultTrailer }) {
   const dispatch = useDispatch();
   const handleChooseTrailer = trailer => {
-    const url = new URL(trailer);
-    const videoId = url.searchParams.get("v");
+    let videoId = "";
+    if (trailerYoutube.test(trailer)) {
+      const parts = trailer.split("/");
+      videoId = parts[parts.length - 1];
+    } else {
+      const url = new URL(trailer);
+      videoId = url.searchParams.get("v");
+    }
     dispatch(chooseTrailer(videoId));
   };
   return (
