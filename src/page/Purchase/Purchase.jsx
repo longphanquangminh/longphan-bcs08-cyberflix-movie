@@ -76,12 +76,40 @@ export default function Purchase() {
         className: "bg-blue-500",
       },
       onOk() {
-        setTimeout(() => navigate("/"), 100);
+        // setTimeout(() => navigate("/"), 100);
       },
       onCancel() {
-        setTimeout(() => navigate("/"), 100);
+        // setTimeout(() => navigate("/"), 100);
       },
     });
+  };
+  const handleUpdateArray = () => {
+    const updatedArray = filmSeats.danhSachGhe.map(item => ({
+      ...item,
+      daDat: chosenSeats.includes(item) ? true : item.daDat,
+    }));
+    setFilmSeats({ ...filmSeats, danhSachGhe: [...updatedArray] });
+  };
+  const askBuyTickets = () => {
+    if (chosenSeats.length === 0) {
+      showNoSeatMessage();
+    } else {
+      confirm({
+        title: "Are you sure?",
+        content: (
+          <>
+            <p>Do you want to buy tickets?</p>
+          </>
+        ),
+        okButtonProps: {
+          className: "bg-blue-500",
+        },
+        onOk() {
+          buyTickets();
+        },
+        onCancel() {},
+      });
+    }
   };
   const buyTickets = () => {
     if (info === null) {
@@ -93,6 +121,9 @@ export default function Purchase() {
         postTickets(id, chosenSeats, info)
           .then(() => {
             showSuccess();
+            handleUpdateArray();
+            setTotalGiaVe(0);
+            setChosenSeats([]);
           })
           .catch(() => {
             showError();
@@ -158,7 +189,7 @@ export default function Purchase() {
             <div>{filmSeats.thongTinPhim.tenRap}</div>
           </div>
           <div className='flex justify-between items-center'>
-            <div>Show date and time:</div>
+            <div>Showtime:</div>
             <div>
               {filmSeats.thongTinPhim.ngayChieu} - {filmSeats.thongTinPhim.gioChieu}
             </div>
@@ -183,7 +214,7 @@ export default function Purchase() {
             </div>
           </div>
           <div className='w-full flex justify-center items-center'>
-            <button className='py-3 mt-3 w-1/2 mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300' onClick={buyTickets}>
+            <button className='py-3 mt-3 w-1/2 mx-auto text-white bg-red-500 rounded hover:bg-red-800 duration-300' onClick={askBuyTickets}>
               Buy tickets
             </button>
           </div>
