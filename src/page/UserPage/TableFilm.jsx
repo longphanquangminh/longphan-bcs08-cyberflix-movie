@@ -446,7 +446,7 @@ export default function TableFilm(props) {
                 },
                 submitButtonProps: {},
               }}
-              title={`Edit film ${item.tenPhim} (#${item.maPhim})`}
+              title={`Create showtime for film ${item.tenPhim} (#${item.maPhim})`}
               trigger={
                 <a
                   onClick={() => {
