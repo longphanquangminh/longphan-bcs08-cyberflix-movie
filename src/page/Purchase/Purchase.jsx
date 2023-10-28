@@ -3,6 +3,7 @@ import { getSeatListByFilm, postTickets } from "../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "antd";
+import { countryFormat } from "../../constants/defaultValues";
 export default function Purchase() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -175,7 +176,7 @@ export default function Purchase() {
           </div>
         </div>
         <div className='border-0 lg:border-l-2 px-3 space-y-3 basis-1/3'>
-          <p className='text-center text-3xl font-bold text-[#8cc34a]'>{totalGiaVe.toLocaleString("vi-VN")} VND</p>
+          <p className='text-center text-3xl font-bold text-[#8cc34a]'>{totalGiaVe.toLocaleString(countryFormat)} VND</p>
           <div className='flex justify-between items-center'>
             <div>Theater:</div>
             <div>{filmSeats.thongTinPhim.tenCumRap}</div>

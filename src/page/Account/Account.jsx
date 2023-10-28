@@ -8,6 +8,7 @@ import { getUserInfo, putUserInfo, layUserTickets } from "../../api/api";
 import { MA_NHOM } from "../../api/config";
 import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
+import { countryFormat } from "../../constants/defaultValues";
 
 const SubmitButton = () => {
   return (
@@ -210,7 +211,7 @@ export default function Account() {
                         <p className='font-semibold'>Booked date: {moment(item.ngayDat).format("DD-MM-YYYY | hh:mm")}</p>
                         <p className='font-bold text-xl text-[#fb4226]'>Film name: {item.tenPhim}</p>
                         <p className='font-semibold'>
-                          Time: {item.thoiLuongPhim} minutes, Price: {item.giaVe.toLocaleString("vi-VN")} VND
+                          Time: {item.thoiLuongPhim} minutes, Price: {item.giaVe.toLocaleString(countryFormat)} VND
                         </p>
                         <p className='font-bold text-xl text-[#008000]'>{item.danhSachGhe[0].tenHeThongRap}</p>
                         <p className='font-semibold'>

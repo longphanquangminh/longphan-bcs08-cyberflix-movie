@@ -3,7 +3,7 @@ import { DeleteOutlined, FieldTimeOutlined, FormOutlined, SearchOutlined } from 
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { adminServ } from "../../api/api";
-import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form, Select } from "antd";
+import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form, Select, InputNumber } from "antd";
 import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate } from "@ant-design/pro-components";
 // import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate, ProFormSelect } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https, httpsNoLoading } from "../../api/config";
@@ -555,7 +555,7 @@ export default function TableFilm(props) {
                     maNhom: MA_NHOM,
                     maPhim: item.maPhim,
                     maRap: chonRap,
-                    giaVe: values.giaVe.replace(/[^\d]/g, ""),
+                    // giaVe: values.giaVe.replace(/[^\d]/g, ""),
                   })
                   .then(() => {
                     message.success(`Create showtime for film ${item.tenPhim.toUpperCase()} successfully!`);
@@ -567,7 +567,7 @@ export default function TableFilm(props) {
               }}
             >
               <img
-                className='w-28 h-28 object-cover mx-auto rounded-lg my-12'
+                className='w-28 h-28 object-cover mx-auto rounded-lg my-6'
                 alt={item.hinhAnh}
                 src={imageUrlRegex.test(item.hinhAnh) ? item.hinhAnh : placeholderImage}
                 onError={onImageError}
@@ -588,11 +588,13 @@ export default function TableFilm(props) {
                     },
                   ]}
                 />
-                <ProFormText
+                {/* <ProFormText
                   width='md'
                   name='giaVe'
                   label='Price'
-                  placeholder='200.000'
+                  placeholder='200,000'
+                  formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  parser={value => value.replace(/\$\s?|(,*)/g, "")}
                   rules={[
                     {
                       required: true,
@@ -600,10 +602,10 @@ export default function TableFilm(props) {
                     },
                     {
                       pattern: new RegExp(priceRegex),
-                      message: "Price must be right format & from 75.000 to 200.000 VND",
+                      message: "Price must be right format & from 75,000 to 200,000 VND",
                     },
                   ]}
-                />
+                /> */}
                 {/* <ProFormSelect
                   request={async () => heThongRap}
                   onChange={value => setChonHeThongRap(value)}
@@ -618,6 +620,27 @@ export default function TableFilm(props) {
                   ]}
                 /> */}
               </ProForm.Group>
+              <Form.Item
+                name='giaVe'
+                label='Price'
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input price!",
+                  },
+                  {
+                    pattern: new RegExp(priceRegex),
+                    message: "Ticket price cannot contain decimals & must be from 75,000 to 200,000 VND",
+                  },
+                ]}
+              >
+                <InputNumber
+                  className='w-full'
+                  placeholder='200,000'
+                  formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  parser={value => value.replace(/\$\s?|(,*)/g, "")}
+                />
+              </Form.Item>
               <Form.Item
                 name='heThongRap'
                 label='Cinema system'
