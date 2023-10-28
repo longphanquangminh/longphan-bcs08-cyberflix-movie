@@ -599,7 +599,7 @@ export default function TableFilm(props) {
                     },
                     {
                       pattern: new RegExp(priceRegex),
-                      message: "Price must be from 75.000 to 200.000 VNĐ",
+                      message: "Price must be right format & from 75.000 to 200.000 VND",
                     },
                   ]}
                 />
