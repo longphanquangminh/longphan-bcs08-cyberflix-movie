@@ -109,7 +109,9 @@ export default function Header() {
   return (
     <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6 fixed z-50 w-full'>
       <p className='text-3xl font-medium text-red-600 animate-pulse text-center'>
-        <Link to='/'>CyberFlix</Link>
+        <Link to='/' onClick={() => window.scrollTo(0, 0)}>
+          CyberFlix
+        </Link>
       </p>
       {location.pathname === "/" && (
         <div className='text-xl font-medium gap-3 lg:gap-12 text-center hidden md:flex justify-center items-center'>
