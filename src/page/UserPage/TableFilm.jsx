@@ -623,7 +623,7 @@ export default function TableFilm(props) {
                 rules={[
                   {
                     required: true,
-                    message: "Please choose theater of the cinema",
+                    message: "Please choose cinema system",
                   },
                 ]}
               >
