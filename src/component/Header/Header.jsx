@@ -3,6 +3,7 @@ import { userLocalStorage } from "../../api/localService";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Dropdown, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
+import { defaultAvatar } from "../../constants/defaultValues";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -82,8 +83,8 @@ export default function Header() {
       return (
         <div className='flex justify-center items-center gap-x-3'>
           <div className='cursor-pointer flex justify-center items-center gap-x-1 group' onClick={handleAccount}>
-            <img src='https://demo1.cybersoft.edu.vn/static/media/avatarTix.546c691f.jpg' className='w-7 h-7  rounded-lg' alt='' />
-            <span className='text-black group-hover:text-gray-500 duration-300'>{info.hoTen}</span>
+            <img src={defaultAvatar} className='w-7 h-7  rounded-lg' alt='' />
+            <span className='text-black group-hover:text-gray-500 duration-300'>{info.hoTen.toUpperCase()}</span>
           </div>
           <button className={classBtn} onClick={handleLogout}>
             Logout

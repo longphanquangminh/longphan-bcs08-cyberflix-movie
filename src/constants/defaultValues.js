@@ -5,3 +5,4 @@ export const placeholderImage = `https://upload.wikimedia.org/wikipedia/commons/
 
 export const defaultTrailerData = "https://www.youtube.com/watch?v=kvAfmYNtugQ";
 export const defaultTrailer = "https://www.youtube.com/watch?v=05DqIGS_koU";
+export const defaultAvatar = "https://avatarfiles.alphacoders.com/122/122157.jpg";
