@@ -4,7 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { adminServ } from "../../api/api";
-import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form } from "antd";
+import { Button, Input, Popconfirm, Space, Table, message, ConfigProvider, Form, Select } from "antd";
 import { ModalForm, ProForm, ProFormText, ProFormDatePicker, ProFormRate, ProFormSelect } from "@ant-design/pro-components";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { defaultTrailer, placeholderImage } from "../../constants/defaultValues";
@@ -27,7 +27,7 @@ const waitTime = (time = 100) => {
 export default function TableFilm(props) {
   const [heThongRap, setHeThongRap] = useState([]);
   const [cumRap, setCumRap] = useState([]);
-  const [chonHeThongRap, setChonHeThongRap] = useState("");
+  const [chonHeThongRap, setChonHeThongRap] = useState(null);
   const [chonRap, setChonRap] = useState(null);
   useEffect(() => {
     https
@@ -44,40 +44,17 @@ export default function TableFilm(props) {
       });
   }, []);
   useEffect(() => {
-    if (chonHeThongRap.length > 0) {
+    if (chonHeThongRap !== null) {
       https
         .get(`${BASE_URL}/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${chonHeThongRap}`)
         .then(res => {
-          // const newArray = res.data.map(item =>
-          //   item.danhSachRap.map(itemChild => ({
-          //     value: itemChild.maRap,
-          //     label: itemChild.tenRap.toUpperCase(),
-          //   })),
-          // );
-
-          // const newArray = res.data.map(item => ({
-          //   value: item.maCumRap,
-          //   label: item.tenCumRap.toUpperCase(),
-          // }));
-
           const newArray = res.data.flatMap(item =>
             item.danhSachRap.map(rapItem => ({
               value: rapItem.maRap,
               label: item.tenCumRap + ": " + rapItem.tenRap,
             })),
           );
-
-          // const newArray = [];
-          // newArray.push(
-          //   ...res.data.map(item =>
-          //     item.danhSachRap.map(itemChild => ({
-          //       value: itemChild.maRap,
-          //       label: itemChild.tenRap.toUpperCase(),
-          //     })),
-          //   ),
-          // );
           setCumRap([...newArray]);
-          console.log(newArray);
         })
         .catch(err => {
           message.error(err.response.data);
@@ -516,7 +493,10 @@ export default function TableFilm(props) {
               autoFocusFirstInput
               modalProps={{
                 destroyOnClose: true,
-                onCancel: () => {},
+                onCancel: () => {
+                  setChonHeThongRap(null);
+                  setChonRap(null);
+                },
               }}
               submitTimeout={2000}
               onFinish={async values => {
@@ -572,7 +552,6 @@ export default function TableFilm(props) {
                 <ProFormSelect
                   request={async () => heThongRap}
                   onChange={value => setChonHeThongRap(value)}
-                  width='md'
                   name='heThongRap'
                   label='Cinema system'
                   placeholder='Select cinema system'
@@ -583,21 +562,24 @@ export default function TableFilm(props) {
                     },
                   ]}
                 />
-                <ProFormSelect
-                  request={async () => cumRap}
-                  onChange={value => setChonRap(value)}
-                  width='md'
-                  name='cumRap'
-                  label='Theater of the cinema'
-                  placeholder='Select theater of the cinema'
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please choose theater of the cinema",
-                    },
-                  ]}
-                />
               </ProForm.Group>
+              <Form.Item
+                name='cumRap'
+                label='Theater of the cinema'
+                rules={[
+                  {
+                    required: true,
+                    message: "Please choose theater of the cinema",
+                  },
+                ]}
+              >
+                <Select
+                  disabled={chonHeThongRap === null}
+                  options={cumRap}
+                  onChange={value => setChonRap(value)}
+                  placeholder='Select theater of the cinema'
+                />
+              </Form.Item>
             </ModalForm>
           </ConfigProvider>
         </Space>
