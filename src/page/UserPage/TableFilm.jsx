@@ -29,6 +29,8 @@ export default function TableFilm(props) {
   const [heThongRap, setHeThongRap] = useState([]);
   const [cumRap, setCumRap] = useState([]);
   const [chonHeThongRap, setChonHeThongRap] = useState(null);
+  const [hinhAnh, setHinhAnh] = useState(null);
+  const [trailerUrl, setTrailerUrl] = useState(null);
   const [chonRap, setChonRap] = useState(null);
   useEffect(() => {
     https
@@ -360,6 +362,7 @@ export default function TableFilm(props) {
                   name='trailer'
                   label='Youtube trailer'
                   placeholder='https://youtube.com/abc'
+                  onChange={value => setTrailerUrl(value)}
                   rules={[
                     {
                       required: true,
@@ -376,6 +379,10 @@ export default function TableFilm(props) {
                   name='hinhAnh'
                   label='Film poster'
                   placeholder='https://domain.com/abc.png'
+                  onChange={e => {
+                    setHinhAnh(e.target.value);
+                    console.log(e.target.value);
+                  }}
                   rules={[
                     {
                       required: true,
@@ -386,6 +393,12 @@ export default function TableFilm(props) {
                       message: "Invalid image url format!",
                     },
                   ]}
+                />
+                <img
+                  className='w-20 h-20 object-cover mx-auto rounded-lg'
+                  alt={hinhAnh}
+                  src={imageUrlRegex.test(hinhAnh) ? hinhAnh : placeholderImage}
+                  onError={onImageError}
                 />
                 <ProFormText
                   width='md'
