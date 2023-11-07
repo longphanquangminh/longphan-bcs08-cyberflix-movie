@@ -25,6 +25,10 @@ html {
   background-color: white;
 }
 
+.ant-picker-focused {
+  box-shadow: none;
+}
+
 @layer utilities {
   ::-webkit-scrollbar {
     width: 6px;

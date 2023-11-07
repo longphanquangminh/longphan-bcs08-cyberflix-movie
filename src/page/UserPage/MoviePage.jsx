@@ -1,6 +1,6 @@
 import enEN from "antd/locale/en_US";
 import { ModalForm, ProForm, ProFormDatePicker, ProFormRate, ProFormText } from "@ant-design/pro-components";
-import { ConfigProvider, Form, message } from "antd";
+import { ConfigProvider, DatePicker, Form, message } from "antd";
 import { BASE_URL, MA_NHOM, https } from "../../api/config";
 import { useState, useEffect } from "react";
 import { getListMovie } from "../../api/api";
@@ -188,6 +188,7 @@ export default function MoviePage() {
                 },
               ]}
             /> */}
+            {/* <DatePicker className='border-none border-transparent focus:shadow-transparent' /> */}
             <ProFormDatePicker
               width='md'
               name='ngayKhoiChieu'

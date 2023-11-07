@@ -73,12 +73,12 @@ export default function DetailMovie() {
                   label: <img className='w-16 h-16' src={item.logo} alt='' />,
                   key: id,
                   children: item.cumRapChieu.map((itemChild, indexChild) => (
-                    <div key={indexChild} className='my-6 space-y-3'>
+                    <div key={indexChild} className='my-6 space-y-3 mr-6'>
                       <p className='font-bold text-[#8cc34a] text-xl'>{itemChild.tenCumRap}</p>
-                      <div className='space-x-6'>
+                      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3'>
                         {itemChild.lichChieuPhim.map((itemLichChieu, indexLichChieu) => (
                           <button
-                            className='bg-red-500 text-white rounded shadow px-5 py-2 cursor-pointer hover:bg-red-700 duration-300'
+                            className='bg-red-500 text-white rounded shadow px-6 py-2 cursor-pointer hover:bg-red-700 duration-300'
                             onClick={() => navigate(`/purchase/${itemLichChieu.maLichChieu}`)}
                             key={indexLichChieu}
                           >

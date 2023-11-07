@@ -132,28 +132,41 @@ export default function Purchase() {
       }
     }
   };
-  if (loading) return <div className='container min-h-screen text-center pt-[140px]'>Loading...</div>;
+  if (loading)
+    return (
+      <div className='container min-h-screen text-center pt-[80px]'>
+        <img alt='' src='https://i.pinimg.com/originals/c7/e1/b7/c7e1b7b5753737039e1bdbda578132b8.gif' className='w-fit m-auto' />
+      </div>
+    );
   if (!filmSeats) return <div className='container min-h-screen text-center pt-[140px]'>No data!</div>;
   return (
     <div className='container min-h-screen pt-[48px]'>
       {/* <p className='text-center mt-12'>Please use computer for best view!</p> */}
-      <div className='grid grid-cols-1 lg:flex flex-row py-12 gap-6'>
+      <div className='lg:flex flex-row py-12 gap-6 space-y-6'>
         <div className='basis-2/3'>
-          <div className='grid grid-cols-16 gap-3'>
-            {filmSeats.danhSachGhe.map((item, index) => (
-              <button
-                onClick={() => addSeat(item)}
-                key={index}
-                disabled={item.daDat}
-                className={`p-3 ${
-                  item.daDat ? "bg-[#767676]" : chosenSeats.includes(item) ? "bg-[#008000]" : item.loaiGhe === "Vip" ? "bg-[#ffa500]" : "bg-[#e9e9e9]"
-                } ${!item.daDat && !chosenSeats.includes(item) ? "hover:bg-gray-300" : ""} duration-300 ${
-                  item.daDat ? "cursor-not-allowed" : "cursor-pointer"
-                } text-center rounded-lg flex justify-center items-center w-auto h-auto lg:w-9 lg:h-9`}
-              >
-                {!item.daDat ? item.stt : "X"}
-              </button>
-            ))}
+          <div className='overflow-x-auto'>
+            <div className='grid grid-cols-16 gap-3 w-[1000px] md:w-full py-3'>
+              {filmSeats.danhSachGhe.map((item, index) => (
+                <button
+                  onClick={() => addSeat(item)}
+                  key={index}
+                  disabled={item.daDat}
+                  className={`p-3 ${
+                    item.daDat
+                      ? "bg-[#767676]"
+                      : chosenSeats.includes(item)
+                      ? "bg-[#008000]"
+                      : item.loaiGhe === "Vip"
+                      ? "bg-[#ffa500]"
+                      : "bg-[#e9e9e9]"
+                  } ${!item.daDat && !chosenSeats.includes(item) ? "hover:bg-gray-300" : ""} duration-300 ${
+                    item.daDat ? "cursor-not-allowed" : "cursor-pointer"
+                  } text-center rounded-lg flex justify-center items-center w-auto h-auto lg:w-9 lg:h-9`}
+                >
+                  {!item.daDat ? item.stt : "X"}
+                </button>
+              ))}
+            </div>
           </div>
           <div className='flex flex-row justify-center items-center gap-12 mt-6'>
             <div className='col-span-1 flex flex-col items-center justify-center'>
