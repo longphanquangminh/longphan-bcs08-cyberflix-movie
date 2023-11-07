@@ -145,7 +145,7 @@ export default function Purchase() {
       <div className='lg:flex flex-row py-12 gap-6 space-y-6'>
         <div className='basis-2/3'>
           <div className='overflow-x-auto'>
-            <div className='grid grid-cols-16 gap-3 w-[1000px] md:w-full py-3'>
+            <div className='grid grid-cols-16 gap-3 w-[1000px] lg:w-full py-3'>
               {filmSeats.danhSachGhe.map((item, index) => (
                 <button
                   onClick={() => addSeat(item)}
