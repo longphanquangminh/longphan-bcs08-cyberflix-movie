@@ -3,8 +3,7 @@ import { adminLocalStorage } from "./localService";
 import { store } from "../redux/store";
 import { SET_LOADING_OFF, SET_LOADING_ON } from "../redux/constant/spinner";
 
-export const TOKEN_CYBER =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCBTw6FuZyAwOCIsIkhldEhhblN0cmluZyI6IjA3LzAzLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcwOTc2OTYwMDAwMCIsIm5iZiI6MTY4Njc2MjAwMCwiZXhwIjoxNzA5OTE3MjAwfQ.KMixzquIcyG1HcsZ_iekv3cHfqWMebGVfzp349mNosg";
+export const TOKEN_CYBER = import.meta.env.VITE_TOKEN_CYBERSOFT;
 
 export const configHeaders = () => {
   return {
@@ -12,7 +11,7 @@ export const configHeaders = () => {
   };
 };
 
-export const BASE_URL = "https://movie0706.cybersoft.edu.vn/api";
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const BASE_URL_2 = "https://movienew.cybersoft.edu.vn/api";
 export const MA_NHOM = "GP09";
 
