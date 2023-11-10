@@ -5,7 +5,7 @@ import { Button, Dropdown, message } from "antd";
 import { SET_INFO } from "../../redux/constant/user";
 import { defaultAvatar } from "../../constants/defaultValues";
 
-export default function Header() {
+export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, scrollIntoNewsRef, scrollIntoAppRef }) {
   const navigate = useNavigate();
   const { info } = useSelector(state => {
     return state.userReducer;
@@ -47,7 +47,7 @@ export default function Header() {
     {
       key: "3",
       label: (
-        <a className='text-black hover:text-gray-700 durataion-300' href='#showtimes'>
+        <a onClick={scrollIntoShowTimesRef} className='text-black hover:text-gray-700 durataion-300'>
           Showtimes
         </a>
       ),
@@ -55,7 +55,7 @@ export default function Header() {
     {
       key: "4",
       label: (
-        <a className='text-black hover:text-gray-700 durataion-300' href='#cinemas'>
+        <a onClick={scrollIntoCinemasRef} className='text-black hover:text-gray-700 durataion-300'>
           Cinemas
         </a>
       ),
@@ -63,7 +63,7 @@ export default function Header() {
     {
       key: "5",
       label: (
-        <a className='text-black hover:text-gray-700 durataion-300' href='#news'>
+        <a onClick={scrollIntoNewsRef} className='text-black hover:text-gray-700 durataion-300'>
           News
         </a>
       ),
@@ -71,7 +71,7 @@ export default function Header() {
     {
       key: "6",
       label: (
-        <a className='text-black hover:text-gray-700 durataion-300' href='#app'>
+        <a onClick={scrollIntoAppRef} className='text-black hover:text-gray-700 durataion-300'>
           App
         </a>
       ),
@@ -116,18 +116,18 @@ export default function Header() {
       </p>
       {location.pathname === "/" && (
         <div className='text-xl font-medium gap-3 lg:gap-12 text-center hidden md:flex justify-center items-center'>
-          <a className='text-black hover:text-gray-700 durataion-300' href='#showtimes'>
+          <button onClick={scrollIntoShowTimesRef} className='text-black hover:text-gray-700 durataion-300'>
             Showtimes
-          </a>
-          <a className='text-black hover:text-gray-700 durataion-300' href='#cinemas'>
+          </button>
+          <button onClick={scrollIntoCinemasRef} className='text-black hover:text-gray-700 durataion-300'>
             Cinemas
-          </a>
-          <a className='text-black hover:text-gray-700 durataion-300' href='#news'>
+          </button>
+          <button onClick={scrollIntoNewsRef} className='text-black hover:text-gray-700 durataion-300'>
             News
-          </a>
-          <a className='text-black hover:text-gray-700 durataion-300' href='#app'>
+          </button>
+          <button onClick={scrollIntoAppRef} className='text-black hover:text-gray-700 durataion-300'>
             App
-          </a>
+          </button>
         </div>
       )}
       <div className='space-x-5'>

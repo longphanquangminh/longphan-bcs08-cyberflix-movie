@@ -1,7 +1,6 @@
 // import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import Header from "../../component/Header/Header";
 import ModalVideo from "react-modal-video";
 import ListMovie from "./ListMovie/ListMovie";
 import Slider from "./Slider/Slider";
@@ -9,11 +8,13 @@ import TabMovie from "./TabMovie/TabMovie";
 import { useDispatch, useSelector } from "react-redux";
 import { CHOOSE_TRAILER } from "../../redux/constant/user";
 import { Carousel, Select, Tabs } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { getListMovie } from "../../api/api";
 import { BASE_URL, configHeaders } from "../../api/config";
 import moment from "moment/moment";
+import Header from "../../component/Header/Header";
+import Footer from "../../component/Footer/Footer";
 
 export default function Home() {
   const [viewMore, setViewMore] = useState(false);
@@ -212,8 +213,39 @@ export default function Home() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const showTimesRef = useRef(null);
+  const cinemasRef = useRef(null);
+  const newsRef = useRef(null);
+  const appRef = useRef(null);
+
+  const scrollIntoShowTimesRef = () => {
+    if (showTimesRef.current) {
+      showTimesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const scrollIntoCinemasRef = () => {
+    if (cinemasRef.current) {
+      cinemasRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const scrollIntoNewsRef = () => {
+    if (newsRef.current) {
+      newsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  const scrollIntoAppRef = () => {
+    if (appRef.current) {
+      appRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
+      <Header
+        scrollIntoShowTimesRef={scrollIntoShowTimesRef}
+        scrollIntoCinemasRef={scrollIntoCinemasRef}
+        scrollIntoNewsRef={scrollIntoNewsRef}
+        scrollIntoAppRef={scrollIntoAppRef}
+      />
       <ModalVideo
         channel='youtube'
         youtube={{ mute: 0, autoplay: 0 }}
@@ -283,11 +315,11 @@ export default function Home() {
             Book tickets
           </button>
         </div>
-        <div id='showtimes' className='pt-[80px]'></div>
+        <div ref={showTimesRef} className='pt-[80px]'></div>
         <ListMovie movieArr={movieArr}></ListMovie>
-        <div id='cinemas' className='pt-[80px]'></div>
+        <div ref={cinemasRef} className='pt-[80px]'></div>
         <TabMovie />
-        <div id='news' className='pt-[80px]'></div>
+        <div ref={newsRef} className='pt-[80px]'></div>
         <div className='container'>
           <Tabs
             defaultActiveKey='1'
@@ -302,7 +334,7 @@ export default function Home() {
             })}
           />
         </div>
-        <div id='app' className='pt-[48px]'></div>
+        <div ref={appRef} className='pt-[48px]'></div>
         <div className='flex flex-col min-h-[calc(100vh-48px)] bg-movie-background bg-center bg-cover bg-no-repeat bg-fixed relative'>
           <div className='flex flex-1 justify-center items-center text-white container'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-12 py-12'>
@@ -358,6 +390,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -21,14 +21,7 @@ function App() {
       <Spinner />
       <BrowserRouter>
         <Routes>
-          <Route
-            path='/'
-            element={
-              <Layout>
-                <Home />
-              </Layout>
-            }
-          />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route
             path='/admin'
