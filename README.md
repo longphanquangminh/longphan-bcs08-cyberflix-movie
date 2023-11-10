@@ -2,6 +2,8 @@ My deployed web link: https://longphan-idoldev-bcs08-cyberflix-movie.vercel.app
 
 Demo (Youtube): https://www.youtube.com/watch?v=--vqdHSymro
 
+Swagger: https://movienew.cybersoft.edu.vn/swagger/index.html
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
