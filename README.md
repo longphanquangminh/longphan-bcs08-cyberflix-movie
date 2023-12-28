@@ -74,6 +74,22 @@ We hope you have a fantastic time exploring and watching movies with CyberFlix!
 3. Install dependencies: `npm i`
 4. Run the development server: `npm run start`
 
+## Configuration
+
+1. Create a `.env` file in the root directory.
+2. Add the following environment variables:
+
+   ```env
+   VITE_TOKEN_CYBERSOFT=your_cybersoft_course_token_(not_expired)
+   VITE_BASE_URL=movie_be_base_url_(contact_us_if_needed)
+   ```
+
+## Useful Links
+
+🌟 Youtube preview: https://www.youtube.com/watch?v=--vqdHSymro
+
+##
+
 ---
 
-This project is developed and contributed by [Long Phan](https://github.com/longphanquangminh)
+This project is developed and contributed by [Long Phan](https://github.com/longphanquangminh) (Idol Dev)
