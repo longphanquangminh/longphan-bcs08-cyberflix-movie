@@ -1,7 +1,7 @@
 # CyberFlix
 
 <p align="center">
-  <img src="url_to_cyberflix_logo" alt="CyberFlix Logo" width="200" height="200">
+  <img src="https://media.discordapp.net/attachments/1026660684739653674/1189952444277469254/Camera_Cinematography_Logo.png" alt="CyberFlix Logo" width="200" height="200">
 </p>
 
 CyberFlix is an innovative cinema project inspired by Moveek, aimed at delivering an exceptional movie-watching experience. This frontend-only project utilizes cutting-edge technologies and design tools to provide a seamless and visually appealing platform.
@@ -22,7 +22,7 @@ Welcome to CyberFlix, where your cinematic journey begins! Follow these simple s
 
 ### 1. Explore Our Movie Collection:
 
-🎥 Visit our website at [CyberFlix.com](https://your-cyberflix-website-url).
+🎥 Visit our website at [here](https://longphan-idoldev-bcs08-cyberflix-movie.vercel.app).
 
 ### 2. Discover Exciting Movies:
 
@@ -42,7 +42,7 @@ Welcome to CyberFlix, where your cinematic journey begins! Follow these simple s
 
 ### Need Assistance?
 
-If you have any questions or need assistance, our support team is ready to help. Contact us via email at support@cyberflix.com or reach out on social media.
+If you have any questions or need assistance, our support team is ready to help. Contact us via email at phanquangminhlong@gmail.com or reach out on social media.
 
 We hope you have a fantastic time exploring and watching movies with CyberFlix!
 
@@ -69,11 +69,11 @@ We hope you have a fantastic time exploring and watching movies with CyberFlix!
 
 ## Usage:
 
-1. Clone the repository: `git clone https://github.com/your-username/cyberflix.git`
-2. Navigate to the project directory: `cd cyberflix`
-3. Install dependencies: `npm install`
-4. Run the development server: `npm start`
+1. Clone the repository: `git clone https://github.com/longphanquangminh/longphan-bcs08-cyberflix-movie.git`
+2. Navigate to the project directory: `cd longphan-bcs08-cyberflix-movie`
+3. Install dependencies: `npm i`
+4. Run the development server: `npm run start`
 
 ---
 
-Developed and contributed by [Your Name](https://github.com/your-github-username).
+This project is developed and contributed by [Long Phan](https://github.com/longphanquangminh)
