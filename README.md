@@ -4,7 +4,7 @@
   <img src="https://media.discordapp.net/attachments/1026660684739653674/1189952444277469254/Camera_Cinematography_Logo.png" alt="CyberFlix Logo" width="200" height="200">
 </p>
 
-CyberFlix is an innovative cinema project inspired by Moveek, aimed at delivering an exceptional movie-watching experience. This frontend-only project utilizes cutting-edge technologies and design tools to provide a seamless and visually appealing platform.
+CyberFlix is an innovative cinema project inspired by [Moveek](https://moveek.com), aimed at delivering an exceptional movie-watching experience. This frontend-only project utilizes cutting-edge technologies and design tools to provide a seamless and visually appealing platform.
 
 ## Features
 
