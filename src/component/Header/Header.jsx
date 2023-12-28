@@ -111,7 +111,11 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
     <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6 fixed z-50 w-full'>
       <p className='text-3xl font-medium text-red-600 animate-pulse text-center'>
         <Link to='/' onClick={() => window.scrollTo(0, 0)}>
-          CyberFlix
+          <img
+            alt=''
+            src='https://media.discordapp.net/attachments/1026660684739653674/1189952444277469254/Camera_Cinematography_Logo.png'
+            className='h-9'
+          />
         </Link>
       </p>
       {location.pathname === "/" && (
