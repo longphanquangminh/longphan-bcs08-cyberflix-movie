@@ -88,8 +88,6 @@ We hope you have a fantastic time exploring and watching movies with CyberFlix!
 
 🌟 Youtube preview: https://www.youtube.com/watch?v=--vqdHSymro
 
-##
-
 ---
 
 This project is developed and contributed by [Long Phan](https://github.com/longphanquangminh) (Idol Dev)
