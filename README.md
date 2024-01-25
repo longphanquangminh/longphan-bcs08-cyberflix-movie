@@ -64,7 +64,7 @@ We hope you have a fantastic time exploring and watching movies with CyberFlix!
 - **Swagger:** A tool for designing, building, and documenting APIs.
 - **Figma:** A collaborative interface design tool.
 - **Canva:** An online graphic design tool for creating logos and other visual content.
-- **Adobe PTS:** Adobe Photoshop for advanced image editing and design.
+- **Adobe Photoshop:** Adobe Photoshop for advanced image editing and design.
 - **Adobe Illustrator:** Vector graphics editor for creating illustrations and designs.
 
 ## Usage:
