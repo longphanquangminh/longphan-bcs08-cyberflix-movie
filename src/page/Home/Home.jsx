@@ -370,7 +370,7 @@ export default function Home() {
               <div className='relative'>
                 <img
                   alt=''
-                  src='https://media.discordapp.net/attachments/1026660684739653674/1164198632325660732/phoneFrame2.png'
+                  src='https://media.discordapp.net/attachments/1026660684739653674/1164198632325660732/phoneFrame2.png?ex=65fae977&is=65e87477&hm=3bf30bff39fd92c3db5d1610fbac98637953e5a87b1df912d6675827d238ac2e&=&format=webp&quality=lossless&width=280&height=593'
                   className='mx-auto w-48 z-50'
                 />
                 <div className='absolute top-1/2 text-white left-1/2 transform -translate-x-1/2 -translate-y-1/2'>

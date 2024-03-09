@@ -14,7 +14,7 @@ export default function Footer() {
     "https://movie-booking-project.vercel.app/img/logo-connect/dcine.png",
     "https://movie-booking-project.vercel.app/img/logo-connect/zalopay_icon.png",
     "https://movie-booking-project.vercel.app/img/logo-connect/payoo.jpg",
-    "https://media.discordapp.net/attachments/1026660684739653674/1164127433969111080/download.png",
+    "https://media.discordapp.net/attachments/1026660684739653674/1164127433969111080/download.png?ex=65faa728&is=65e83228&hm=24cee98c02e098b002de68b157167c6048e63f214afc117395f41fa8ae0a3294&=&format=webp&quality=lossless&width=125&height=125",
     "https://movie-booking-project.vercel.app/img/logo-connect/AGRIBANK.png",
     "https://movie-booking-project.vercel.app/img/logo-connect/VIETTINBANK.png",
     "https://movie-booking-project.vercel.app/img/logo-connect/IVB.png",
