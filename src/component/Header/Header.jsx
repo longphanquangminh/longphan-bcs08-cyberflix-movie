@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { userLocalStorage } from "../../api/localService";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Button, Dropdown, message } from "antd";
-import { SET_INFO } from "../../redux/constant/user";
-import { defaultAvatar } from "../../constants/defaultValues";
+import { useDispatch, useSelector } from 'react-redux';
+import { userLocalStorage } from '../../api/localService';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Button, Dropdown, message } from 'antd';
+import { SET_INFO } from '../../redux/constant/user';
+import { defaultAvatar } from '../../constants/defaultValues';
 
 export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, scrollIntoNewsRef, scrollIntoAppRef }) {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
   });
   const dispatch = useDispatch();
   const handleLogout = () => {
-    message.success("Logout successfully!");
-    navigate("/");
+    message.success('Logout successfully!');
+    navigate('/');
     userLocalStorage.remove();
     const action = {
       type: SET_INFO,
@@ -25,27 +25,27 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
   };
   const handleLogin = () => {
     // window.location.href = "/login";
-    navigate("/login");
+    navigate('/login');
   };
   const handleRegister = () => {
     // window.location.href = "/login";
-    navigate("/register");
+    navigate('/register');
   };
   const handleAccount = () => {
-    navigate("/account");
+    navigate('/account');
   };
   const location = useLocation();
   const items = [
     {
-      key: "1",
+      key: '1',
       label: info ? <Link to='/account'>{info.hoTen}</Link> : <Link to='/login'>Login</Link>,
     },
     {
-      key: "2",
+      key: '2',
       label: info ? <a onClick={handleLogout}>Logout</a> : <Link to='/register'>Register</Link>,
     },
     {
-      key: "3",
+      key: '3',
       label: (
         <a onClick={scrollIntoShowTimesRef} className='text-black hover:text-gray-700 durataion-300'>
           Showtimes
@@ -53,7 +53,7 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
       ),
     },
     {
-      key: "4",
+      key: '4',
       label: (
         <a onClick={scrollIntoCinemasRef} className='text-black hover:text-gray-700 durataion-300'>
           Cinemas
@@ -61,7 +61,7 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
       ),
     },
     {
-      key: "5",
+      key: '5',
       label: (
         <a onClick={scrollIntoNewsRef} className='text-black hover:text-gray-700 durataion-300'>
           News
@@ -69,7 +69,7 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
       ),
     },
     {
-      key: "6",
+      key: '6',
       label: (
         <a onClick={scrollIntoAppRef} className='text-black hover:text-gray-700 durataion-300'>
           App
@@ -78,7 +78,7 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
     },
   ];
   const renderUserNav = () => {
-    const classBtn = "border-2 border-black rounded-lg w-20 text-center hidden md:block";
+    const classBtn = 'border-2 border-black rounded-lg w-20 text-center hidden md:block';
     if (info) {
       return (
         <div className='flex justify-center items-center gap-x-3'>
@@ -111,14 +111,10 @@ export default function Header({ scrollIntoShowTimesRef, scrollIntoCinemasRef, s
     <div className='bg-white flex items-center justify-between shadow-lg px-20 py-3 gap-6 fixed z-50 w-full'>
       <p className='text-3xl font-medium text-red-600 animate-pulse text-center'>
         <Link to='/' onClick={() => window.scrollTo(0, 0)}>
-          <img
-            alt=''
-            src='https://media.discordapp.net/attachments/1026660684739653674/1189952444277469254/Camera_Cinematography_Logo.png?ex=65fc5192&is=65e9dc92&hm=408186ef256770bd6ba87211a2e0685f682b3fc7b14d27d9f57c648bf425fdd3&=&format=webp&quality=lossless&width=593&height=593'
-            className='h-9'
-          />
+          <img alt='' src='https://portfolio-minhlong.vercel.app/images/cyberflix.png' className='h-9' />
         </Link>
       </p>
-      {location.pathname === "/" && (
+      {location.pathname === '/' && (
         <div className='text-xl font-medium gap-3 lg:gap-12 text-center hidden md:flex justify-center items-center'>
           <button onClick={scrollIntoShowTimesRef} className='text-black hover:text-gray-700 durataion-300'>
             Showtimes

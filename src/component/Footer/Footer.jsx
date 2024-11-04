@@ -1,44 +1,44 @@
 export default function Footer() {
   const logos = [
-    "https://movie-booking-project.vercel.app/img/logo-connect/cgv.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/bhd.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/galaxycine.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/cinestar.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/lotte.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/megags.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/bt.jpg",
-    "https://movie-booking-project.vercel.app/img/logo-connect/dongdacinema.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/TOUCH.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/cnx.jpg",
-    "https://movie-booking-project.vercel.app/img/logo-connect/STARLIGHT.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/dcine.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/zalopay_icon.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/payoo.jpg",
-    "https://media.discordapp.net/attachments/1026660684739653674/1164127433969111080/download.png?ex=65faa728&is=65e83228&hm=24cee98c02e098b002de68b157167c6048e63f214afc117395f41fa8ae0a3294&=&format=webp&quality=lossless&width=125&height=125",
-    "https://movie-booking-project.vercel.app/img/logo-connect/AGRIBANK.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/VIETTINBANK.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/IVB.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/123go.png",
-    "https://movie-booking-project.vercel.app/img/logo-connect/laban.png",
+    'https://movie-booking-project.vercel.app/img/logo-connect/cgv.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/bhd.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/galaxycine.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/cinestar.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/lotte.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/megags.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/bt.jpg',
+    'https://movie-booking-project.vercel.app/img/logo-connect/dongdacinema.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/TOUCH.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/cnx.jpg',
+    'https://movie-booking-project.vercel.app/img/logo-connect/STARLIGHT.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/dcine.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/zalopay_icon.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/payoo.jpg',
+    'https://portfolio-minhlong.vercel.app/images/vietcb.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/AGRIBANK.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/VIETTINBANK.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/IVB.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/123go.png',
+    'https://movie-booking-project.vercel.app/img/logo-connect/laban.png',
   ];
   const mobileApps = [
     {
-      img: "https://movie-booking-project.vercel.app/img/mobile-system/apple-logo.png",
-      url: "https://apps.apple.com/vn/app/movie-booking/id644319307",
+      img: 'https://movie-booking-project.vercel.app/img/mobile-system/apple-logo.png',
+      url: 'https://apps.apple.com/vn/app/movie-booking/id644319307',
     },
     {
-      img: "https://movie-booking-project.vercel.app/img/mobile-system/android-logo.png",
-      url: "https://play.google.com/store/apps/details?id=com.movie.booking",
+      img: 'https://movie-booking-project.vercel.app/img/mobile-system/android-logo.png',
+      url: 'https://play.google.com/store/apps/details?id=com.movie.booking',
     },
   ];
   const socialMedia = [
     {
-      img: "https://movie-booking-project.vercel.app/img/media/facebook-logo.png",
-      url: "https://cgv.vn",
+      img: 'https://movie-booking-project.vercel.app/img/media/facebook-logo.png',
+      url: 'https://cgv.vn',
     },
     {
-      img: "https://movie-booking-project.vercel.app/img/media/zalo-logo.png",
-      url: "https://cgv.vn",
+      img: 'https://movie-booking-project.vercel.app/img/media/zalo-logo.png',
+      url: 'https://cgv.vn',
     },
   ];
   return (
@@ -94,7 +94,11 @@ export default function Footer() {
         <div className='w-full h-px bg-white'></div>
         <div className='py-6 grid lg:flex flex-row gap-12'>
           <div className='basis-1/6'>
-            <img src='https://movie-booking-project.vercel.app/img/logo-connect/zion-logo.jpg' alt='' className='mx-auto md:mx-0 rounded-lg w-24' />
+            <img
+              src='https://movie-booking-project.vercel.app/img/logo-connect/zion-logo.jpg'
+              alt=''
+              className='mx-auto md:mx-0 rounded-lg w-24'
+            />
           </div>
           <div className='basis-4/6 space-y-3 text-center md:text-justify'>
             <h1 className='uppercase font-bold'>TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION</h1>
@@ -106,7 +110,11 @@ export default function Footer() {
             </div>
           </div>
           <div className='basis-1/6'>
-            <img src='https://movie-booking-project.vercel.app/img/media/certificate.png' alt='' className='mx-auto md:mx-0 w-24' />
+            <img
+              src='https://movie-booking-project.vercel.app/img/media/certificate.png'
+              alt=''
+              className='mx-auto md:mx-0 w-24'
+            />
           </div>
         </div>
       </div>
